@@ -1,20 +1,48 @@
-import React from "react";
-
+import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 function Login() {
+  const [isLoged, setIsLoged] = useState(false);
+
+  const username = useRef("");
+  const password = useRef("");
+  const hundleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(username.current.value, password.current.value);
+  };
+
   return (
-    <div className="form-wrapper-login">
-      <form className="form" action="">
-        <input type="text" placeholder="username/email" />
-        <input type="text" placeholder="password" />
-        <button className="btn"> Login </button>
-        <h4>
-          Not a member yet ? <a href=""> Sign up now </a>
-        </h4>
-        <h4>
-          <a href=""> Forgot password ? </a>
-        </h4>
-      </form>
-    </div>
+    <>
+      {isLoged ? (
+        <div className="form-wrapper-login">Logged in</div>
+      ) : (
+        <div className="form-wrapper-login">
+          <form className="form" action="">
+            <input
+              type="text"
+              name="username"
+              ref={username}
+              placeholder="username/email"
+            />
+            <input
+              type="text"
+              name="password"
+              ref={password}
+              placeholder="password"
+            />
+            <button className="btn" type="submit" onClick={hundleSubmit}>
+              Login
+            </button>
+            <h4>
+              Not a member yet ? <Link to="/register">Sign up now</Link>
+            </h4>
+            <h4>
+              <Link to="/reset-password">Forgot password ?</Link>
+            </h4>
+          </form>
+        </div>
+      )}
+    </>
   );
 }
 

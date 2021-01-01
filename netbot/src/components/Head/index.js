@@ -1,17 +1,14 @@
 import React from "react";
-
+import Home from "./Home";
+import Dashboard from "./Dashboard";
+const login = false;
 function index() {
-  return (
-    <div className="head-wrapper">
-      <div className="logo-wrapper">
-        <div className="logo">
-          <span> NetBot</span>
-        </div>
-      </div>
-
-      <div className="brand">NETBOT</div>
-    </div>
-  );
+  {
+    if (login) {
+      return <Dashboard />;
+    } else {
+      return <Home />;
+    }
+  }
 }
-
 export default index;

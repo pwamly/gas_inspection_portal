@@ -1,14 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Forgot() {
   return (
     <div className="form-wrapper-forgot">
       <form className="form" action="">
         <input type="text" placeholder="username/email" />
-        <input type="text" placeholder="password" />
         <button className="btn"> Reset </button>
         <h4>
-          Not a member yet ?<a href=""> Login </a>
+          Not a member yet ?<Link to="/login">Login </Link>
         </h4>
       </form>
     </div>
