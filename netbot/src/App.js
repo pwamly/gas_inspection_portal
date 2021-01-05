@@ -8,6 +8,14 @@ import {
 import { ProtectRoute } from "./components/ProtectRoute";
 import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
+import { createStore } from "redux";
+const initialStore = {};
+
+function reducer(state, action) {
+  return state;
+}
+
+const store = createStore(reducer, initialStore);
 
 function App() {
   return (

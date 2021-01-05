@@ -43,6 +43,34 @@ a {
 }
 
 
+/*dash head*/
+
+.head-wrapper-dash {
+    width: auto;
+    height: 64px;
+    display: grid;
+    /* background: pink; */
+    min-width: fit-content;
+    border: solid white 0.1px;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    margin-bottom: 50px;
+}
+
+.dash {
+    color: #ffffff;
+    height: fit-content;
+}
+
+.auth {
+    display: flex;
+    flex-direction: row;
+    padding-top: 15px;
+    gap: 20px;
+}
+
+
 /* logo */
 
 .logo-wrapper {

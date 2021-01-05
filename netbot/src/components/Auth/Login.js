@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { login, registerUser } from "../../client/index";
 function Login() {
   const [isLoged, setIsLoged] = useState(false);
 
-  const username = useRef("");
+  const email = useRef("");
   const password = useRef("");
   const hundleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(username.current.value, password.current.value);
+    login({ email: email.current.value, password: password.current.value });
   };
 
   return (
@@ -19,13 +19,13 @@ function Login() {
         <div className="form-wrapper-login">
           <form className="form" action="">
             <input
-              type="text"
+              type="email"
               name="username"
-              ref={username}
+              ref={email}
               placeholder="username/email"
             />
             <input
-              type="text"
+              type="password"
               name="password"
               ref={password}
               placeholder="password"
