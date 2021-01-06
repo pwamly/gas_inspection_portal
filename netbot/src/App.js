@@ -9,17 +9,16 @@ import { ProtectRoute } from "./components/ProtectRoute";
 import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import { createStore } from "redux";
-const initialStore = {};
-
-function reducer(state, action) {
-  return state;
-}
-
+import { Provider } from "react-redux";
+import { userData } from "./client/index";
+import reducer from "./reducer";
+const data = userData();
+const initialStore = { data: data };
 const store = createStore(reducer, initialStore);
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <div className="site">
         <Router>
           <Switch>
@@ -35,7 +34,7 @@ function App() {
           </Switch>
         </Router>
       </div>
-    </>
+    </Provider>
   );
 }
 

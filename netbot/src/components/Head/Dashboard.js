@@ -1,5 +1,5 @@
 import React from "react";
-
+import { logout } from "../../client";
 function Dashboard() {
   return (
     <div className="head-wrapper-dash">
@@ -10,7 +10,9 @@ function Dashboard() {
       </div>
       <div className="brand"> NETBOT </div>
       <div className="auth">
-        <button className="btn">Sign out</button>
+        <button className="btn" onClick={() => logout()}>
+          Sign out
+        </button>
       </div>
     </div>
   );

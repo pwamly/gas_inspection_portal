@@ -61,6 +61,8 @@ a {
 .dash {
     color: #ffffff;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
 }
 
 .auth {
@@ -68,6 +70,102 @@ a {
     flex-direction: row;
     padding-top: 15px;
     gap: 20px;
+}
+
+.main-dash {
+    display: grid;
+    flex-direction: row;
+    width: auto;
+    grid-template-columns: 30% 70%;
+    padding: 6px;
+    gap: 20px;
+    /* background: #117004; */
+}
+
+.profile {
+    color: #ffffff;
+    padding: 20px;
+    height: 400px;
+    /* background: brown; */
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    border-radius: 0px 16px 16px 0px;
+    border: solid 0.1px rgb(83, 83, 83);
+}
+
+.avatar {
+    background: none;
+    margin: 0 auto;
+}
+
+.aimg {
+    height: 200px;
+    background: #ffffff;
+    border-radius: 36px;
+}
+
+.details {
+    border: solid 0.1px rgb(83, 83, 83);
+    padding: 12px;
+    width: fit-content;
+    margin-left: 50px;
+}
+
+.details,
+h3 {
+    background: none;
+}
+
+.cards {
+    width: 850px;
+    border: solid 0.1px rgb(83, 83, 83);
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card-items {
+    border: solid 0.1px rgb(83, 83, 83);
+    background: none;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 45% 45% 10%;
+    gap: 5px;
+}
+
+.cavatar {
+    /* background: blue; */
+}
+
+.cardimg {
+    height: 70px;
+    width: 70px;
+    /* background: #117004; */
+}
+
+.username {
+    padding-top: 18px;
+    /* background: red; */
+    text-align: center;
+}
+
+.status {
+    padding-top: 18px;
+    /* background: green; */
+    text-align: center;
+}
+
+.nouser {
+    display: flex;
+    justify-content: center;
+}
+
+.cbtn {
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -162,6 +260,10 @@ input {
     color: #ffffff;
     text-align: center;
     margin: 0 auto;
+}
+
+.add-user-title {
+    text-align: center;
 }
 
 

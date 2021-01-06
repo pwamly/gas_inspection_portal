@@ -15,7 +15,7 @@ function index() {
       <div className="main">
         <Router>
           <Switch>
-            <Route exact path="/login">
+            <Route path="/login">
               <Login />
             </Route>
             <Route path="/register">

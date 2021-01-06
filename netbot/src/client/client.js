@@ -5,7 +5,7 @@ cache.set(
         fname: "peter",
         lname: "boko",
         email: "peter@gmail.com",
-        status: "inactive",
+        status: "active",
         role: "admin",
         password: "1234",
     }, ],
@@ -13,7 +13,7 @@ cache.set(
 );
 
 export const isValidUser = () => {
-    return localStorage.getItem("isLogged", true) || false;
+    return localStorage.getItem("isLogged");
 };
 
 export const isAdmin = () => {
@@ -34,23 +34,7 @@ async function isEmailExist(email) {
     return dat;
 }
 
-function isCorrectPassword(password, email) {
-    const data = cache.get("userData");
-    data.map((el) => {
-        if (el.email == email) {
-            if (el.password == password) {
-                cache.set(
-                    "login", [{
-                        isLogged: true,
-                    }, ],
-                    120000
-                );
-            }
-        } else {
-            return false;
-        }
-    });
-}
+//register user
 
 export const registerUser = (newuser) => {
     const { email } = newuser;
@@ -61,11 +45,12 @@ export const registerUser = (newuser) => {
             cache.set("userData", [], 60000);
             return { Successful: true, message: "success" };
         } catch (error) {
-            return { Successful: false, message: "Failed" };
+            return { Successful: false, message: "user exist" };
         }
     } else {}
 };
-const te = [{}, { name: "peter", age: 25 }, { name: "per", age: 0 }];
+
+// login
 
 export const login = (value) => {
     const { email, password } = value;
@@ -87,11 +72,22 @@ export const login = (value) => {
         }
         return arr;
     }, []);
+
     return dat;
 };
 
+// fetch user data
 export const userData = () => {
     console.log(cache.get("userData"));
     const data = cache.get("userData");
+
     return data;
+};
+
+// logout
+export const logout = () => {
+    console.log("loged out");
+    localStorage.clear();
+    window.location.replace(`/login`);
+    return;
 };
