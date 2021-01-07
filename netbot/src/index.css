@@ -118,8 +118,10 @@ h3 {
 }
 
 .eye {
-    padding-top: 24px;
-    padding-left: 10px;
+    margin-top: 24px;
+    margin-left: 10px;
+    width: fit-content;
+    height: fit-content;
 }
 
 .eye:hover {
@@ -337,8 +339,10 @@ input {
 }
 
 .delete {
-    padding-top: 24px;
-    padding-left: 10px;
+    margin-top: 24px;
+    margin-left: 10px;
+    width: fit-content;
+    height: fit-content;
 }
 
 .delete:hover {

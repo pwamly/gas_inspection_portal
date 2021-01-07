@@ -7,7 +7,7 @@ import {
     EXIT_ADD_FORM,
     ADD_USER_FORM,
 } from "./actions";
-import { registerUser } from "./client/";
+import { removeUser, registerUser } from "./client/";
 
 function reducer(state, action) {
     /*forms*/
@@ -21,11 +21,13 @@ function reducer(state, action) {
     /*user data*/
     if (action.type === ADD_USER) {
         if (action.payload) {
-            console.log("iiiiiiiiii", action.payload);
             registerUser(action.payload);
         }
-
         return {...state, adduser: false };
+    }
+
+    if (action.type === REMOVE_USER) {
+        return {...state, data: removeUser(action.payload) };
     }
 
     return state;

@@ -3,8 +3,8 @@ import avatar from "../../assets/logo512r.png";
 import { connect } from "react-redux";
 import { ImPencil } from "react-icons/im";
 
-function index({ data = [] }) {
-  const { fname, lname, email, status, role } = data[0];
+function index({ data, profile }) {
+  const { fname, lname, email, status, role } = profile;
   return (
     <div className="profile">
       <div className="avatar">
@@ -23,8 +23,9 @@ function index({ data = [] }) {
     </div>
   );
 }
-const mapStateToprops = ({ data }) => {
-  return { data };
+const mapStateToprops = (store) => {
+  const { profile } = store;
+  return { ...store, profile: profile };
 };
 
 export default connect(mapStateToprops)(index);

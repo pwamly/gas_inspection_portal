@@ -1,3 +1,4 @@
+import { stringify } from "query-string";
 import { v4 as uuidv4 } from "uuid";
 var cache = require("js-cache");
 
@@ -14,9 +15,11 @@ if (!admindata) {
             role: "admin",
             password: "1234",
         }, ],
-        60000
+        6000000
     );
 }
+
+const data = cache.get("userData") || [];
 
 export const isValidUser = () => {
     return localStorage.getItem("isLogged");
@@ -31,7 +34,6 @@ export const authenticate = () => {
 };
 
 function isEmailExist(email) {
-    const data = cache.get("userData") || [];
     for (var i = 0; i < data.length; i++) {
         if (data[i].email === email) {
             return data[i];
@@ -46,10 +48,9 @@ export const registerUser = (newuser) => {
     const isExist = isEmailExist(email);
     if (!isEmailExist(email)) {
         try {
-            const data = cache.get("userData");
             newuser = {...newuser, id: uuidv4(), status: "Inactive", role: "user" };
             data.push(newuser);
-            cache.set("userData", data, 60000);
+            cache.set("userData", data, 6000000);
             return { Successful: true, message: "success" };
         } catch (error) {
             console.log("user exist", newuser);
@@ -58,37 +59,43 @@ export const registerUser = (newuser) => {
     } else {}
 };
 
+// remove user
+
+export const removeUser = ({ id }) => {
+    const newdata = data.filter((user) => user.id !== id);
+    cache.set("userData", newdata, 6000000);
+    return newdata;
+};
+
 // login
 
 export const login = (value) => {
     const { email, password } = value;
     const data = cache.get("userData") || [];
-    const dat = data.reduce((arr, i, en) => {
-        if (i.email === email) {
-            if (i.password == password) {
-                arr.push({ Successful: true, message: "logged" });
-                console.log("loged", password);
-                localStorage.setItem("isLogged", true);
-                window.location.replace(`/dashboard`);
-            } else {
-                arr.push({ Successful: false, message: "Wrong password" });
-                console.log("wrong password");
-            }
-        } else {
-            console.log("Not user", isEmailExist(email).length);
-            arr.push({ Successful: false, message: "Don't have" });
-        }
-        return arr;
-    }, []);
 
-    return dat;
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].email === email && data[i].password === password) {
+            localStorage.setItem("isLogged", true);
+            const { fname, lname, email, status, role } = data[i];
+            const prof = { fname, lname, email, status, role };
+            localStorage.setItem("profile", JSON.stringify(prof));
+            window.location.replace(`/dashboard`);
+            return true;
+        }
+    }
+};
+
+// get profile
+
+export const getProfile = () => {
+    const prof = localStorage.getItem("profile");
+    return JSON.parse(prof);
 };
 
 // fetch user data
 export const userData = () => {
     console.log(cache.get("userData"));
     const data = cache.get("userData");
-
     return data;
 };
 
