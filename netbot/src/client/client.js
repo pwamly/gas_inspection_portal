@@ -1,16 +1,22 @@
+import { v4 as uuidv4 } from "uuid";
 var cache = require("js-cache");
 
-cache.set(
-    "userData", [{
-        fname: "peter",
-        lname: "boko",
-        email: "peter@gmail.com",
-        status: "active",
-        role: "admin",
-        password: "1234",
-    }, ],
-    60000
-);
+const admindata = cache.get("userData");
+
+if (!admindata) {
+    cache.set(
+        "userData", [{
+            id: uuidv4(),
+            fname: "Peter",
+            lname: "Boko",
+            email: "peter@gmail.com",
+            status: "Active",
+            role: "admin",
+            password: "1234",
+        }, ],
+        60000
+    );
+}
 
 export const isValidUser = () => {
     return localStorage.getItem("isLogged");
@@ -24,27 +30,29 @@ export const authenticate = () => {
     return false;
 };
 
-async function isEmailExist(email) {
-    const data = (await cache.get("userData")) || [];
-    const dat = await data.reduce((arr, i, en) => {
-        if (i.email == email) {
-            arr.push(i);
+function isEmailExist(email) {
+    const data = cache.get("userData") || [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].email === email) {
+            return data[i];
         }
-    }, []);
-    return dat;
+    }
 }
 
 //register user
 
 export const registerUser = (newuser) => {
     const { email } = newuser;
-    if (isEmailExist(email).length === 0) {
+    const isExist = isEmailExist(email);
+    if (!isEmailExist(email)) {
         try {
             const data = cache.get("userData");
+            newuser = {...newuser, id: uuidv4(), status: "Inactive", role: "user" };
             data.push(newuser);
-            cache.set("userData", [], 60000);
+            cache.set("userData", data, 60000);
             return { Successful: true, message: "success" };
         } catch (error) {
+            console.log("user exist", newuser);
             return { Successful: false, message: "user exist" };
         }
     } else {}
