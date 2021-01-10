@@ -13,6 +13,7 @@ function Cards({
   remove,
   edituser,
   viewuser,
+  adduserbtn,
 }) {
   return (
     <div className="cards">
@@ -20,26 +21,27 @@ function Cards({
         user.map((item) => <Carditem {...item} key={item.id} />)
       ) : (
         <div className="nouser">
-          <h3>No user yet</h3>
+          <h3> No user yet </h3>
         </div>
       )}
-      {adduser && children}
-      {viewuser && children}
-      {edituser && children}
-      <div className="cbtn">
-        <button
-          className="btn"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch({ type: ADD_USER_FORM });
-          }}
-        >
-          Add User
-        </button>
-      </div>
+      {adduser && children} {viewuser && children} {edituser && children}
+      {adduserbtn && (
+        <div className="cbtn">
+          <button
+            className="btn"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch({ type: ADD_USER_FORM });
+            }}
+          >
+            Add User
+          </button>
+        </div>
+      )}
     </div>
   );
 }
+
 function mapStateToprops(store) {
   const { data, adduser } = store;
   return { ...store, user: data, adduser: adduser };

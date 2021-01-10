@@ -21,6 +21,7 @@ const initialStore = {
   profile: profile,
   viewuser: false,
   viewusr: false,
+  adduserbtn: true,
 };
 const store = createStore(reducer, initialStore);
 
@@ -37,8 +38,9 @@ function App() {
               path="/dashboard"
               component={Dashboard}
             ></ProtectRoute>
+            <ProtectRoute path="/" component={Dashboard}></ProtectRoute>
+            <Redirect exact to="/" />
             <Route path="*" component={() => <h2> 404 Not Found </h2>} />
-            <Redirect to="/dashboard" />
           </Switch>
         </Router>
       </div>

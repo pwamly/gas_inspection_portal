@@ -41,6 +41,7 @@ function reducer(state, action) {
             viewuser: true,
             viewdata: action.payload,
             viewusr: true,
+            adduserbtn: false,
         };
     }
     if (action.type === EXIT_VEW_USER) {
@@ -48,13 +49,14 @@ function reducer(state, action) {
             ...state,
             viewuser: false,
             viewdata: null,
+            adduserbtn: true,
         };
     }
     if (action.type === EDIT_USER) {
         return {...state, edituser: true, viewuser: false };
     }
     if (action.type === EXIT_EDIT_USER) {
-        return {...state, edituser: false, viewdata: null };
+        return {...state, edituser: false, viewdata: null, adduserbtn: true };
     }
     if (action.type === SAVE_UPDATES) {
         let { data } = state;
@@ -69,7 +71,13 @@ function reducer(state, action) {
             }
         }
 
-        return {...state, edituser: false, data, viewdata: null };
+        return {
+            ...state,
+            edituser: false,
+            data,
+            viewdata: null,
+            adduserbtn: true,
+        };
     }
     return state;
 }

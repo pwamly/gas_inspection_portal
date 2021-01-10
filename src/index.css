@@ -94,6 +94,12 @@ a {
     border: solid 0.1px rgb(83, 83, 83);
 }
 
+.pdetails {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
 .avatar {
     background: none;
     margin: 0 auto;
@@ -143,7 +149,7 @@ h3 {
     background: none;
     padding: 12px;
     display: grid;
-    grid-template-columns: 5% 5% 35% 40% 10%;
+    grid-template-columns: 10% 10% 45% 25% 8%;
     gap: 5px;
 }
 
@@ -160,12 +166,24 @@ h3 {
 .username {
     padding-top: 18px;
     /* background: red; */
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: row;
     text-align: center;
+}
+
+.h3span {
+    color: rgb(13, 240, 13);
 }
 
 .status {
     padding-top: 18px;
     /* background: green; */
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
     text-align: center;
 }
 

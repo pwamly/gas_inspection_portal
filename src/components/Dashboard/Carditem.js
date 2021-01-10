@@ -13,8 +13,13 @@ function Carditem(item) {
       <div className="delete" onClick={() => item.remove()} key={item.id}>
         <FaTrash />
       </div>
-      <h3 className="username"> Username: {item.fname + " " + item.lname} </h3>
-      <h3 className="status"> Status: {item.status} </h3>
+      <div className="username">
+        <h3 className="h3span">User Name:</h3>
+        <h3>{item.fname + " " + item.lname}</h3>
+      </div>
+      <div className="status">
+        <h3 className="h3span">Status:</h3> <h3>{item.status}</h3>
+      </div>
       <div className="cavatar">
         <img className="cardimg" src={avatar} alt="" />
       </div>
