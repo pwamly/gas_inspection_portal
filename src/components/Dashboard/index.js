@@ -8,7 +8,6 @@ import ViewUser from "./ViewUser";
 import EditUsr from "./EditUsr";
 
 function index({ edituser, adduser, viewuser }) {
-  console.log(edituser, adduser, viewuser);
   return (
     <div className="dash">
       <Head />
@@ -19,19 +18,19 @@ function index({ edituser, adduser, viewuser }) {
             <div className="addform">
               <Regform />
             </div>
-          )}
+          )}{" "}
           {viewuser && (
             <div className="viewuser">
               <ViewUser />
             </div>
-          )}
+          )}{" "}
           {edituser && (
             <div className="viewuser">
               <EditUsr />
             </div>
-          )}
-        </Cards>
-      </div>
+          )}{" "}
+        </Cards>{" "}
+      </div>{" "}
     </div>
   );
 }

@@ -54,7 +54,6 @@ export const registerUser = (newuser) => {
             cache.set("userData", data, 6000000);
             return { Successful: true, message: "success" };
         } catch (error) {
-            console.log("user exist", newuser);
             return { Successful: false, message: "user exist" };
         }
     } else {}
@@ -64,12 +63,9 @@ export const registerUser = (newuser) => {
 
 export const removeUser = ({ id }) => {
     const data = cache.get("userData");
-    console.log("data before", data);
-    console.log("the id", id);
+
     const newdata = data.filter((user) => user.id !== id);
     cache.set("userData", newdata, 6000000);
-    console.log("data after", data);
-    console.log("the sent result", newdata);
     return newdata;
 };
 
@@ -100,14 +96,12 @@ export const getProfile = () => {
 
 // fetch user data
 export const userData = () => {
-    console.log(cache.get("userData"));
     const data = cache.get("userData");
     return data;
 };
 
 // logout
 export const logout = () => {
-    console.log("loged out");
     localStorage.clear();
     window.location.replace(`/login`);
     return;

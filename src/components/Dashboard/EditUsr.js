@@ -122,7 +122,6 @@ function EditUsr({ viewdata, dispatch, viewuser, edituser, profile, viewusr }) {
 }
 
 function mapStateToprops(store) {
-  console.log(store);
   return { ...store };
 }
 

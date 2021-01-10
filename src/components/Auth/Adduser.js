@@ -24,7 +24,6 @@ function Adduser({ data, adduser, dispatch }) {
     });
   };
 
-  console.log(adduser);
   return (
     <div className="form-adduser">
       <h4 className="add-user-title">Add New User</h4>
