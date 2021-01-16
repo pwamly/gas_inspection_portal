@@ -2,8 +2,8 @@
 import { Router } from "express";
 import auth_route from "../auth";
 
-const api_route = Router();
+const controller = Router();
 
-api_route.use("/auth", auth_route);
+controller.use("/auth", auth_route);
 
-module.exports = api_route;
+module.exports = controller;
