@@ -5,7 +5,6 @@ import { nb_user } from "../models";
 import { sign, verify } from "jsonwebtoken";
 
 module.exports = (req, res) => {
-    console.log("uuuuuuuuuuuuuuuuuu");
     try {
         const { token } = req.body;
         if (!token) {
