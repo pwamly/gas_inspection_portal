@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+require("dotenv").config();
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
@@ -17,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             username: { type: DataTypes.STRING(255), allowNull: false },
             email: { type: DataTypes.STRING(255), allowNull: false, unique: true },
             password: { type: DataTypes.STRING(128), allowNull: false },
+            refresh_token: { type: DataTypes.TEXT, allowNull: true },
         }, {
             tableName: "nb_user",
             modelName: "nb_user",
@@ -60,12 +62,21 @@ module.exports = (sequelize, DataTypes) => {
                     const { id, first_name, last_name, username, email } = user;
                     const profile = { id, first_name, last_name, username, email };
 
-                    return {
-                        profile,
-                        accessToken: sign(profile, " lakjbiaueishdsi", {
-                            expiresIn: "15m",
-                        }),
-                    };
+                    const access_token = sign(profile, process.env.ACCESSTOKEN_SECRETE, {
+                        expiresIn: "1m",
+                    });
+                    const refresh_token = sign({ id }, process.env.REFRESHTOKEN_SECRETE, {
+                        expiresIn: "1d",
+                    });
+                    const tokensaved = await nb_user.update({ refresh_token }, {
+                        where: { id: user.id },
+                    });
+                    if (tokensaved) {
+                        return {
+                            profile,
+                            accessToken: { access_token, refresh_token },
+                        };
+                    }
                 } else {
                     throw new Error("Wrong password!");
                 }

@@ -31,6 +31,6 @@ module.exports = async(req, res) => {
 
         return res.json({ success: created });
     } catch (error) {
-        console.log("erro", error);
+        console.log("error", error);
     }
 };
