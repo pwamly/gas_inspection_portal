@@ -3,13 +3,19 @@ require("dotenv").config();
 import express from "express";
 import controller from "./controller";
 import bodyParser from "body-parser";
-
+import cookieParser from "cookie-parser";
+import refreshtoken from "./auth/refreshtoken";
 const app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", controller);
+app.post("/refresh_token", (req, res) => {
+    console.log(req.cookies);
+    //refreshtoken
+});
 app.listen(port, () => {
     console.log("server started at http://localhost:" + port);
 });
