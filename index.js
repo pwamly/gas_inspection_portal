@@ -12,10 +12,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", controller);
-app.post("/refresh_token", (req, res) => {
-    console.log(req.cookies);
-    //refreshtoken
-});
+app.post("/refresh_token", refreshtoken);
 app.listen(port, () => {
     console.log("server started at http://localhost:" + port);
 });

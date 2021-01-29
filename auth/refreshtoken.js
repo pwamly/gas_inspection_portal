@@ -2,43 +2,51 @@
 
 require("dotenv").config();
 import { nb_user } from "../models";
-import { sign, verify } from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
+import createAcessToken from "./createAcessToken";
+import createRereshToken from "../auth/createRefreshToken";
+import sendRefreshToken from "./sendRefreshToken";
+import db from "../models";
 
-module.exports = (req, res) => {
-    try {
-        const { token } = req.body;
-        if (!token) {
-            res.statusMessage = "NO TOKEN";
-            return res.status(401).json({ data: { message: "NO TOKEN" } });
-        }
-        verify(token, process.env.REFRESHTOKEN_SECRETE, (error, user) => {
-            if (error) {
-                res.statusMessage = "INVALID TOKEN";
-                return res.status(403).json({ data: { message: "INVALID TOKEN" } });
-            }
-            const { id, first_name, last_name, username, email } = user;
-            const profile = { id, first_name, last_name, username, email };
-            nb_user
-                .findOne({ attributes: ["refresh_token"], where: { id: user.id } })
-                .then((refreshtoken) => {
-                    if (!refreshtoken) {
-                        res.statusMessage = "NO TOKEN LOGIN AGAIN";
-                        return res
-                            .status(403)
-                            .json({ data: { message: "NO TOKEN LOGIN AGAIN" } });
-                    }
-                    if (!refreshtoken == token) {
-                        res.statusMessage = "WROMG TOKEN";
-                        return res.status(401).json({ data: { message: "WROMG TOKEN" } });
-                    }
-                    const access_token = sign(profile, process.env.ACCESSTOKEN_SECRETE, {
-                        expiresIn: "1m",
-                    });
+module.exports = async(req, res) => {
+    const { jto: token } = req.cookies;
 
-                    return res.json({ accessToken: access_token });
-                });
-        });
-    } catch (error) {
-        console.log("erro", error);
+    if (!token) {
+        console.log("refresh token not sent from cookies");
+        res.statusMessage = "NO TOKEN";
+        return res.status(401).json({ successful: false, AccessToken: "" });
     }
+    let payload = null;
+    try {
+        payload = verify(token, process.env.REFRESHTOKEN_SECRETE);
+    } catch (error) {
+        console.log(error);
+        if (error)
+            return res.status(401).json({ successful: false, AccessToken: "" });
+    }
+
+    const user = await nb_user.findOne({ where: { id: payload.id } });
+
+    if (!user) {
+        console.log("token not exist in db");
+        return res.status(401).json({ successful: false, AccessToken: "" });
+    }
+
+    if (user.token_version !== payload.token_version) {
+        console.log(
+            "token version not match",
+            user.token_version,
+            payload.token_version
+        );
+        return res.status(401).json({ successful: false, AccessToken: "" });
+    }
+
+    const { id, first_name, last_name, username, email, token_version } = user;
+    const profile = { id, first_name, last_name, username, email };
+
+    sendRefreshToken(res, await createRereshToken({ id, token_version }, db));
+
+    return res
+        .status(401)
+        .json({ successful: true, AccessToken: createAcessToken(profile) });
 };
