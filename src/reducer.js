@@ -31,7 +31,7 @@ function reducer(state, action) {
     }
 
     if (action.type === REMOVE_USER) {
-        return {...state, data: removeUser(action.payload) };
+        return {...state, data: removeUser(action.payload), viewuser: false };
     }
 
     if (action.type === VIEW_USER) {
