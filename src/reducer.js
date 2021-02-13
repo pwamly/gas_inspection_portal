@@ -11,7 +11,8 @@ import {
     EXIT_VEW_USER,
     SAVE_UPDATES,
 } from "./actions";
-import { removeUser, registerUser } from "./client/";
+// import { removeUser, registerUser } from "./client/";
+let removeUser, registerUser;
 
 function reducer(state, action) {
     /*forms*/
@@ -31,7 +32,7 @@ function reducer(state, action) {
     }
 
     if (action.type === REMOVE_USER) {
-        return {...state, data: removeUser(action.payload), viewuser: false };
+        // return {...state, data: removeUser(action.payload), viewuser: false };
     }
 
     if (action.type === VIEW_USER) {

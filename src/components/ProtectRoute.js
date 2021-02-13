@@ -1,13 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { isValidUser } from "../client";
+import { isLogged } from "../client";
 
-const isloged = isValidUser();
 export const ProtectRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       render={(props) =>
-        isloged ? (
+        isLogged() == true ? (
           <Component {...props} />
         ) : (
           <Redirect

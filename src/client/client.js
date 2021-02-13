@@ -1,108 +1,34 @@
 import { stringify } from "query-string";
-import { v4 as uuidv4 } from "uuid";
-var cache = require("js-cache");
+import { store } from "../store";
+import instance from "../config/axiosConfig";
 
-const admindata = cache.get("userData");
+let access_token;
+let userId;
 
-if (!admindata) {
-    cache.set(
-        "userData", [{
-            id: uuidv4(),
-            fname: "Peter",
-            lname: "Boko",
-            email: "peter@gmail.com",
-            status: "Active",
-            role: "admin",
-            phone: "255673089337",
-            password: "1234",
-        }, ],
-        6000000
-    );
-}
+const state = store.getState();
+const { token } = state;
+export const fetchAccessToken = async() => {
+    try {
+        access_token = await instance.post("/refresh_token");
 
-const data = cache.get("userData") || [];
-
-export const isValidUser = () => {
-    return localStorage.getItem("isLogged");
-};
-
-export const isAdmin = () => {
-    return false;
-};
-
-export const authenticate = () => {
-    return false;
-};
-
-function isEmailExist(email) {
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].email === email) {
-            return data[i];
-        }
-    }
-}
-
-//register user
-
-export const registerUser = (newuser) => {
-    const data = cache.get("userData");
-    const { email } = newuser;
-    if (!isEmailExist(email)) {
-        try {
-            newuser = {...newuser, id: uuidv4(), status: "Inactive", role: "user" };
-            data.push(newuser);
-            cache.set("userData", data, 6000000);
-            return { Successful: true, message: "success" };
-        } catch (error) {
-            return { Successful: false, message: "user exist" };
-        }
-    } else {}
-};
-
-// remove user
-
-export const removeUser = ({ id }) => {
-    const data = cache.get("userData");
-
-    const newdata = data.filter((user) => user.id !== id);
-    cache.set("userData", newdata, 6000000);
-    return newdata;
-};
-
-// login
-
-export const login = (value) => {
-    const { email, password } = value;
-    const data = cache.get("userData") || [];
-
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].email === email && data[i].password === password) {
-            localStorage.setItem("isLogged", true);
-            const { fname, lname, email, status, role, phone, id } = data[i];
-            const prof = { id, fname, lname, email, status, role, phone };
-            localStorage.setItem("profile", JSON.stringify(prof));
-            window.location.replace(`/dashboard`);
-            return true;
-        }
+        return access_token;
+    } catch (error) {
+        console.log(error);
     }
 };
 
-// get profile
-
-export const getProfile = () => {
-    const prof = localStorage.getItem("profile");
-    return JSON.parse(prof);
+export const isLogged = () => {
+    if (state.isLogged !== true) {}
+    return false;
 };
 
-// fetch user data
-export const userData = () => {
-    const data = cache.get("userData");
-    return data;
-};
+export const login = async(payload) => {
+    try {
+        const authRes = await instance.post("/auth/login", {...payload });
+        console.log("resp", authRes);
+    } catch (error) {
+        console.log("error in login", error);
+    }
 
-// logout
-export const logout = () => {
-    localStorage.clear();
-    window.location.replace(`/login`);
-    return;
+    return false;
 };
