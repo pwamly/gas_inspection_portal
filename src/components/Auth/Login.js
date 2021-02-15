@@ -1,15 +1,18 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { login } from "../../client/index";
 
 function Login() {
   const [isLoged, setIsLoged] = useState(false);
-
+  const history = useHistory();
   const email = useRef("");
   const password = useRef("");
   const hundleSubmit = (e) => {
     e.preventDefault();
-    login({ username: email.current.value, password: password.current.value });
+    login({
+      username: email.current.value,
+      password: password.current.value,
+    });
   };
 
   return (

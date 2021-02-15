@@ -10,6 +10,7 @@ import {
     VIEW_USER,
     EXIT_VEW_USER,
     SAVE_UPDATES,
+    SAVE_TOKEN,
 } from "./actions";
 // import { removeUser, registerUser } from "./client/";
 let removeUser, registerUser;
@@ -80,6 +81,17 @@ function reducer(state, action) {
             adduserbtn: true,
         };
     }
+
+    //................. AUTH
+
+    if (action.type === SAVE_TOKEN) {
+        if (action.payload) {
+            const { access_token } = action.payload;
+            console.log("token from login", access_token);
+            return {...state, token: access_token };
+        }
+    }
+
     return state;
 }
 
