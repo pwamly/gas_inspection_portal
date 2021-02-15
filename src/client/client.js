@@ -6,6 +6,9 @@ import { SAVE_TOKEN } from "../actions";
 let access_token;
 let userId;
 
+//..................start..................
+// ............. auth functions........
+
 export const fetchAccessToken = async() => {
     try {
         access_token = await instance.post("/refresh_token");
@@ -46,3 +49,16 @@ export const login = async(payload) => {
 
     return false;
 };
+
+//..................end..................
+// ............. auth functions..........
+
+/**
+ * @function getProfile
+ * @argument {id}
+ * @returns data
+ */
+
+const getProfile = async() => {};
+
+export const client = {};

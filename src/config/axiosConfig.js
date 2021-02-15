@@ -16,13 +16,13 @@ BASE_URL = process.env.REACT_APP_NECBOT_API_URL;
 
 const defaultOptions = {
     baseURL: BASE_URL,
+    withCredentials: true,
     headers: {
         "Content-Type": "application/json",
     },
 };
 
 if (!instance) {
-    const options = { baseURL: BASE_URL };
     instance = axios.create(defaultOptions);
     // instance.defaults.headers.common["Authorization"] =
     //     "AUTH TOKEN FROM INSTANCE";

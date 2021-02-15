@@ -3,7 +3,7 @@ import { createStore } from "redux";
 import reducer from "./reducer";
 let store;
 const initstore = {
-    data: ["data"],
+    userData: ["data"],
     adduser: false,
     edituser: false,
     profile: "profile",
