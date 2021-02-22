@@ -2,7 +2,7 @@ import { stringify } from "query-string";
 import { store } from "../store";
 import instance from "../config/axiosConfig";
 import { SAVE_TOKEN } from "../actions";
-
+import { merge, forEach } from "lodash";
 let access_token;
 let userId;
 
@@ -59,6 +59,43 @@ export const login = async(payload) => {
  * @returns data
  */
 
-const getProfile = async() => {};
+const getProfile = async() => {
+    await instance.get();
+};
 
-export const client = {};
+export const client = { getProfile };
+
+const API_RESOURCES = [{
+        name: "address-book",
+    },
+    {
+        name: "admin",
+    },
+    {
+        name: "plan",
+    },
+    {
+        name: "credit",
+    },
+    { name: "contact" },
+    {
+        name: "crm",
+    },
+    {
+        name: "credit-scheme",
+    },
+    {
+        name: "sender-name",
+    },
+    { name: "sms-template" },
+    { name: "purchase" },
+    { name: "payment" },
+    {
+        name: "vendor",
+    },
+];
+
+forEach(API_RESOURCES, (resource) => {
+    console.log("ggggggg", resource);
+    // merge(dar, resource);
+});

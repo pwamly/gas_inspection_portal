@@ -1,12 +1,14 @@
 "use strict";
 import { createStore } from "redux";
 import reducer from "./reducer";
+import { ear } from "./client";
+
 let store;
 const initstore = {
-    userData: ["data"],
+    data: [],
     adduser: false,
     edituser: false,
-    profile: "profile",
+    profile: {},
     viewuser: false,
     viewusr: false,
     adduserbtn: true,
@@ -14,7 +16,6 @@ const initstore = {
 };
 if (!store) {
     store = createStore(reducer, initstore);
-    console.log("uuuuuuuuuu", store);
 }
-
+console.log("uuuuuuuuuu" + ear);
 export { store };
