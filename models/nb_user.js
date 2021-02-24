@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Op } = require("sequelize");
 require("dotenv").config();
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
@@ -54,9 +54,12 @@ module.exports = (sequelize, DataTypes) => {
     nb_user.validateAndGet = async function(username, password) {
         try {
             const user = await nb_user.findOne({
-                where: { username },
+                where: {
+                    [Op.or]: [{ username }, { email: username }],
+                },
                 raw: true,
             });
+
             if (!user) throw new Error("Account not exists!");
             if (user) {
                 const match = await compare(password, user.password);
@@ -72,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
                     const profile = { id, first_name, last_name, username, email };
 
                     const access_token = sign(profile, process.env.ACCESSTOKEN_SECRETE, {
-                        expiresIn: "1m",
+                        expiresIn: "4s",
                     });
                     const refresh_token = await createRereshToken({ id, token_version },
                         nb_user
@@ -90,7 +93,8 @@ module.exports = (sequelize, DataTypes) => {
             }
             return null;
         } catch (err) {
-            console.error(err);
+            console.log(err);
+            // console.error(err);
             throw err;
         }
     };

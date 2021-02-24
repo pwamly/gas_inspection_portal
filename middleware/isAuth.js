@@ -13,13 +13,17 @@ module.exports = async(req, res, next) => {
             .json({ data: { message: "No Authorization Header" } });
     }
 
-    verify(token, process.env.ACCESSTOKEN_SECRETE, (error, user) => {
-        console.log("users", error);
-        if (error) {
-            res.statusMessage = "NOT HAVE ACCESS!";
-            return res.status(403).json({ data: { message: "NOT HAVE ACCESS!" } });
-        }
+    var payload = await verify(
+        token,
+        process.env.ACCESSTOKEN_SECRETE,
+        (error, user) => {
+            // console.log("users", error);
+            if (error) {
+                res.statusMessage = "NOT HAVE ACCESS!";
+                return res.status(403).json({ data: { message: "NOT HAVE ACCESS!" } });
+            }
 
-        next();
-    });
+            next();
+        }
+    );
 };

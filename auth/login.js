@@ -9,6 +9,9 @@ module.exports = async(req, res) => {
         const Token = await nb_user.validateAndGet(username, password);
         const { access_token, refresh_token } = Token;
         sendRefreshToken(res, refresh_token);
+
         return res.json({ success: true, accessToken: access_token });
-    } catch (error) {}
+    } catch (error) {
+        return res.status(401).json({ successful: false });
+    }
 };

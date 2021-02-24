@@ -47,6 +47,6 @@ module.exports = async(req, res) => {
     sendRefreshToken(res, await createRereshToken({ id, token_version }, db));
 
     return res
-        .status(401)
+        .status(200)
         .json({ successful: true, AccessToken: createAcessToken(profile) });
 };

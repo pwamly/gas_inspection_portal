@@ -2,13 +2,13 @@
 
 import { Router } from "express";
 
-const users = Router();
+const user = Router();
 
-users.get("/", () => {
+user.get("/", () => {
     console.log("get all users");
 });
-users.delete("/", () => {
+user.delete("/", () => {
     console.log("delete users users");
 });
 
-module.exports = users;
+module.exports = user;
