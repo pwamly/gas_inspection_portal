@@ -1,7 +1,6 @@
 "use strict";
 import { createStore } from "redux";
 import reducer from "./reducer";
-import { ear } from "./client";
 
 let store;
 const initstore = {
@@ -17,5 +16,5 @@ const initstore = {
 if (!store) {
     store = createStore(reducer, initstore);
 }
-console.log("uuuuuuuuuu" + ear);
+
 export { store };

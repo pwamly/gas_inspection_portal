@@ -9,8 +9,7 @@ let BASE_URL;
 let isAlreadyFetchingAccessToken = false;
 let subscribers = [];
 
-const state = store.getState();
-let { token } = state;
+const token = localStorage.getItem("token");
 
 BASE_URL = process.env.REACT_APP_NECBOT_API_URL;
 
@@ -24,12 +23,6 @@ const defaultOptions = {
 
 if (!instance) {
     instance = axios.create(defaultOptions);
-    // instance.defaults.headers.common["Authorization"] =
-    //     "AUTH TOKEN FROM INSTANCE";
-
-    // //interceptor response
-
-    // Set the AUTH token for any request
     instance.interceptors.request.use(function(config) {
         if (token) {
             config.headers.Authorization = token ? `Bearer ${token}` : "";
@@ -54,24 +47,33 @@ if (!instance) {
                 config,
                 response: { status },
             } = error;
-            const originalRequest = config;
+            let originalRequest = config;
 
             if (originalRequest.url == "/auth/login") {} else {
-                if (status === 401) {
+                if (status === 403) {
                     if (!isAlreadyFetchingAccessToken) {
                         isAlreadyFetchingAccessToken = true;
-                        store.dispatch(fetchAccessToken()).then((access_token) => {
+
+                        fetchAccessToken().then((access_token) => {
+                            const { AccessToken } = access_token.data;
                             isAlreadyFetchingAccessToken = false;
-                            onAccessTokenFetched(access_token);
+                            onAccessTokenFetched(AccessToken);
                         });
                     }
 
                     const retryOriginalRequest = new Promise((resolve) => {
-                        addSubscriber((access_token) => {
-                            originalRequest.headers.Authorization = "Bearer " + access_token;
-                            resolve(instance(originalRequest));
+                        addSubscriber((AccessToken) => {
+                            const newtoken = "Bearer " + AccessToken;
+                            const newheaders = {
+                                ...originalRequest.headers,
+                                Authorization: newtoken,
+                            };
+                            const newrequest = {...originalRequest, headers: newheaders };
+                            const newinstance = axios.create();
+                            resolve(newinstance(newrequest));
                         });
                     });
+
                     return retryOriginalRequest;
                 }
             }
