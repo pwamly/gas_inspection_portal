@@ -19,6 +19,7 @@ module.exports = async(req, res, next) => {
         (error, user) => {
             // console.log("users", error);
             if (error) {
+                console.log("auth error..........", error);
                 res.statusMessage = "NOT HAVE ACCESS!";
                 return res.status(403).json({ data: { message: "NOT HAVE ACCESS!" } });
             }
