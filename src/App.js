@@ -8,11 +8,13 @@ import {
 import { ProtectRoute } from "./components/ProtectRoute";
 
 import Home from "./components/Home";
-import Dashboard from "./components/Dashboard";
+// import Dashboard from "./components/Dashboard"; for testing only
+import Dashboard from "./components/Dash_board";
 import { Provider } from "react-redux";
 import { ToastProvider } from "react-toast-notifications";
 import { userData, getProfile } from "./client/index";
 import { store } from "./store";
+import "./App.css";
 
 function App() {
   return (

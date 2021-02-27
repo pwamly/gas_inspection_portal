@@ -60,14 +60,15 @@ export const isLogged = () => {
         console.log("no token");
         return false;
     }
-    return logged;
+    // return logged;  ............ uncomment for change only
+    return true;
 };
 
 export const login = async(payload) => {
     try {
         const authRes = await instance.post("/auth/login", {...payload });
-        const { accessToken } = authRes.data;
-        if (authRes.status == "200") {
+        const { accessToken } = authRes;
+        if (accessToken) {
             localStorage.setItem("token", accessToken);
             localStorage.setItem("islogged", true);
             window.location.replace(`/dashboard`);
@@ -93,6 +94,27 @@ export const logout = async() => {
     }
 
     return false;
+};
+
+export const getCode = async(data) => {
+    try {
+        const { email } = data;
+        const code = await instance.post("/auth/forgot-password", { email });
+        return code;
+    } catch (error) {
+        return {};
+    }
+};
+
+export const postCode = async(data) => {
+    try {
+        const { email, usercode, newpassword } = data;
+        console.log(data);
+        // const code = await instance.post("/auth/forgot-password", { email });
+        // return code;
+    } catch (error) {
+        return {};
+    }
 };
 //..................end..................
 // ............. auth functions..........

@@ -5,6 +5,7 @@ import reducer from "./reducer";
 let store;
 const initstore = {
     data: [],
+    formdata: {},
     adduser: false,
     edituser: false,
     profile: {},

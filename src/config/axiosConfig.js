@@ -40,7 +40,7 @@ if (!instance) {
 
     instance.interceptors.response.use(
         function(response) {
-            return response;
+            return response.data;
         },
         function(error) {
             const {

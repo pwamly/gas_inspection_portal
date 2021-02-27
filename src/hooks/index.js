@@ -101,7 +101,7 @@ export const useGets = (onGet, params) => {
         setLoading(true);
         onGet({ sort, q: searchQuery, ...filters, ...params })
             .then((response) => {
-                setResults(response.data);
+                setResults(response);
                 setLoading(false);
             })
             .catch((error) => {
@@ -146,7 +146,7 @@ export const useGet = (id, onGet) => {
 
         onGet(id)
             .then((response) => {
-                setResult(response.data);
+                setResult(response);
                 setLoading(false);
             })
             .catch((error) => {
