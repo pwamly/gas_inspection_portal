@@ -60,8 +60,8 @@ export const isLogged = () => {
         console.log("no token");
         return false;
     }
-    // return logged;  ............ uncomment for change only
-    return true;
+    return logged;
+    // return true;  ............ uncomment for change only
 };
 
 export const login = async(payload) => {
