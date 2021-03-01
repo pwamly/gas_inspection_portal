@@ -1,9 +1,11 @@
 import React from "react";
-import Login from "../Auth/Login";
-import Register from "../Auth/Register";
-import Forgot from "../Auth/Forgot";
-import Head from "../Head";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import Container from "@material-ui/core/Container";
+import ForgotPassword from "./Forms/ForgotPassword/ForgotPasswordForm";
+import Login from "./Forms/Login";
+import Navbar from "./Navibar/Navbar";
+import Footer from "../Footer/Footer";
 
 const login = true;
 const forgot = "";
@@ -11,22 +13,22 @@ const forgot = "";
 function index() {
   return (
     <>
-      <Head />
-      <div className="main">
-        <Router>
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/reset-password">
-              <Forgot />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
+      <div className="main-home">
+        <Navbar />
+        <Container>
+          <Router>
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>{" "}
+              <Route path="/reset-password">
+                <ForgotPassword />
+              </Route>{" "}
+            </Switch>{" "}
+          </Router>{" "}
+        </Container>{" "}
+        <Footer />
+      </div>{" "}
     </>
   );
 }

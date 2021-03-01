@@ -1,31 +1,44 @@
 import { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { SAVE_FORM_DATA } from "../../actions";
 import { getCode } from "../../client";
 import { postCode } from "../../client";
 
-function Forgot() {
+function Forgot({ formdata, dispatch }) {
   const [data, setData] = useState(null);
   const [code, setCode] = useState(null);
   const [showcode, setShowcode] = useState(null);
 
-  const email = useRef("");
-  const usercode = useRef("");
-  const newpassword = useRef("");
+  const formRef = useRef();
 
-  let formdata;
+  let email = useRef("");
+  let usercode = useRef("");
+  let newpassword = useRef("");
+
+  let fdata;
 
   const handleSubmitf = async (e) => {
     e.preventDefault();
-    formdata = { email: email.current.value };
-    let responsecode = await getCode(formdata);
+    fdata = { email: email.current.value };
+    dispatch({ type: SAVE_FORM_DATA, payload: { ...fdata } });
+    let responsecode = await getCode(fdata);
+    formRef.current.reset();
     setCode(responsecode.code);
     setShowcode(true);
-    setData(email);
+    setData(formdata);
   };
+
   const handleSubmits = async (e) => {
     e.preventDefault();
-    formdata = { email: data, newpassword, usercode };
-    let responsecode = await postCode(formdata);
+    fdata = {
+      newpassword: newpassword.current.value,
+      usercode: usercode.current.value,
+    };
+
+    fdata.email = formdata.email;
+    let responsecode = await postCode(fdata);
+    formRef.current.reset();
     // setCode(responsecode.code);
     // setShowcode(true);
     // setData(email);
@@ -39,7 +52,7 @@ function Forgot() {
   return (
     <div className="form-wrapper-forgot">
       {!data ? (
-        <form className="form" action="">
+        <form className="form" action="" ref={formRef}>
           <input
             type="email"
             placeholder="phone / email"
@@ -51,7 +64,7 @@ function Forgot() {
           </button>
         </form>
       ) : code ? (
-        <form className="form" action="">
+        <form className="form" action="" ref={formRef}>
           <input
             type="text"
             placeholder="Enter code"
@@ -84,5 +97,7 @@ function Forgot() {
     </div>
   );
 }
-
-export default Forgot;
+function mapStateToprops(store) {
+  return { ...store };
+}
+export default connect(mapStateToprops)(Forgot);

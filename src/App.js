@@ -8,8 +8,10 @@ import {
 import { ProtectRoute } from "./components/ProtectRoute";
 
 import Home from "./components/Home";
+import Form from "./components/Forms/Stepform/ForgotPassword/ForgotPasswordForm";
 import Dashboard from "./components/Dashboard";
 // import Dashboard from "./components/Dash_board"; for testing only
+import { Provider } from "react-redux";
 import { ToastProvider } from "react-toast-notifications";
 import { userData, getProfile } from "./client/index";
 import { store } from "./store";
@@ -24,18 +26,23 @@ function App() {
             <Switch>
               <Route exact path="/login">
                 <Home />
-              </Route>
+              </Route>{" "}
+              <Route exact path="/form">
+                <Form />
+              </Route>{" "}
               <ProtectRoute
                 path="/dashboard"
                 component={Dashboard}
-              ></ProtectRoute>
-              <ProtectRoute path="/" component={Dashboard}></ProtectRoute>
+              ></ProtectRoute>{" "}
+              <ProtectRoute path="/" component={Dashboard}>
+                {" "}
+              </ProtectRoute>{" "}
               <Redirect exact to="/" />
               <Route path="*" component={() => <h2> 404 Not Found </h2>} />
-            </Switch>
-          </Router>
-        </div>
-      </ToastProvider>
+            </Switch>{" "}
+          </Router>{" "}
+        </div>{" "}
+      </ToastProvider>{" "}
     </Provider>
   );
 }

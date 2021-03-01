@@ -11,6 +11,7 @@ import {
     EXIT_VEW_USER,
     SAVE_UPDATES,
     SAVE_TOKEN,
+    SAVE_FORM_DATA,
 } from "./actions";
 // import { removeUser, registerUser } from "./client/";
 let removeUser, registerUser;
@@ -92,6 +93,15 @@ function reducer(state, action) {
         }
     }
 
+    //......... form data
+
+    if (action.type === SAVE_FORM_DATA) {
+        if (action.payload) {
+            const { email } = action.payload;
+            console.log("token from login", email);
+            return {...state, formdata: { email } };
+        }
+    }
     return state;
 }
 
