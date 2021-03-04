@@ -9,8 +9,8 @@ import { ProtectRoute } from "./components/ProtectRoute";
 
 import Home from "./components/Home";
 import Form from "./components/Forms/Stepform/ForgotPassword/ForgotPasswordForm";
-import Dashboard from "./components/Dashboard";
-// import Dashboard from "./components/Dash_board"; for testing only
+// import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Dash_board";
 import { Provider } from "react-redux";
 import { ToastProvider } from "react-toast-notifications";
 import { userData, getProfile } from "./client/index";

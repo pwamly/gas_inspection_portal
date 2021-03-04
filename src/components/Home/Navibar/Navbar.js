@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Container from "@material-ui/core/Container";
 import { SidebarData } from "./Menubar/sidebarData";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -15,7 +16,19 @@ function Navbar() {
         <Link to="#" className="menu-bars">
           <FaIcons.FaBars onClick={showsidebar} />
         </Link>
+        <Container maxWidth="xs" className="navcontainer">
+          <Link to="#" className="navlinks">
+            Home
+          </Link>
+          <Link to="#" className="navlinks">
+            Feeds
+          </Link>
+          <Link to="/dashboard" className="navlinks">
+            Login
+          </Link>
+        </Container>
       </div>
+
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showsidebar}>
           <li className="navbar-toggle">

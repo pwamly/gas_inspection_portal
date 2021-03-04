@@ -13,27 +13,28 @@ function Index() {
     <>
       <div className="navbar">
         <Link to="#" className="menu-bars">
-          <FaIcons.FaBars onClick={showsidebar} />
-        </Link>
-      </div>
+          <FaIcons.FaBars onClick={showsidebar} />{" "}
+        </Link>{" "}
+      </div>{" "}
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showsidebar}>
           <li className="navbar-toggle">
             <Link to="#" className="menu-bars">
               <AiIcons.AiOutlineClose />
-            </Link>
-          </li>
+            </Link>{" "}
+          </li>{" "}
           {SidebarData.map((item, index) => {
             return (
               <li key={index} className={item.cName}>
                 <Link to={item.path} className="menu-bar">
-                  {item.icon} <span> {item.title} </span>
-                </Link>
+                  {" "}
+                  {item.icon} <span> {item.title} </span>{" "}
+                </Link>{" "}
               </li>
             );
-          })}
-        </ul>
-      </nav>
+          })}{" "}
+        </ul>{" "}
+      </nav>{" "}
     </>
   );
 }

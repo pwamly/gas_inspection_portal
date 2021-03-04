@@ -12,17 +12,11 @@ h4 {
 
 .home,
 .reports,
-.products {
-    display: flex;
-    height: 90vh;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-}
+.products {}
 
 .main-home {
     display: grid;
-    grid-template-rows: auto 60% 20% !important;
+    grid-template-rows: 20% 60% 20% !important;
 }
 
 .login-form {

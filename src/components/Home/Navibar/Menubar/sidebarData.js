@@ -11,13 +11,13 @@ export const SidebarData = [{
     },
     {
         title: "Feeds",
-        path: "/teams",
+        path: "/feeds",
         icon: < IoIcons.IoMdPeople / > ,
         cName: "nav-text",
     },
     {
-        title: "Support",
-        path: "/support",
+        title: "Login",
+        path: "/login",
         icon: < IoIcons.IoMdHelpCircle / > ,
         cName: "nav-text",
     },

@@ -43,6 +43,7 @@ if (!instance) {
             return response.data;
         },
         function(error) {
+            console.log("uuuuuuuuuuuuu", JSON.stringify(error));
             const {
                 config,
                 response: { status },
