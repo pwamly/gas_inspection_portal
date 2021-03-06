@@ -6,6 +6,8 @@ import Footer from "../Footer/Footer";
 import "./dashbar.css";
 import RegistrationForm from "./Registration";
 import { ProtectRoute } from "../../components/ProtectRoute";
+import Regform from "../Pdf/Pdf";
+import Printform from "../Dash_board/Printform/Printform";
 import {
   Redirect,
   BrowserRouter as Router,
@@ -24,12 +26,13 @@ function Index() {
               <ProtectRoute
                 path="/dashboard/registration"
                 component={RegistrationForm}
-              />
-            </Switch>
-          </Router>
-        </Container>
-        <Footer />
-      </IconContext.Provider>
+              />{" "}
+              <ProtectRoute path="/dashboard/pdf" component={Regform} />{" "}
+            </Switch>{" "}
+          </Router>{" "}
+        </Container>{" "}
+        <Footer />{" "}
+      </IconContext.Provider>{" "}
     </>
   );
 }

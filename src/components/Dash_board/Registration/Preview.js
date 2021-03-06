@@ -6,6 +6,11 @@ import RenderAccordion from "./RenderAccordion";
 function Preview(data) {
   const { formData, navigation, nameid } = data;
   const {
+    name,
+    email,
+    phone,
+    plateno,
+    location,
     newInstallation,
     periodic,
     afterAccident,
@@ -24,22 +29,55 @@ function Preview(data) {
     manufacturer,
     serialno,
     installername,
-    cylinderno,
-    cylinderposition,
-    cylindertype,
-    cmanufacturer,
-    cmanuContact,
-    servicepressure,
-    cmanufacturedDate,
-    waterVolume,
-    expiryDate,
-    tbscertificate,
+    cylinderno1,
+    cylinderposition1,
+    cylindertype1,
+    cmanufacturer1,
+    cmanuContact1,
+    servicepressure1,
+    cmanufacturedDate1,
+    waterVolume1,
+    expiryDate1,
+    tbscertificate1,
+    cylinderno2,
+    cylinderposition2,
+    cylindertype2,
+    cmanufacturer2,
+    cmanuContact2,
+    servicepressure2,
+    cmanufacturedDate2,
+    waterVolume2,
+    expiryDate2,
+    tbscertificate2,
+    cylinderno3,
+    cylinderposition3,
+    cylindertype3,
+    cmanufacturer3,
+    cmanuContact3,
+    servicepressure3,
+    cmanufacturedDate3,
+    waterVolume3,
+    expiryDate3,
+    tbscertificate3,
   } = formData;
 
   const { go } = navigation;
   return (
     <Container maxWidth="sm" style={{ height: "100vh" }}>
-      <h3>Review</h3>
+      <h3> Review </h3>{" "}
+      <RenderAccordion
+        summary="OWNER DETAILS"
+        details={[
+          { nameid: "Owner" },
+          { "Full Name": name },
+          { Email: email },
+          { Phone: phone },
+          { "Plate No": plateno },
+          { Location: location },
+        ]}
+        go={go}
+        nameid={nameid}
+      />{" "}
       <RenderAccordion
         summary="INSPECTION TYPE"
         details={[
@@ -50,7 +88,7 @@ function Preview(data) {
         ]}
         go={go}
         nameid={nameid}
-      />
+      />{" "}
       <RenderAccordion
         summary="VEHICLE INFORMATION"
         details={[
@@ -88,27 +126,60 @@ function Preview(data) {
         go={go}
       />{" "}
       <RenderAccordion
-        summary="CNG CYLINDER INFORMATION"
+        summary="CNG CYLINDER INFORMATION 1"
         details={[
           { nameid: "Cng-cylinders-information" },
-          { "Cylinder No": cylinderno },
-          { "Cylinder Position": cylinderposition },
-          { "Cylinder Type": cylindertype },
-          { "Manufacture Name": cmanufacturer },
-          { "Manufacturer Address": cmanuContact },
-          { "Service Presssure(MPa)": servicepressure },
-          { "Manufactured Date": cmanufacturedDate },
-          { "Water volume(Ltr)": waterVolume },
-          { "Expiry Date": expiryDate },
-          { "TBS Certificate": tbscertificate },
+          { "Cylinder No": cylinderno1 },
+          { "Cylinder Position": cylinderposition1 },
+          { "Cylinder Type": cylindertype1 },
+          { "Manufacture Name": cmanufacturer1 },
+          { "Manufacturer Address": cmanuContact1 },
+          { "Service Presssure(MPa)": servicepressure1 },
+          { "Manufactured Date": cmanufacturedDate1 },
+          { "Water volume(Ltr)": waterVolume1 },
+          { "Expiry Date": expiryDate1 },
+          { "TBS Certificate": tbscertificate1 },
+        ]}
+        go={go}
+      />{" "}
+      <RenderAccordion
+        summary="CNG CYLINDER INFORMATION 2"
+        details={[
+          { nameid: "Cng-cylinders-information" },
+          { "Cylinder No": cylinderno2 },
+          { "Cylinder Position": cylinderposition2 },
+          { "Cylinder Type": cylindertype2 },
+          { "Manufacture Name": cmanufacturer2 },
+          { "Manufacturer Address": cmanuContact2 },
+          { "Service Presssure(MPa)": servicepressure2 },
+          { "Manufactured Date": cmanufacturedDate2 },
+          { "Water volume(Ltr)": waterVolume2 },
+          { "Expiry Date": expiryDate2 },
+          { "TBS Certificate": tbscertificate2 },
+        ]}
+        go={go}
+      />{" "}
+      <RenderAccordion
+        summary="CNG CYLINDER INFORMATION 3"
+        details={[
+          { nameid: "Cng-cylinders-information" },
+          { "Cylinder No": cylinderno3 },
+          { "Cylinder Position": cylinderposition3 },
+          { "Cylinder Type": cylindertype3 },
+          { "Manufacture Name": cmanufacturer3 },
+          { "Manufacturer Address": cmanuContact3 },
+          { "Service Presssure(MPa)": servicepressure3 },
+          { "Manufactured Date": cmanufacturedDate3 },
+          { "Water volume(Ltr)": waterVolume3 },
+          { "Expiry Date": expiryDate3 },
+          { "TBS Certificate": tbscertificate3 },
         ]}
         go={go}
       />{" "}
       <Button color="primary" variant="contained" style={{ marginTop: "1rem" }}>
-        Submit
-      </Button>
+        Submit{" "}
+      </Button>{" "}
     </Container>
   );
 }
-
 export default Preview;

@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm, useStep } from "react-hooks-helper";
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import Owner from "./Owner";
 import InspectionForm from "./InspectionForm";
 import VehicleInfo from "./VehicleInformatin";
 import VehicleInfoCont from "./VehicleInfoCont";
-import Box from "@material-ui/core/Box";
 import EngineType from "./EngineType";
 import ConversionKitInfo from "./ConversionKitInfo";
 import CgnCylinderInfo from "./CgnCylinderInfo";
@@ -14,6 +15,11 @@ import "./reg.css";
 
 function Index() {
   const Default = {
+    name: "",
+    email: "",
+    phone: "",
+    plateno: "",
+    location: "",
     newInstallation: "",
     periodic: "",
     afterAccident: "",
@@ -63,8 +69,8 @@ function Index() {
     expiryDate2: "",
     tbscertificate2: "",
   };
-  const nameid = { stepid: "Inspection-type" };
   const steps = [
+    { id: "Owner" },
     { id: "Inspection-type" },
     { id: "Vehicle-information" },
     { id: "Vehicle-informationCont" },
@@ -75,10 +81,23 @@ function Index() {
     { id: "preview" },
   ];
   const [formData, setForm] = useForm(Default);
-  const { step, navigation } = useStep({ steps, initialStep: 7 });
+  const { step, navigation } = useStep({ steps, initialStep: 0 });
   const props = { formData, setForm, navigation };
 
   switch (step.id) {
+    case "Owner":
+      return (
+        <Grid
+          container
+          justify="center"
+          direction="column"
+          alignContent="center"
+          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+        >
+          <Owner {...props} />{" "}
+        </Grid>
+      );
+
     case "Inspection-type":
       return (
         <Grid
@@ -88,7 +107,7 @@ function Index() {
           alignContent="center"
           style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
         >
-          <InspectionForm {...props} {...nameid} />{" "}
+          <InspectionForm {...props} />{" "}
         </Grid>
       );
     case "Vehicle-information":
@@ -136,7 +155,7 @@ function Index() {
           alignContent="center"
           style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
         >
-          <ConversionKitInfo {...props} />
+          <ConversionKitInfo {...props} />{" "}
         </Grid>
       );
     case "Cng-cylinders-information":
@@ -166,7 +185,7 @@ function Index() {
     case "preview":
       return (
         <Box p={5}>
-          <Preview {...props} />
+          <Preview {...props} />{" "}
         </Box>
       );
   }

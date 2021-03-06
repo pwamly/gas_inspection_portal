@@ -207,7 +207,7 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
               maxWidth=""
             />
           </Card>{" "}
-        </Card>
+        </Card>{" "}
         <div style={{ marginTop: "1rem" }}>
           {" "}
           <Button
@@ -227,7 +227,7 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
             Next{" "}
           </Button>{" "}
         </div>{" "}
-      </Card>
+      </Card>{" "}
     </Container>
   );
 }

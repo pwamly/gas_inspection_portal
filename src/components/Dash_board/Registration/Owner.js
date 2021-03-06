@@ -16,8 +16,8 @@ const style = {
   },
 };
 
-function InspectionForm({ formData, setForm, navigation }) {
-  const { newInstallation, periodic, afterAccident } = formData;
+function Owner({ formData, setForm, navigation }) {
+  const { name, email, phone, plateno, location } = formData;
 
   async function handle() {
     let responsecode = "1234";
@@ -29,59 +29,69 @@ function InspectionForm({ formData, setForm, navigation }) {
   return (
     <Container maxWidth="xs">
       <Card variant="outlined" style={style}>
-        <h3> INSPECTION TYPE </h3>{" "}
+        <h3> OWNER INFORMATION </h3>{" "}
         <TextField
-          label="New Installation"
-          value={newInstallation}
+          label="Full Name"
+          value={name}
           onChange={setForm}
-          name="newInstallation"
+          name="name"
           margin="normal"
           variant="outlined"
           autoComplete="off"
           fullWidth
         />
         <TextField
-          label="Periodic"
-          value={periodic}
+          label="Location"
+          value={location}
           onChange={setForm}
-          name="periodic"
+          name="location"
           margin="normal"
           variant="outlined"
           autoComplete="off"
           fullWidth
         />
         <TextField
-          label="After Accident"
-          value={afterAccident}
+          label="Email"
+          value={email}
           onChange={setForm}
-          name="afterAccident"
+          name="email"
           margin="normal"
           variant="outlined"
           autoComplete="off"
           fullWidth
         />
-        <div style={{ marginTop: "1rem" }}>
-          {" "}
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginRight: "2px" }}
-            onClick={() => navigation.previous()}
-          >
-            Back{" "}
-          </Button>{" "}
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginRight: "1rem" }}
-            onClick={handle}
-          >
-            Next{" "}
-          </Button>{" "}
-        </div>{" "}
+        <TextField
+          label="Phone"
+          value={phone}
+          onChange={setForm}
+          name="phone"
+          margin="normal"
+          variant="outlined"
+          autoComplete="off"
+          fullWidth
+        />
+        <TextField
+          label="Plate No"
+          value={plateno}
+          onChange={setForm}
+          name="plateno"
+          margin="normal"
+          variant="outlined"
+          autoComplete="off"
+          fullWidth
+        />
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          style={{ marginTop: "1rem" }}
+          onClick={handle}
+        >
+          Next{" "}
+        </Button>{" "}
       </Card>{" "}
     </Container>
   );
 }
 
-export default InspectionForm;
+export default Owner;
