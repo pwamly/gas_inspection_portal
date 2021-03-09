@@ -15,7 +15,7 @@ module.exports = async(req, res) => {
         });
         const { recoveryCode } = rcode;
 
-        var payload = await verify(
+        var payload = verify(
             recoveryCode,
             process.env.RECOVERY_SECRETE,
             (error, dbcode) => {

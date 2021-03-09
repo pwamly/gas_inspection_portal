@@ -28,7 +28,14 @@ module.exports = async(req, res) => {
             },
             defaults: bodyPayload,
         });
-
+        if (created) {
+            console.log("user created");
+            return res.json({ success: created });
+        }
+        if (user) {
+            console.log("user already exist", user);
+            return res.status(417).json({ data: { message: "user already exist" } });
+        }
         return res.json({ success: created });
     } catch (error) {
         console.log("error", error);

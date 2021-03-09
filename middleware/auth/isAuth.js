@@ -1,7 +1,7 @@
 "use strict";
 require("dotenv").config();
 const { verify } = require("jsonwebtoken");
-import { nb_user } from "../models";
+import { nb_user } from "../../models";
 
 module.exports = async(req, res, next) => {
     const auHeader = req.headers["authorization"];
@@ -22,6 +22,10 @@ module.exports = async(req, res, next) => {
                 console.log("auth error..........", error);
                 res.statusMessage = "NOT HAVE ACCESS!";
                 return res.status(403).json({ data: { message: "NOT HAVE ACCESS!" } });
+            }
+            if (user) {
+                req.payload = user;
+                // console.log(user);
             }
 
             next();

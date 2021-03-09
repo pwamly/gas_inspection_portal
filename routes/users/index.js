@@ -4,9 +4,10 @@ import { Router } from "express";
 
 const user = Router();
 
-user.get("/", () => {
-    console.log("get all users");
+user.post("/", () => {
+    console.log("post all users");
 });
+
 user.delete("/", () => {
     console.log("delete users users");
 });

@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             refresh_token: { type: DataTypes.TEXT, allowNull: true },
             token_version: { type: DataTypes.INTEGER(255), allowNull: true },
             recoveryCode: { type: DataTypes.TEXT, allowNull: true },
+            userRole: { type: DataTypes.STRING, allowNull: true },
         }, {
             tableName: "nb_user",
             modelName: "nb_user",
@@ -73,11 +74,19 @@ module.exports = (sequelize, DataTypes) => {
                         username,
                         email,
                         token_version,
+                        userRole,
                     } = user;
-                    const profile = { id, first_name, last_name, username, email };
+                    const profile = {
+                        id,
+                        first_name,
+                        last_name,
+                        username,
+                        email,
+                        userRole,
+                    };
 
                     const access_token = sign(profile, process.env.ACCESSTOKEN_SECRETE, {
-                        expiresIn: "15m",
+                        expiresIn: "15h",
                     });
                     const refresh_token = await createRereshToken({ id, token_version },
                         nb_user
