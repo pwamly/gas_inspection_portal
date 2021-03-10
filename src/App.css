@@ -14,11 +14,6 @@ h4 {
 .reports,
 .products {}
 
-.main-home {
-    display: grid;
-    grid-template-rows: 20% 60% 20% !important;
-}
-
 .login-form {
     position: block;
     display: flex;

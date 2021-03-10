@@ -92,7 +92,7 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+          style={{ height: "100hv", border: "3px", boxSizing: "border-box" }}
         >
           <Owner {...props} />{" "}
         </Grid>
@@ -105,7 +105,12 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+          style={{
+            height: "100hv%",
+            border: "3px",
+            boxSizing: "border-box",
+            paddingTop: "40px",
+          }}
         >
           <InspectionForm {...props} />{" "}
         </Grid>
@@ -117,7 +122,12 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "9px", boxSizing: "border-box" }}
+          style={{
+            height: "100hv%",
+            border: "9px",
+            boxSizing: "border-box",
+            paddingTop: "40px",
+          }}
         >
           <VehicleInfo {...props} />{" "}
         </Grid>
@@ -129,7 +139,12 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+          style={{
+            height: "100hv%",
+            border: "3px",
+            boxSizing: "border-box",
+            paddingTop: "40px",
+          }}
         >
           <VehicleInfoCont {...props} />{" "}
         </Grid>
@@ -141,7 +156,12 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+          style={{
+            height: "100hv%",
+            border: "3px",
+            boxSizing: "border-box",
+            paddingTop: "40px",
+          }}
         >
           <EngineType {...props} />{" "}
         </Grid>
@@ -153,7 +173,12 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+          style={{
+            height: "100hv%",
+            border: "3px",
+            boxSizing: "border-box",
+            paddingTop: "40px",
+          }}
         >
           <ConversionKitInfo {...props} />{" "}
         </Grid>
@@ -165,7 +190,11 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+          style={{
+            height: "100hv%",
+            border: "3px",
+            boxSizing: "border-box",
+          }}
         >
           <CgnCylinderInfo {...props} />{" "}
         </Grid>
@@ -177,14 +206,27 @@ function Index() {
           justify="center"
           direction="column"
           alignContent="center"
-          style={{ height: "100vh", border: "3px", boxSizing: "border-box" }}
+          style={{
+            height: "100hv%",
+            border: "3px",
+            boxSizing: "border-box",
+          }}
         >
           <CgnCylinderInfoCont {...props} />{" "}
         </Grid>
       );
     case "preview":
       return (
-        <Box p={5}>
+        <Box
+          p={5}
+          style={{
+            border: "3px",
+            boxSizing: "border-box",
+
+            maxHeight: "550px",
+            overflowY: "auto",
+          }}
+        >
           <Preview {...props} />{" "}
         </Box>
       );

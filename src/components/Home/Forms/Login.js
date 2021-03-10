@@ -7,7 +7,7 @@ import Card from "@material-ui/core/Card";
 import { login } from "../../../client/client";
 import { useToasts } from "react-toast-notifications";
 import Spinner from "../../Spinner/Spiner";
-
+import "./form.css";
 const style = {
   maxWidth: 300,
   padding: "20px",
@@ -39,7 +39,7 @@ function Login() {
     try {
       setLoading(true);
       const response = await login({
-        email: username.current.value,
+        username: username.current.value,
         password: password.current.value,
       });
       formref.current.reset();
@@ -59,9 +59,9 @@ function Login() {
   }
 
   return (
-    <Container maxWidth="xs" className="login-form">
+    <div className="login-form">
       <Card variant="outlined" style={style}>
-        <h3> Sign in </h3>
+        <h3> Sign in </h3>{" "}
         <TextField
           label="Email "
           margin="normal"
@@ -70,7 +70,7 @@ function Login() {
           autoComplete="off"
           fullWidth
           ref={formref}
-        />
+        />{" "}
         <TextField
           label="Password "
           margin="normal"
@@ -79,7 +79,7 @@ function Login() {
           autoComplete="off"
           fullWidth
           ref={formref}
-        />
+        />{" "}
         <Button
           variant="contained"
           fullWidth
@@ -89,20 +89,19 @@ function Login() {
         >
           {loading ? (
             <div style={spinerStyle}>
-              <Spinner loading={loading} /> Loading...
+              <Spinner loading={loading} /> Loading...{" "}
             </div>
           ) : (
             "Login"
-          )}
-        </Button>
-
+          )}{" "}
+        </Button>{" "}
         <h4>
           <Link to="/reset-password" style={{ textDecoration: "none" }}>
             Forgot password ?
-          </Link>
-        </h4>
-      </Card>
-    </Container>
+          </Link>{" "}
+        </h4>{" "}
+      </Card>{" "}
+    </div>
   );
 }
 

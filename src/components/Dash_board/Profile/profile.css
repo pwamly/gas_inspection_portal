@@ -1,0 +1,22 @@
+.avata {
+    color: #fff !important;
+    background: #1a83ff;
+    border-radius: 32px;
+    width: 160px;
+    height: 160px;
+}
+
+.initialzoomp {
+    position: relative;
+    top: 66px;
+    left: 46px;
+    font-size: 32px;
+}
+
+.pavata {
+    width: 100%;
+    background-color: #060b26;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}

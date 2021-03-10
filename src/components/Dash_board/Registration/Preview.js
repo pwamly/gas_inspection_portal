@@ -63,7 +63,7 @@ function Preview(data) {
 
   const { go } = navigation;
   return (
-    <Container maxWidth="sm" style={{ height: "100vh" }}>
+    <Container maxWidth="sm" style={{ height: "90%" }}>
       <h3> Review </h3>{" "}
       <RenderAccordion
         summary="OWNER DETAILS"
@@ -176,7 +176,11 @@ function Preview(data) {
         ]}
         go={go}
       />{" "}
-      <Button color="primary" variant="contained" style={{ marginTop: "1rem" }}>
+      <Button
+        color="primary"
+        variant="contained"
+        style={{ marginTop: "1rem", marginBottom: "5px" }}
+      >
         Submit{" "}
       </Button>{" "}
     </Container>

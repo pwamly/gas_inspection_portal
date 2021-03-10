@@ -6,6 +6,7 @@ import ForgotPassword from "./Forms/ForgotPassword/ForgotPasswordForm";
 import Login from "./Forms/Login";
 import Navbar from "./Navibar/Navbar";
 import Footer from "../Footer/Footer";
+import "./home.css";
 
 const login = true;
 const forgot = "";
@@ -13,22 +14,20 @@ const forgot = "";
 function index() {
   return (
     <>
-      <div className="main-home">
-        <Navbar />
-        <Container>
-          <Router>
-            <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>{" "}
-              <Route path="/reset-password">
-                <ForgotPassword />
-              </Route>{" "}
-            </Switch>{" "}
-          </Router>{" "}
-        </Container>{" "}
-        <Footer />
-      </div>{" "}
+      <Navbar />
+      <Container className="main-home">
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>{" "}
+            <Route path="/reset-password">
+              <ForgotPassword />
+            </Route>{" "}
+          </Switch>{" "}
+        </Router>{" "}
+      </Container>{" "}
+      <Footer />
     </>
   );
 }

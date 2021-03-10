@@ -14,39 +14,39 @@ function Navbar() {
     <>
       <div className="navbar">
         <Link to="#" className="menu-bars">
-          <FaIcons.FaBars onClick={showsidebar} />
-        </Link>
+          <FaIcons.FaBars onClick={showsidebar} />{" "}
+        </Link>{" "}
         <Container maxWidth="xs" className="navcontainer">
           <Link to="#" className="navlinks">
-            Home
-          </Link>
+            Home{" "}
+          </Link>{" "}
           <Link to="#" className="navlinks">
-            Feeds
-          </Link>
-          <Link to="/dashboard" className="navlinks">
-            Login
-          </Link>
-        </Container>
+            Feeds{" "}
+          </Link>{" "}
+          <Link to="/login" className="navlinks">
+            Login{" "}
+          </Link>{" "}
+        </Container>{" "}
       </div>
-
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showsidebar}>
           <li className="navbar-toggle">
             <Link to="#" className="menu-bars">
               <AiIcons.AiOutlineClose />
-            </Link>
-          </li>
+            </Link>{" "}
+          </li>{" "}
           {SidebarData.map((item, index) => {
             return (
               <li key={index} className={item.cName}>
                 <Link to={item.path} className="menu-bar">
-                  {item.icon} <span> {item.title} </span>
-                </Link>
+                  {" "}
+                  {item.icon} <span> {item.title} </span>{" "}
+                </Link>{" "}
               </li>
             );
-          })}
-        </ul>
-      </nav>
+          })}{" "}
+        </ul>{" "}
+      </nav>{" "}
     </>
   );
 }

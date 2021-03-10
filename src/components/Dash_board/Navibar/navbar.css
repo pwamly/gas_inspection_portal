@@ -1,15 +1,13 @@
 .navbar {
-    background-color: #060b26;
     height: 80px;
     display: flex;
-    justify-content: start;
-    align-items: center;
+    flex-direction: row;
 }
 
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
-    background: none;
+    width: 20%;
 }
 
 .nav-menu {
@@ -69,4 +67,31 @@
 
 span {
     margin-left: 16px;
+}
+
+.avatar {
+    color: #fff !important;
+    background: #1a83ff;
+    border-radius: 32px;
+    width: 60px;
+    height: 60px;
+}
+
+.initial {
+    position: relative;
+    top: 17px;
+    left: 4px;
+    font-size: large;
+}
+
+.avatar:hover {
+    background: #0f79f3;
+    cursor: pointer;
+}
+
+.pavatar {
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
 }

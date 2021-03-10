@@ -32,6 +32,7 @@ function App() {
               </Route>{" "}
               <ProtectRoute
                 path="/dashboard"
+                exact
                 component={Dashboard}
               ></ProtectRoute>{" "}
               <ProtectRoute path="/" component={Dashboard}>

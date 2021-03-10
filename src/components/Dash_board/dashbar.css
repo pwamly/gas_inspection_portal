@@ -1,4 +1,7 @@
-.dashboard {}
+.dashboard {
+    min-height: 100hv;
+    width: 100%;
+}
 
 .menu-bars {
     display: block;
