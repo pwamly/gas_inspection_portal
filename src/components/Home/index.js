@@ -14,9 +14,10 @@ const forgot = "";
 function index() {
   return (
     <>
-      <Navbar />
-      <Container className="main-home">
-        <Router>
+      {" "}
+      <Router>
+        <Navbar />
+        <Container className="main-home">
           <Switch>
             <Route path="/login">
               <Login />
@@ -25,8 +26,8 @@ function index() {
               <ForgotPassword />
             </Route>{" "}
           </Switch>{" "}
-        </Router>{" "}
-      </Container>{" "}
+        </Container>{" "}
+      </Router>{" "}
       <Footer />
     </>
   );

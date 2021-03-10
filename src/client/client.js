@@ -108,12 +108,11 @@ export const getCode = async(data) => {
 
 export const postCode = async(data) => {
     try {
-        const { email, usercode: code, newpassword } = data;
-
+        const { email, usercode, newpass } = data;
         const isSuccessful = await instance.post("/auth/reset-password", {
             email,
-            code,
-            newpassword,
+            code: usercode,
+            newpassword: newpass,
         });
         if (isSuccessful) {
             return { isSuccessful: true };

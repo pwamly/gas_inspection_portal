@@ -6,47 +6,26 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import "../Navibar/navbar.css";
+import "../home.css";
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showsidebar = () => setSidebar(!sidebar);
   return (
     <>
-      <div className="navbar">
-        <Link to="#" className="menu-bars">
-          <FaIcons.FaBars onClick={showsidebar} />{" "}
-        </Link>{" "}
-        <Container maxWidth="xs" className="navcontainer">
-          <Link to="#" className="navlinks">
+      <div className="navba">
+        <Container className="navcontaine">
+          <Link to="#" className="navlinks1">
             Home{" "}
           </Link>{" "}
-          <Link to="#" className="navlinks">
+          <Link to="#" className="navlinks1">
             Feeds{" "}
           </Link>{" "}
-          <Link to="/login" className="navlinks">
+          <Link to="/login" className="navlinks1">
             Login{" "}
           </Link>{" "}
         </Container>{" "}
-      </div>
-      <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-        <ul className="nav-menu-items" onClick={showsidebar}>
-          <li className="navbar-toggle">
-            <Link to="#" className="menu-bars">
-              <AiIcons.AiOutlineClose />
-            </Link>{" "}
-          </li>{" "}
-          {SidebarData.map((item, index) => {
-            return (
-              <li key={index} className={item.cName}>
-                <Link to={item.path} className="menu-bar">
-                  {" "}
-                  {item.icon} <span> {item.title} </span>{" "}
-                </Link>{" "}
-              </li>
-            );
-          })}{" "}
-        </ul>{" "}
-      </nav>{" "}
+      </div>{" "}
     </>
   );
 }

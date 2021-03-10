@@ -106,7 +106,7 @@ function Index() {
           direction="column"
           alignContent="center"
           style={{
-            height: "100hv%",
+            height: "100hv",
             border: "3px",
             boxSizing: "border-box",
             paddingTop: "40px",
@@ -123,7 +123,7 @@ function Index() {
           direction="column"
           alignContent="center"
           style={{
-            height: "100hv%",
+            height: "100hv",
             border: "9px",
             boxSizing: "border-box",
             paddingTop: "40px",
@@ -140,7 +140,7 @@ function Index() {
           direction="column"
           alignContent="center"
           style={{
-            height: "100hv%",
+            height: "100hv",
             border: "3px",
             boxSizing: "border-box",
             paddingTop: "40px",
@@ -157,7 +157,7 @@ function Index() {
           direction="column"
           alignContent="center"
           style={{
-            height: "100hv%",
+            height: "100hv",
             border: "3px",
             boxSizing: "border-box",
             paddingTop: "40px",
@@ -174,7 +174,7 @@ function Index() {
           direction="column"
           alignContent="center"
           style={{
-            height: "100hv%",
+            height: "100hv",
             border: "3px",
             boxSizing: "border-box",
             paddingTop: "40px",
@@ -191,7 +191,7 @@ function Index() {
           direction="column"
           alignContent="center"
           style={{
-            height: "100hv%",
+            height: "100hv",
             border: "3px",
             boxSizing: "border-box",
           }}
@@ -207,7 +207,7 @@ function Index() {
           direction="column"
           alignContent="center"
           style={{
-            height: "100hv%",
+            height: "100hv",
             border: "3px",
             boxSizing: "border-box",
           }}

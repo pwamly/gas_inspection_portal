@@ -5,12 +5,11 @@ import reducer from "./reducer";
 let store;
 const initstore = {
     data: [],
-    formdata: {},
     adduser: false,
     edituser: false,
     profile: {},
     viewuser: false,
-    viewusr: false,
+    showProfile: false,
     adduserbtn: true,
     token: "",
 };

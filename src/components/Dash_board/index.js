@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navibar/index";
 import { IconContext } from "react-icons";
 import Container from "@material-ui/core/Container";
 import Footer from "../Footer/Footer";
+import { connect } from "react-redux";
+import { getUserId, httpActions } from "../../client/index";
+import { useGet } from "../../hooks";
 import "./dashbar.css";
 import RegistrationForm from "./Registration";
 import { ProtectRoute } from "../../components/ProtectRoute";
@@ -10,6 +13,8 @@ import Regform from "../Pdf/Pdf";
 import Printform from "../Dash_board/Printform/Printform";
 import Spline from "./Charts/Spline";
 import Profile from "../Dash_board/Profile/Profile";
+import { SAVE_INITIAL_DATA } from "../../actions";
+
 import {
   Redirect,
   BrowserRouter as Router,
@@ -17,22 +22,36 @@ import {
   Switch,
 } from "react-router-dom";
 
-function Index({ modalShown, toggleModal }) {
+const { getProfile } = httpActions;
+
+function Index({ modalShown, toggleModal, showProfile, dispatch }) {
+  let initial;
+  const vendorId = getUserId();
+  const { result: user, loading, refresh } = useGet(vendorId, getProfile);
+  const { fname, lname, email, username, phone, userRole } = user || {};
+
+  if (fname && lname) {
+    initial = `${fname} ${lname}`
+      .split(" ")
+      .map((n, i, a) => (i === 0 || i + 1 === a.length ? n[0] : null))
+      .join("")
+      .toUpperCase();
+  }
+
+  useEffect(() => {
+    dispatch({
+      type: SAVE_INITIAL_DATA,
+      payload: { fname, lname, email, username, phone, userRole, initial },
+    });
+  }, [user]);
+
   return (
     <>
-      {/* <Profile /> */}
+      {" "}
+      {showProfile && <Profile />}
       <IconContext.Provider value={{ color: "#fff" }}>
         <Router>
-          <Navbar>
-            <Profile
-              shown={true}
-              close={() => {
-                toggleModal(false);
-              }}
-            >
-              <h1>Look! I'm inside the modal!</h1>
-            </Profile>
-          </Navbar>
+          <Navbar props={initial} />
           <Container className="dashboard">
             <Switch>
               <ProtectRoute path="/dashboard" exact component={Spline} />{" "}
@@ -50,5 +69,8 @@ function Index({ modalShown, toggleModal }) {
     </>
   );
 }
+const mapStateToprops = (store) => {
+  return { ...store };
+};
 
-export default Index;
+export default connect(mapStateToprops)(Index);

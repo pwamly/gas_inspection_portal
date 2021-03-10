@@ -43,22 +43,25 @@ if (!instance) {
             return response.data;
         },
         function(error) {
-            console.log("uuuuuuuuuuuuu", JSON.stringify(error));
             const {
                 config,
                 response: { status },
             } = error;
             let originalRequest = config;
 
-            if (originalRequest.url == "/auth/login") {} else {
+            if (originalRequest.url === "/auth/reset-password") {
+                return;
+            } else {
                 if (status === 403) {
                     if (!isAlreadyFetchingAccessToken) {
                         isAlreadyFetchingAccessToken = true;
 
                         fetchAccessToken().then((access_token) => {
-                            const { AccessToken } = access_token.data;
-                            isAlreadyFetchingAccessToken = false;
-                            onAccessTokenFetched(AccessToken);
+                            if (access_token) {
+                                const { AccessToken } = access_token.data;
+                                isAlreadyFetchingAccessToken = false;
+                                onAccessTokenFetched(AccessToken);
+                            }
                         });
                     }
 

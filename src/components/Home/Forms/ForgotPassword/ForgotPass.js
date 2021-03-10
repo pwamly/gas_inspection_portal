@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useToasts } from "react-toast-notifications";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -18,12 +19,29 @@ const style = {
 };
 
 function ForgotPass({ formData, setForm, navigation }) {
+  const { addToast } = useToasts();
+  const [loading, setLoading] = useState(false);
   const { email, code, newpass } = formData;
 
   async function handle() {
-    let responsecode = "1234";
-    if (responsecode) {
-      navigation.next();
+    setLoading(true);
+    try {
+      const { code } = await getCode({ email });
+
+      if (code) {
+        setLoading(false);
+        addToast("... your recovery code successfully sent to your phone", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        navigation.next();
+        return;
+      }
+      setLoading(false);
+      addToast("Account Not found!", { appearance: "error" });
+    } catch (error) {
+      setLoading(false);
+      addToast("Failed", { appearance: "error" });
     }
   }
 

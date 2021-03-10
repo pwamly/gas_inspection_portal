@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { SidebarData } from "../Menubar/sidebarData";
+import { connect } from "react-redux";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import "../Navibar/navbar.css";
 import { logout as signout } from "../../../client";
+import { VIEW_USER } from "../../../actions";
 
-function Index({ child }) {
+function Index({ dispatch, props }) {
+  console.log("llllllllllll", props);
   const [sidebar, setSidebar] = useState(false);
   const showsidebar = () => setSidebar(!sidebar);
   const [modalShown, toggleModal] = useState(false);
@@ -28,11 +31,11 @@ function Index({ child }) {
           <div
             className="avatar"
             onClick={() => {
-              alert("hhhhhhhhh");
               toggleModal(!modalShown);
+              dispatch({ type: VIEW_USER, payload: { modalShown } });
             }}
           >
-            <span className="initial"> LF </span>{" "}
+            <span className="initial"> {props} </span>{" "}
           </div>{" "}
         </div>{" "}
       </div>{" "}
@@ -67,5 +70,7 @@ function Index({ child }) {
     </>
   );
 }
-
-export default Index;
+const MapStateToprops = (store) => {
+  return { ...store };
+};
+export default connect(MapStateToprops)(Index);

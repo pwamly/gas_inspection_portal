@@ -11,6 +11,7 @@ import {
     EXIT_VEW_USER,
     SAVE_UPDATES,
     SAVE_TOKEN,
+    SAVE_INITIAL_DATA,
     SAVE_FORM_DATA,
 } from "./actions";
 // import { removeUser, registerUser } from "./client/";
@@ -38,15 +39,25 @@ function reducer(state, action) {
     }
 
     if (action.type === VIEW_USER) {
-        return {
-            ...state,
-            adduser: false,
-            viewuser: true,
-            viewdata: action.payload,
-            viewusr: true,
-            adduserbtn: false,
-        };
+        if (action.payload) {
+            const { modalShown } = action.payload;
+            return {
+                ...state,
+                showProfile: modalShown,
+            };
+        }
+        return {...state };
     }
+    if (action.type === SAVE_INITIAL_DATA) {
+        if (action.payload) {
+            return {
+                ...state,
+                profile: {...action.payload },
+            };
+        }
+        return {...state };
+    }
+
     if (action.type === EXIT_VEW_USER) {
         return {
             ...state,

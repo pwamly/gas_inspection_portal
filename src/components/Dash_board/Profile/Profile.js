@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@material-ui/core/Card";
+import { getUserId, httpActions } from "../../../client/index";
 import "./profile.css";
+import { connect } from "react-redux";
+import { useGet } from "../../../hooks";
+const { getProfile } = httpActions;
 
-function Profile() {
+function Profile({ profile }) {
   const style = { display: "flex", flexDirection: "row", fontWeight: "bold" };
+  const { fname, initial, lname, email, username, phone, userRole } =
+    profile || {};
+
   return (
     <Card
       variant="outlined "
@@ -18,16 +25,14 @@ function Profile() {
         minWidth: "300px",
         zIndex: "1",
         height: "500px",
-        opacity: "1",
         borderRadius: "16px",
       }}
     >
       <div className="pavata">
         <div className="avata">
-          <span className="initialzoomp"> LF</span>{" "}
-        </div>
+          <span className="initialzoomp"> {initial} </span>{" "}
+        </div>{" "}
       </div>
-
       <div
         style={{
           display: "flex",
@@ -37,20 +42,23 @@ function Profile() {
         }}
       >
         <span style={style}>
-          Name : <span style={{ fontWeight: "normal" }}>Stephano Peter</span>
-        </span>
+          Name:{" "}
+          <span style={{ fontWeight: "normal" }}> {fname + "   " + lname}</span>{" "}
+        </span>{" "}
         <span style={style}>
-          Email : <span style={{ fontWeight: "normal" }}>pwamly@gmail.com</span>
-        </span>
+          Email: <span style={{ fontWeight: "normal" }}>{email}</span>{" "}
+        </span>{" "}
         <span style={style}>
-          Phone : <span style={{ fontWeight: "normal" }}>+255673089337</span>
-        </span>
+          Phone: <span style={{ fontWeight: "normal" }}> {phone}</span>{" "}
+        </span>{" "}
         <span style={style}>
-          Role : <span style={{ fontWeight: "normal" }}>admin</span>
-        </span>
-      </div>
+          Role: <span style={{ fontWeight: "normal" }}> {userRole} </span>{" "}
+        </span>{" "}
+      </div>{" "}
     </Card>
   );
 }
-
-export default Profile;
+const MapStateToprops = (store) => {
+  return { ...store };
+};
+export default connect(MapStateToprops)(Profile);

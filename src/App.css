@@ -14,10 +14,4 @@ h4 {
 .reports,
 .products {}
 
-.login-form {
-    position: block;
-    display: flex;
-    padding: 56px;
-}
-
 .navbar {}

@@ -11,3 +11,4 @@ export const VIEW_USER = "VIEW_USER";
 export const EXIT_VEW_USER = "EXIT_VEW_USER";
 export const SAVE_TOKEN = "SAVE_TOKEN";
 export const SAVE_FORM_DATA = "SAVE_FORM_DATA";
+export const SAVE_INITIAL_DATA = "SAVE_INITIAL_DATA";
