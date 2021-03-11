@@ -9,7 +9,10 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT;
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+// const orig = "http://localhost:3000";
+const orig = "http://3.136.108.40:5500";
+
+app.use(cors({ origin: orig, credentials: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
