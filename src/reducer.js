@@ -28,10 +28,7 @@ function reducer(state, action) {
 
     /*user data*/
     if (action.type === ADD_USER) {
-        if (action.payload) {
-            registerUser(action.payload);
-        }
-        return {...state, adduser: false };
+        return {...state, adduser: true };
     }
 
     if (action.type === REMOVE_USER) {
@@ -67,7 +64,7 @@ function reducer(state, action) {
         };
     }
     if (action.type === EDIT_USER) {
-        return {...state, edituser: true, viewuser: false };
+        return {...state, edituser: true };
     }
     if (action.type === EXIT_EDIT_USER) {
         return {...state, edituser: false, viewdata: null, adduserbtn: true };

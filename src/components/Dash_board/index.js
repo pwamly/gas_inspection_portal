@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import Footer from "../Footer/Footer";
 import { connect } from "react-redux";
 import { getUserId, httpActions } from "../../client/index";
+import Team from "./Team/Index";
 import { useGet } from "../../hooks";
 import "./dashbar.css";
 import RegistrationForm from "./Registration";
@@ -14,6 +15,7 @@ import Printform from "../Dash_board/Printform/Printform";
 import Spline from "./Charts/Spline";
 import Profile from "../Dash_board/Profile/Profile";
 import { SAVE_INITIAL_DATA } from "../../actions";
+import Report from "./Report/Report";
 
 import {
   Redirect,
@@ -48,23 +50,31 @@ function Index({ modalShown, toggleModal, showProfile, dispatch }) {
   return (
     <>
       {" "}
-      {showProfile && <Profile />}
+      {showProfile && <Profile />}{" "}
       <IconContext.Provider value={{ color: "#fff" }}>
-        <Router>
-          <Navbar props={initial} />
-          <Container className="dashboard">
-            <Switch>
-              <ProtectRoute path="/dashboard" exact component={Spline} />{" "}
-              <ProtectRoute
-                path="/dashboard/registration"
-                exact
-                component={RegistrationForm}
-              />{" "}
-              <ProtectRoute path="/kjjkl" component={RegistrationForm} />{" "}
-            </Switch>{" "}
-          </Container>{" "}
-        </Router>{" "}
-        <Footer />{" "}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Router>
+            <Navbar props={initial} />{" "}
+            <Container className="dashboard">
+              <Switch>
+                <ProtectRoute path="/dashboard" exact component={Spline} />{" "}
+                <ProtectRoute
+                  path="/dashboard/registration"
+                  exact
+                  component={RegistrationForm}
+                />{" "}
+                <ProtectRoute path="/dashboard/team" component={Team} />{" "}
+                <ProtectRoute path="/dashboard/reports" component={Report} />{" "}
+              </Switch>{" "}
+            </Container>{" "}
+          </Router>{" "}
+          <Footer />{" "}
+        </div>{" "}
       </IconContext.Provider>{" "}
     </>
   );

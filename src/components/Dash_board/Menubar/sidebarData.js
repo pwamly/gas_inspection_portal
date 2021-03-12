@@ -17,19 +17,19 @@ export const SidebarData = [{
     },
     {
         title: "Reports",
-        path: "/reports",
+        path: "/dashboard/reports",
         icon: < IoIcons.IoIosPaper / > ,
         cName: "nav-text",
     },
     {
         title: "feeds",
-        path: "/feeds",
+        path: "#",
         icon: < FaIcons.FaCartPlus / > ,
         cName: "nav-text",
     },
     {
         title: "Team",
-        path: "/teams",
+        path: "/dashboard/team",
         icon: < IoIcons.IoMdPeople / > ,
         cName: "nav-text",
     },

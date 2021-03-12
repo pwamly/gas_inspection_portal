@@ -22,7 +22,6 @@ function Index({ data, profile, dispatch }) {
         <div className="pencil" onClick={() => dispatch({ type: EDIT_USER })}>
           <ImPencil />
         </div>
-        {console.log("ttttttttttttttt", user)}
         <div className="pdetails">
           <h3 className="h3span">First name:</h3> <h3>{user.fname}</h3>
         </div>

@@ -74,7 +74,6 @@ span {
     background: #1a83ff;
     border-radius: 32px;
     width: 60px;
-    height: 60px;
 }
 
 .initial {
@@ -82,6 +81,7 @@ span {
     top: 17px;
     left: 4px;
     font-size: large;
+    background: none !important;
 }
 
 .avatar:hover {
@@ -94,4 +94,5 @@ span {
     display: flex;
     justify-content: flex-end;
     padding: 20px;
+    background: none !important;
 }

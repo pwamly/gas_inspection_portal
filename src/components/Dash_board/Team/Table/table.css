@@ -1,0 +1,31 @@
+td {
+    border: none !important;
+    padding: 20px;
+}
+
+.table-wrapper {
+    box-sizing: border-box;
+    border: 0.1px solid rgb(190, 190, 190);
+    border-radius: 14px;
+    margin-top: 35px;
+}
+
+.pagination {
+    text-decoration: none !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.page-link {
+    text-decoration: none !important;
+}
+
+.plus:hover {
+    background: rgb(219, 219, 226);
+}
+
+.plus {
+    color: blue;
+}

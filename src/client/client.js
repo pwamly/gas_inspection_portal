@@ -80,6 +80,22 @@ export const login = async(payload) => {
     return false;
 };
 
+export const editProfile = async(payload) => {
+    try {
+        const response = await instance.put("/auth/profile", {...payload });
+
+        if (response) {
+            const { successful, success } = response;
+            return successful || success;
+        }
+    } catch (error) {
+        return error;
+        console.log("error in login", error);
+    }
+
+    return false;
+};
+
 export const logout = async() => {
     localStorage.clear();
     window.location.replace(`/`);

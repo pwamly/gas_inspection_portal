@@ -15,20 +15,22 @@ function index() {
   return (
     <>
       {" "}
-      <Router>
-        <Navbar />
-        <Container className="main-home">
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>{" "}
-            <Route path="/reset-password">
-              <ForgotPassword />
-            </Route>{" "}
-          </Switch>{" "}
-        </Container>{" "}
-      </Router>{" "}
-      <Footer />
+      <div>
+        <Router>
+          <Navbar />
+          <Container className="main-home">
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>{" "}
+              <Route path="/reset-password">
+                <ForgotPassword />
+              </Route>{" "}
+            </Switch>{" "}
+          </Container>{" "}
+        </Router>{" "}
+        <Footer />
+      </div>{" "}
     </>
   );
 }
