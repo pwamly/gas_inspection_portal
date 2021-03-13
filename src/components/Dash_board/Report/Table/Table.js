@@ -17,13 +17,31 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { FaEye, FaRegEye, FaTrash, FaPrint } from "react-icons/fa";
 import { ImPencil } from "react-icons/im";
-import "./table.css";
+import "./tablereport.css";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
+
+export function Actions() {
+  return (
+    <div
+      style={{
+        marginTop: "30px",
+        display: "flex",
+        flexDirection: "row",
+        gap: "15px",
+        paddingRight: "40px",
+      }}
+    >
+      <FaEye className="IconStyle" />
+      <ImPencil className="IconStyle" />
+      <FaTrash id="trash" className="IconStyle" />
+    </div>
+  );
+}
 
 const rows = [
   {
@@ -143,6 +161,7 @@ const columns = [
   { name: "cexpiryDate2", label: "Cylinder Expiry Date", show: true },
   { name: "tbscertificate2", label: "Tbs Certificate", show: true },
   { name: "inspectorID", label: "Inspector ID", show: true },
+  { name: "formatter", label: "Actions", show: true, formatter: Actions },
 ];
 
 function BasicTable({ dispatch }) {
@@ -154,23 +173,26 @@ function BasicTable({ dispatch }) {
   const [opendate, setOpendate] = useState(false);
   const [openstatus, setOpenstatus] = useState(false);
 
-  const handledateChange = (event) => {
+  const handleChangedate = (event) => {
     setDate(event.target.value);
-  };
-  const handlestatusChange = (event) => {
-    setStatus(event.target.value);
   };
 
   const handleClosedate = () => {
-    setDate(false);
+    setOpendate(false);
   };
 
   const handleOpendate = () => {
-    setDate(true);
+    setOpendate(true);
   };
+  //..
+  const handleChangestatus = (event) => {
+    setStatus(event.target.value);
+  };
+
   const handleClosestatus = () => {
     setOpenstatus(false);
   };
+
   const handleOpenstatus = () => {
     setOpenstatus(true);
   };
@@ -217,7 +239,7 @@ function BasicTable({ dispatch }) {
             onClose={handleClosedate}
             onOpen={handleOpendate}
             value={date}
-            onChange={handledateChange}
+            onChange={handleChangedate}
             ref={formref}
           >
             <MenuItem value="day">Today</MenuItem>
@@ -244,7 +266,7 @@ function BasicTable({ dispatch }) {
             onClose={handleClosestatus}
             onOpen={handleOpenstatus}
             value={status}
-            onChange={handlestatusChange}
+            onChange={handleChangestatus}
             ref={formref}
           >
             <MenuItem value="day">Expired</MenuItem>
@@ -280,9 +302,15 @@ function BasicTable({ dispatch }) {
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                {columns.map((column) => (
-                  <TableCell>{row[column.name] || "N/A"}</TableCell>
-                ))}
+                {columns.map((column) => {
+                  if (column.show == false) {
+                    return null;
+                  }
+                  if (column.name == "formatter") {
+                    return <Actions />;
+                  }
+                  return <TableCell>{row[column.name] || "N/A"}</TableCell>;
+                })}
               </TableRow>
             ))}
           </TableBody>

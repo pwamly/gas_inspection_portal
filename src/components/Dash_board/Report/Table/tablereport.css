@@ -29,3 +29,16 @@ ul {
 .plus {
     color: blue;
 }
+
+.IconStyle {
+    color: blue !important;
+}
+
+.IconStyle:hover {
+    font-size: x-large !important;
+    cursor: pointer !important;
+}
+
+#trash:hover {
+    color: blue !important;
+}

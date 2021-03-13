@@ -15,6 +15,7 @@ import { Provider } from "react-redux";
 import { ToastProvider } from "react-toast-notifications";
 import { userData, getProfile } from "./client/index";
 import { store } from "./store";
+import Pdf from "./components/Pdf/Pdf";
 import "./App.css";
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
                 <Home />
               </Route>{" "}
               <Route exact path="/form">
-                <Form />
+                <Pdf />
               </Route>{" "}
               <ProtectRoute
                 path="/dashboard"

@@ -11,7 +11,7 @@ import Pagination from "react-bootstrap/Pagination";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
 import { ADD_USER } from "../../../../actions";
-import "./table.css";
+import "./tableteam.css";
 
 const useStyles = makeStyles({
   table: {
