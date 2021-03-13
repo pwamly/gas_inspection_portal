@@ -1,6 +1,7 @@
-table {
+#vehicleinfo table {
     border-collapse: collapse;
     border: 1px solid black;
+    display: table;
 }
 
 td {
@@ -29,8 +30,10 @@ td {
 }
 
 .vehicleinfo {
-    width: 705px;
-    margin-left: 45px;
+    width: 705px !important;
+    border: 1px solid black;
+    margin-left: 45px !important;
+    background: green;
 }
 
 th {
@@ -42,6 +45,7 @@ th {
 
 .trow {
     height: 50px;
+    border: 1px solid black;
 }
 
 
