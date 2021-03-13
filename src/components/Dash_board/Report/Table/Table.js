@@ -277,29 +277,41 @@ function BasicTable({ dispatch }) {
       <TableContainer
         component={Paper}
         style={{
-          border: "none",
+          border: "none !important",
         }}
       >
         <Table
+          id="repotable"
           className={classes.table}
           aria-label="simple table"
           style={{
-            border: "none",
+            border: "none !important",
             padding: "auto",
           }}
         >
-          <TableHead style={{ background: "rgb(241, 239, 239)" }}>
-            <TableRow>
-              <TableCell></TableCell>
+          <TableHead
+            style={{
+              background: "rgb(241, 239, 239)",
+              border: "none !important",
+            }}
+          >
+            <TableRow style={{ border: "none !important" }}>
+              <TableCell style={{ border: "none !important" }}></TableCell>
               {columns.map((th) => (
-                <TableCell>{th.label}</TableCell>
+                <TableCell style={{ border: "none !important" }}>
+                  {th.label}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody style={{ border: "none !important" }}>
             {rows.map((row, index) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
+              <TableRow key={row.name} style={{ border: "none !important" }}>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ border: "none !important" }}
+                >
                   {index + 1}
                 </TableCell>
                 {columns.map((column) => {
@@ -309,7 +321,11 @@ function BasicTable({ dispatch }) {
                   if (column.name == "formatter") {
                     return <Actions />;
                   }
-                  return <TableCell>{row[column.name] || "N/A"}</TableCell>;
+                  return (
+                    <TableCell style={{ border: "none !important" }}>
+                      {row[column.name] || "N/A"}
+                    </TableCell>
+                  );
                 })}
               </TableRow>
             ))}

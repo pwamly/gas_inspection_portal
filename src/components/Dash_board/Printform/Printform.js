@@ -25,9 +25,8 @@ function Printform() {
   return (
     <Container
       style={{
-        minWidth: "100vh",
+        height: "100hv",
         width: "21.8cm",
-        background: "red ",
       }}
     >
       <div className="pdfform">
@@ -78,87 +77,146 @@ function Printform() {
         <table className="vehicleinfo">
           <thead>
             <tr>
-              <th colspan="7" style={{ color: "#fff" }}>
+              <th colspan="7" style={{ background: "#646060", color: "#fff" }}>
                 VEHICLE INFORMATION{" "}
               </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody>
             <tr className="trow" style={{ border: "1px solid black" }}>
-              <td style={{ width: "145px", border: "solid black" }}>
+              <td
+                style={{
+                  width: "145px",
+                  borderRight: "solid 1px black",
+                }}
+              >
                 Name of Owner{" "}
               </td>{" "}
-              <td style={{ width: "80px" }}> Vehicle Reg.No </td>{" "}
-              <td style={{ width: "80px" }}> Year of man. </td>{" "}
-              <td style={{ width: "80px" }}> Make </td>{" "}
-              <td style={{ width: "80px" }}> Model </td>{" "}
-              <td style={{ width: "auto" }}>
+              <td
+                style={{
+                  width: "80px",
+                  borderRight: "solid 1px black",
+                }}
+              >
+                {" "}
+                Vehicle Reg.No{" "}
+              </td>{" "}
+              <td style={{ width: "80px", borderRight: "solid 1px black" }}>
+                {" "}
+                Year of man.{" "}
+              </td>{" "}
+              <td style={{ width: "80px", borderRight: "solid 1px black" }}>
+                {" "}
+                Make{" "}
+              </td>{" "}
+              <td style={{ width: "80px", borderRight: "solid 1px black" }}>
+                {" "}
+                Model{" "}
+              </td>{" "}
+              <td style={{ width: "auto", borderRight: "solid 1px black" }}>
                 Chassis No.or VIN Engine No / Type{" "}
               </td>{" "}
-              <td style={{ width: "80px" }}> Mileage at Inspection(km) </td>{" "}
+              <td style={{ width: "80px", borderRight: "solid 1px black" }}>
+                {" "}
+                Mileage at Inspection(km){" "}
+              </td>{" "}
             </tr>{" "}
             <tr className="trow">
-              <td> </td> <td> </td> <td> </td> <td> </td> <td> </td>{" "}
-              <td>
+              <td style={{ borderRight: "solid 1px black" }}> </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}> </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}> </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}> </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
                 3{" "}
-                <div styl={{ background: "none" }}>
+                <div>
                   <div id="span1" class="t">
                     1{" "}
                   </div>{" "}
                 </div>{" "}
               </td>{" "}
-              <td> </td>{" "}
+              <td style={{ borderLeft: "solid 1px black" }}> egeg</td>{" "}
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
         <table className="vehicleinfo">
           <thead>
-            <tr>
+            <tr style={{ border: "solid 1px black" }}>
               <th colspan="7" style={{ background: "#646060", color: "#fff" }}>
                 TYPE OF NGV{" "}
               </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody>
-            <tr className="trow">
-              <td style={{ width: "235px" }}> Bi - fuel[....] </td>{" "}
-              <td style={{ width: "235px" }}> Dedicated[....] </td>{" "}
-              <td style={{ width: "235px" }}> Dual fuel[....] </td>{" "}
+            <tr className="trow" style={{ border: "solid 1px black" }}>
+              <td style={{ width: "235px", borderRight: "solid 1px black" }}>
+                {" "}
+                Bi - fuel[....]{" "}
+              </td>{" "}
+              <td style={{ width: "235px", borderRight: "solid 1px black" }}>
+                {" "}
+                Dedicated[....]{" "}
+              </td>{" "}
+              <td style={{ width: "235px", borderRight: "solid 1px black" }}>
+                {" "}
+                Dual fuel[....]{" "}
+              </td>{" "}
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
         <table className="converkit">
           <thead>
-            <tr>
-              <th colspan="2" style={{ background: "#646060", color: "#fff" }}>
+            <tr style={{ border: "1px solid black" }}>
+              <th
+                colspan="2"
+                style={{
+                  background: "#646060",
+                  color: "#fff",
+                  border: "1px solid black",
+                }}
+              >
                 CONVERSION KIT INFORMATION{" "}
               </th>{" "}
             </tr>{" "}
           </thead>{" "}
           <tbody>
-            <tr className="">
+            <tr style={{ border: "1px solid black" }}>
               <td
                 style={{
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Type{" "}
               </td>{" "}
-              <td> </td>{" "}
+              <td
+                style={{
+                  border: "solid 1px black",
+                }}
+              >
+                {" "}
+              </td>{" "}
             </tr>{" "}
-            <tr className="">
+            <tr style={{ border: "solid 1px black" }}>
               <td
                 style={{
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Manufacturer{" "}
               </td>{" "}
-              <td> </td>{" "}
+              <td
+                style={{
+                  border: "solid 1px black",
+                }}
+              >
+                {" "}
+              </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -166,11 +224,18 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Serial No{" "}
               </td>{" "}
-              <td> </td>{" "}
+              <td
+                style={{
+                  border: "solid 1px black",
+                }}
+              >
+                {" "}
+              </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -178,17 +243,24 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Name of Installer{" "}
               </td>{" "}
-              <td> </td>{" "}
+              <td
+                style={{
+                  border: "solid 1px black",
+                }}
+              >
+                {" "}
+              </td>{" "}
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
         <table className="cylinder">
           <thead>
-            <tr>
+            <tr style={{ border: "solid 1px black" }}>
               <th
                 colspan="4"
                 style={{
@@ -210,6 +282,7 @@ function Printform() {
                       height: "100%",
                       paddingTop: "0px",
                       paddingBottom: "0px",
+                      borderRight: "solid 1px black",
                     }}
                   >
                     CNG CYLINDERS INFROMATION{" "}
@@ -226,11 +299,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Cylinder No.{" "}
               </td>{" "}
-              <td> 1 </td> <td> 2 </td> <td> 3 </td>{" "}
+              <td style={{ border: "solid 1px black" }}> 1 </td>{" "}
+              <td style={{ border: "solid 1px black" }}> 2 </td>{" "}
+              <td style={{ border: "solid 1px black" }}> 3 </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -238,11 +314,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Cylinder position in the Vehicle{" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -250,11 +329,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Cylinder Type{" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -262,11 +344,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Manufacture Name{" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -274,11 +359,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Manufacturer Address / Contact{" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -286,11 +374,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Service Pressure(MPa){" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -298,11 +389,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Manufactured Date{" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -310,11 +404,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Water Volume(litres){" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -326,7 +423,9 @@ function Printform() {
               >
                 Expiry Date{" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -334,11 +433,14 @@ function Printform() {
                   width: "213px",
                   textAlign: "start",
                   paddingLeft: "5px",
+                  border: "solid 1px black",
                 }}
               >
                 Certificate of Conformity to Tanzania Standards(TBS){" "}
               </td>{" "}
-              <td> </td> <td></td> <td> </td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
+              <td style={{ border: "solid 1px black" }}></td>{" "}
+              <td style={{ border: "solid 1px black" }}> </td>{" "}
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
@@ -360,11 +462,11 @@ function Printform() {
           </thead>{" "}
           <tbody>
             <tr className="" style={{ height: "1px" }}>
-              <td>
+              <td style={{ border: "solid 1px black" }}>
                 <table className="inspectionstandards">
                   <thead>
                     <tr>
-                      <th colspan="2" style={{}}>
+                      <th colspan="2" style={{ border: "1px solid black" }}>
                         <div
                           style={{
                             display: "flex",
@@ -394,6 +496,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         CNG cylinder mounting on the brackets{" "}
@@ -405,6 +508,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         CNG cylinder Condition{" "}
@@ -416,6 +520,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         PRD condition and vent line{" "}
@@ -427,6 +532,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         Fuel line from CNG cylinder to Pressure Regulator{" "}
@@ -438,6 +544,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         Pressure Regulator{" "}
@@ -449,6 +556,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         Refuelling connection and mounting{" "}
@@ -460,6 +568,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         Piping and hoses condition and connections under the
@@ -472,6 +581,7 @@ function Printform() {
                           width: "213px",
                           textAlign: "start",
                           paddingLeft: "5px",
+                          border: "1px solid black",
                         }}
                       >
                         Dressing of wiring{" "}
@@ -480,7 +590,7 @@ function Printform() {
                   </tbody>{" "}
                 </table>{" "}
               </td>{" "}
-              <td>
+              <td style={{ border: "solid 1px black" }}>
                 <div
                   style={{
                     width: "377px",
@@ -513,7 +623,7 @@ function Printform() {
                         fontWeight: "normal",
                       }}
                     >
-                      <h5> & #8226;</h5>
+                      <h5> &#8226;</h5>
                       <h5
                         style={{
                           fontSize: "12px",
@@ -536,7 +646,7 @@ function Printform() {
                         fontWeight: "normal",
                       }}
                     >
-                      <h5> & #8226;</h5>
+                      <h5> &#8226;</h5>
                       <h5
                         style={{
                           fontSize: "12px",
@@ -562,14 +672,14 @@ function Printform() {
             marginLeft: "45px",
             display: "flex",
             flexDirection: "row",
-            marginTop: "30px",
+            marginTop: "20px",
             gap: "70px",
           }}
         >
-          <div style={{ width: "200px", height: "150px", background: "green" }}>
+          <div style={{ width: "200px", height: "150px" }}>
             <img style={{ width: "200px", height: "150px" }} src={signature} />{" "}
           </div>{" "}
-          <div style={{ width: "200px", background: "red", height: "120px" }}>
+          <div style={{ width: "200px", height: "120px" }}>
             <img style={{ width: "200px", height: "150px" }} src={stamp} />{" "}
           </div>{" "}
         </div>{" "}

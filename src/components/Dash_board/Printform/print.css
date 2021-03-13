@@ -1,17 +1,18 @@
-#vehicleinfo table {
+.pdfform {
+    width: 21.8cm;
+    height: 97%;
+}
+
+.vehicleinfo {
     border-collapse: collapse;
-    border: 1px solid black;
+    border: 1px solid black !important;
     display: table;
 }
 
-td {
-    border: 1px solid black;
-    padding: 0.5rem;
-}
 
-.pdfform {
-    width: 21.8cm;
-}
+/* td {
+    padding: 0.5rem;
+} */
 
 .pdftitle {
     width: "100px";
@@ -33,7 +34,6 @@ td {
     width: 705px !important;
     border: 1px solid black;
     margin-left: 45px !important;
-    background: green;
 }
 
 th {
@@ -45,7 +45,6 @@ th {
 
 .trow {
     height: 50px;
-    border: 1px solid black;
 }
 
 
@@ -55,7 +54,6 @@ td {
     text-align: center;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
     padding: 2px;
     font-size: 12px;
 }
@@ -71,16 +69,25 @@ td {
 .converkit {
     width: 705px;
     margin-left: 45px;
+    border-collapse: collapse;
+    border: 1px solid black !important;
+    display: table;
 }
 
 .cylinder {
     width: 705px;
+    display: table;
     margin-left: 45px;
+    border-collapse: collapse;
+    border: 1px solid black !important;
 }
 
 .tbs {
     width: 351px;
+    display: table;
     margin-left: 45px;
+    border-collapse: collapse !important;
+    border: 1px solid black !important;
 }
 
 .inspectionstandards {
