@@ -75,6 +75,7 @@ function Profile({ profile, edituser, dispatch }) {
 
   return (
     <>
+      {" "}
       {!edituser ? (
         <Card
           variant="outlined "
@@ -146,7 +147,6 @@ function Profile({ profile, edituser, dispatch }) {
               <Edit />
             </IconButton>{" "}
           </div>
-          )
         </Card>
       ) : (
         <Card
@@ -219,9 +219,9 @@ function Profile({ profile, edituser, dispatch }) {
               "Save"
             )}{" "}
           </Button>{" "}
-          <h4></h4>{" "}
+          <h4> </h4>{" "}
         </Card>
-      )}
+      )}{" "}
     </>
   );
 }

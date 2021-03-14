@@ -10,7 +10,6 @@ import { logout as signout } from "../../../client";
 import { VIEW_USER } from "../../../actions";
 
 function Index({ dispatch, props }) {
-  console.log("llllllllllll", props);
   const [sidebar, setSidebar] = useState(false);
   const showsidebar = () => setSidebar(!sidebar);
   const [modalShown, toggleModal] = useState(false);

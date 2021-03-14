@@ -9,6 +9,7 @@ import Table from "./Table/Table";
 import VehicleReg from "../Registration/index";
 import PrintForm from "../Printform/Printform";
 import Pdf from "../../Pdf/Pdf";
+import View from "./View";
 
 function Report() {
   const table = false;

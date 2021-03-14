@@ -1,4 +1,11 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -25,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export function Actions() {
+export function Actio() {
   return (
     <div
       style={{
@@ -36,135 +43,232 @@ export function Actions() {
         paddingRight: "40px",
       }}
     >
-      <FaEye className="IconStyle" />
+      <Link to="#">
+        {" "}
+        <FaEye
+          className="IconStyle"
+          onClick={(row) => {
+            console.log("jjjjjjjjjjjjjj", row);
+          }}
+        />
+      </Link>
+
       <ImPencil className="IconStyle" />
       <FaTrash id="trash" className="IconStyle" />
     </div>
   );
 }
 
-const rows = [
-  {
-    name: "gwamako joel",
-    email: "gwamako@gmail.com",
-    phone: "255673000997",
-    location: "Dar es salaam",
-    newInstallation: "...v...",
-    periodic: ".....",
-    afterAccident: "....",
-    ownername: "KAZAIKI HOSPITALL",
-    vihecleRegno: "T361 ADU",
-    manYear: "2004",
-    make: "MISTUBISH",
-    model: "ROSA",
-    chasisno: "BE63EG301113",
-    engineno: "4M51EAA907413",
-    milliege: "130785",
-    biFuel: "...",
-    Dedicated: "...V...",
-    DualFuel: "....",
-    type: "SEQUENTIAL EFI",
-    manufacturer: "JAPAN",
-    serialno: "-",
-    installername: "",
-    cylinderno3: "3",
-    cylinderposition3: "",
-    cylinderSerialNo3: "12",
-    cylindertype3: "",
-    cmanufacturer3: "",
-    cmanuContact3: "",
-    servicepressure3: "",
-    cmanufacturedDate3: "",
-    waterVolume3: "",
-    cexpiryDate3: "5-10-2019",
-    tbscertificate3: "",
-    cylinderno1: "1",
-    cylinderposition1: "underneath",
-    cylindertype1: "2",
-    cylinderSerialNo1: "78",
-    cmanufacturer1: "BQ",
-    cmanuContact1: "china",
-    servicepressure1: "20Mpa",
-    cmanufacturedDate1: "10/2019",
-    waterVolume1: "120L",
-    cexpiryDate1: "10-2038",
-    tbscertificate1: "YES",
-    cylinderno2: "2",
-    cylinderSerialNo2: "5",
-    cylinderposition2: "underneath",
-    cylindertype2: "2",
-    cmanufacturer2: "BQ",
-    cmanuContact2: "china",
-    servicepressure2: "20Mpa",
-    cmanufacturedDate2: "10-2019",
-    waterVolume2: "120L",
-    cexpiryDate2: "10-2038",
-    tbscertificate2: "YES",
-    inspectorID: "",
-  },
-];
-
-const columns = [
-  { name: "name", label: "Name", show: true },
-  { name: "email", label: "Email", show: true },
-  { name: "phone", label: "Phone", show: true },
-  { name: "location", label: "Location", show: true },
-  { name: "newInstallation", label: "New Installation", show: true },
-  { name: "periodic", label: "Periodic", show: true },
-  { name: "afterAccident", label: "After Accident", show: true },
-  { name: "ownername", label: "Owner Name", show: true },
-  { name: "vihecleRegno", label: "Vehicle Reg No", show: true },
-  { name: "manYear", label: "Manu Year", show: true },
-  { name: "make", label: "Make", show: true },
-  { name: "model", label: "Model", show: true },
-  { name: "chasisno", label: "Chasis No", show: true },
-  { name: "engineno", label: "Engine No", show: true },
-  { name: "milliege", label: "Milliege", show: true },
-  { name: "biFuel", label: "Bi Fuel", show: true },
-  { name: "Dedicated", label: "Dedicated", show: true },
-  { name: "DualFuel", label: "Dual Fuel", show: true },
-  { name: "type", label: "Type", show: true },
-  { name: "manufacturer", label: "Manufacturer", show: true },
-  { name: "serialno", label: "Serial No", show: true },
-  { name: "installername", label: "Installer name", show: true },
-  { name: "cylinderno3", label: "Cylinder No", show: true },
-  { name: "cylinderposition3", label: "Cylinder position", show: true },
-  { name: "cylinderSerialNo3", label: "Cylinder Serial No", show: true },
-  { name: "cylindertype3", label: "Cylinder Type", show: true },
-  { name: "cmanufacturer3", label: "Cylinder Manufacturer", show: true },
-  { name: "cmanuContact3", label: "Cylinder Manu Contact", show: true },
-  { name: "servicepressure3", label: "Service Pressure", show: true },
-  { name: "cmanufacturedDate3", label: "Cylinder manu date", show: true },
-  { name: "waterVolume3", label: "Water Vol", show: true },
-  { name: "cexpiryDate3", label: "Expiry Date", show: true },
-  { name: "tbscertificate3", label: "Tbs Certicicate", show: true },
-  { name: "cylinderno1", label: "Cylinder No", show: true },
-  { name: "cylinderposition1", label: "Cylinder Position", show: true },
-  { name: "cylindertype1", label: "Cylinder Type", show: true },
-  { name: "cylinderSerialNo1", label: "Cylinder Serial No", show: true },
-  { name: "cmanufacturer1", label: "Cylinder manu", show: true },
-  { name: "cmanuContact1", label: "Cylinder Contact", show: true },
-  { name: "servicepressure1", label: "Service Pressure", show: true },
-  { name: "cmanufacturedDate1", label: "Cylinder Manu date", show: true },
-  { name: "waterVolume1", label: "Water Volume", show: true },
-  { name: "cexpiryDate1", label: "Cylinder Expiry Date", show: true },
-  { name: "tbscertificate1", label: "Tbs Certificate", show: true },
-  { name: "cylinderno2", label: "Cylinder No", show: true },
-  { name: "cylinderSerialNo2", label: "Cylinder Serial No", show: true },
-  { name: "cylinderposition2", label: "Cylinder position", show: true },
-  { name: "cylindertype2", label: "Cylinder type", show: true },
-  { name: "cmanufacturer2", label: "cylinder manufacturer", show: true },
-  { name: "cmanuContact2", label: "Cylinder Contact", show: true },
-  { name: "servicepressure2", label: "Service Pressure", show: true },
-  { name: "cmanufacturedDate2", label: "Cylinder Manufcturer", show: true },
-  { name: "waterVolume2", label: "Water Volume", show: true },
-  { name: "cexpiryDate2", label: "Cylinder Expiry Date", show: true },
-  { name: "tbscertificate2", label: "Tbs Certificate", show: true },
-  { name: "inspectorID", label: "Inspector ID", show: true },
-  { name: "formatter", label: "Actions", show: true, formatter: Actions },
-];
-
 function BasicTable({ dispatch }) {
+  const Actions = useCallback(
+    (row) => (
+      <div
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          flexDirection: "row",
+          gap: "15px",
+          paddingRight: "40px",
+        }}
+      >
+        <Link to="#">
+          {" "}
+          <FaEye
+            className="IconStyle"
+            onClick={() => {
+              console.log("jjjjjjjjjjjjjj", row);
+            }}
+          />
+        </Link>
+
+        <ImPencil className="IconStyle" />
+        <FaTrash id="trash" className="IconStyle" />
+      </div>
+    ),
+    []
+  );
+
+  const rows = [
+    {
+      id: "jsgjdinqldnwoqjdwqmmd;wdmw;",
+      name: "gwamako joel",
+      email: "gwamako@gmail.com",
+      phone: "255673000997",
+      location: "Dar es salaam",
+      newInstallation: "...v...",
+      periodic: ".....",
+      afterAccident: "....",
+      ownername: "KAZAIKI HOSPITALL",
+      vihecleRegno: "T361 ADU",
+      manYear: "2004",
+      make: "MISTUBISH",
+      model: "ROSA",
+      chasisno: "BE63EG301113",
+      engineno: "4M51EAA907413",
+      milliege: "130785",
+      biFuel: "...",
+      Dedicated: "...V...",
+      DualFuel: "....",
+      type: "SEQUENTIAL EFI",
+      manufacturer: "JAPAN",
+      serialno: "-",
+      installername: "",
+      cylinderno3: "3",
+      cylinderposition3: "",
+      cylinderSerialNo3: "12",
+      cylindertype3: "",
+      cmanufacturer3: "",
+      cmanuContact3: "",
+      servicepressure3: "",
+      cmanufacturedDate3: "",
+      waterVolume3: "",
+      cexpiryDate3: "5-10-2019",
+      tbscertificate3: "",
+      cylinderno1: "1",
+      cylinderposition1: "underneath",
+      cylindertype1: "2",
+      cylinderSerialNo1: "78",
+      cmanufacturer1: "BQ",
+      cmanuContact1: "china",
+      servicepressure1: "20Mpa",
+      cmanufacturedDate1: "10/2019",
+      waterVolume1: "120L",
+      cexpiryDate1: "10-2038",
+      tbscertificate1: "YES",
+      cylinderno2: "2",
+      cylinderSerialNo2: "5",
+      cylinderposition2: "underneath",
+      cylindertype2: "2",
+      cmanufacturer2: "BQ",
+      cmanuContact2: "china",
+      servicepressure2: "20Mpa",
+      cmanufacturedDate2: "10-2019",
+      waterVolume2: "120L",
+      cexpiryDate2: "10-2038",
+      tbscertificate2: "YES",
+      inspectorID: "",
+    },
+    {
+      id: "12123123123214141242414",
+      name: "Magufuli Baba",
+      email: "gwamako@gmail.com",
+      phone: "255673000997",
+      location: "Dar es salaam",
+      newInstallation: "...v...",
+      periodic: ".....",
+      afterAccident: "....",
+      ownername: "KAZAIKI HOSPITALL",
+      vihecleRegno: "T361 ADU",
+      manYear: "2004",
+      make: "MISTUBISH",
+      model: "ROSA",
+      chasisno: "BE63EG301113",
+      engineno: "4M51EAA907413",
+      milliege: "130785",
+      biFuel: "...",
+      Dedicated: "...V...",
+      DualFuel: "....",
+      type: "SEQUENTIAL EFI",
+      manufacturer: "JAPAN",
+      serialno: "-",
+      installername: "",
+      cylinderno3: "3",
+      cylinderposition3: "",
+      cylinderSerialNo3: "12",
+      cylindertype3: "",
+      cmanufacturer3: "",
+      cmanuContact3: "",
+      servicepressure3: "",
+      cmanufacturedDate3: "",
+      waterVolume3: "",
+      cexpiryDate3: "5-10-2019",
+      tbscertificate3: "",
+      cylinderno1: "1",
+      cylinderposition1: "underneath",
+      cylindertype1: "2",
+      cylinderSerialNo1: "78",
+      cmanufacturer1: "BQ",
+      cmanuContact1: "china",
+      servicepressure1: "20Mpa",
+      cmanufacturedDate1: "10/2019",
+      waterVolume1: "120L",
+      cexpiryDate1: "10-2038",
+      tbscertificate1: "YES",
+      cylinderno2: "2",
+      cylinderSerialNo2: "5",
+      cylinderposition2: "underneath",
+      cylindertype2: "2",
+      cmanufacturer2: "BQ",
+      cmanuContact2: "china",
+      servicepressure2: "20Mpa",
+      cmanufacturedDate2: "10-2019",
+      waterVolume2: "120L",
+      cexpiryDate2: "10-2038",
+      tbscertificate2: "YES",
+      inspectorID: "",
+    },
+  ];
+
+  const columns = [
+    { name: "name", label: "Name", show: true },
+    { name: "email", label: "Email", show: true },
+    { name: "phone", label: "Phone", show: true },
+    { name: "location", label: "Location", show: true },
+    { name: "newInstallation", label: "New Installation", show: true },
+    { name: "periodic", label: "Periodic", show: true },
+    { name: "afterAccident", label: "After Accident", show: true },
+    { name: "ownername", label: "Owner Name", show: true },
+    { name: "vihecleRegno", label: "Vehicle Reg No", show: true },
+    { name: "manYear", label: "Manu Year", show: true },
+    { name: "make", label: "Make", show: true },
+    { name: "model", label: "Model", show: true },
+    { name: "chasisno", label: "Chasis No", show: true },
+    { name: "engineno", label: "Engine No", show: true },
+    { name: "milliege", label: "Milliege", show: true },
+    { name: "biFuel", label: "Bi Fuel", show: true },
+    { name: "Dedicated", label: "Dedicated", show: true },
+    { name: "DualFuel", label: "Dual Fuel", show: true },
+    { name: "type", label: "Type", show: true },
+    { name: "manufacturer", label: "Manufacturer", show: true },
+    { name: "serialno", label: "Serial No", show: true },
+    { name: "installername", label: "Installer name", show: true },
+    { name: "cylinderno3", label: "Cylinder No", show: true },
+    { name: "cylinderposition3", label: "Cylinder position", show: true },
+    { name: "cylinderSerialNo3", label: "Cylinder Serial No", show: true },
+    { name: "cylindertype3", label: "Cylinder Type", show: true },
+    { name: "cmanufacturer3", label: "Cylinder Manufacturer", show: true },
+    { name: "cmanuContact3", label: "Cylinder Manu Contact", show: true },
+    { name: "servicepressure3", label: "Service Pressure", show: true },
+    { name: "cmanufacturedDate3", label: "Cylinder manu date", show: true },
+    { name: "waterVolume3", label: "Water Vol", show: true },
+    { name: "cexpiryDate3", label: "Expiry Date", show: true },
+    { name: "tbscertificate3", label: "Tbs Certicicate", show: true },
+    { name: "cylinderno1", label: "Cylinder No", show: true },
+    { name: "cylinderposition1", label: "Cylinder Position", show: true },
+    { name: "cylindertype1", label: "Cylinder Type", show: true },
+    { name: "cylinderSerialNo1", label: "Cylinder Serial No", show: true },
+    { name: "cmanufacturer1", label: "Cylinder manu", show: true },
+    { name: "cmanuContact1", label: "Cylinder Contact", show: true },
+    { name: "servicepressure1", label: "Service Pressure", show: true },
+    { name: "cmanufacturedDate1", label: "Cylinder Manu date", show: true },
+    { name: "waterVolume1", label: "Water Volume", show: true },
+    { name: "cexpiryDate1", label: "Cylinder Expiry Date", show: true },
+    { name: "tbscertificate1", label: "Tbs Certificate", show: true },
+    { name: "cylinderno2", label: "Cylinder No", show: true },
+    { name: "cylinderSerialNo2", label: "Cylinder Serial No", show: true },
+    { name: "cylinderposition2", label: "Cylinder position", show: true },
+    { name: "cylindertype2", label: "Cylinder type", show: true },
+    { name: "cmanufacturer2", label: "cylinder manufacturer", show: true },
+    { name: "cmanuContact2", label: "Cylinder Contact", show: true },
+    { name: "servicepressure2", label: "Service Pressure", show: true },
+    { name: "cmanufacturedDate2", label: "Cylinder Manufcturer", show: true },
+    { name: "waterVolume2", label: "Water Volume", show: true },
+    { name: "cexpiryDate2", label: "Cylinder Expiry Date", show: true },
+    { name: "tbscertificate2", label: "Tbs Certificate", show: true },
+    { name: "inspectorID", label: "Inspector ID", show: true },
+    { name: "formatter", label: "Actions", show: true, formatter: Actions },
+  ];
+
   const classes = useStyles();
   const formref = useRef();
   const fsname = useRef("");
@@ -306,7 +410,7 @@ function BasicTable({ dispatch }) {
           </TableHead>
           <TableBody style={{ border: "none !important" }}>
             {rows.map((row, index) => (
-              <TableRow key={row.name} style={{ border: "none !important" }}>
+              <TableRow key={row.id} style={{ border: "none !important" }}>
                 <TableCell
                   component="th"
                   scope="row"
@@ -319,7 +423,7 @@ function BasicTable({ dispatch }) {
                     return null;
                   }
                   if (column.name == "formatter") {
-                    return <Actions />;
+                    return <TableCell>{column.formatter(row)}</TableCell>;
                   }
                   return (
                     <TableCell style={{ border: "none !important" }}>
@@ -343,7 +447,7 @@ function BasicTable({ dispatch }) {
                   className="plus"
                   onClick={() => dispatch({ type: ADD_USER })}
                 />
-                <FaEye className="plus" />
+
                 <Pagination.First
                   onClick={() => "goToPage(1)"}
                   disabled={true}
