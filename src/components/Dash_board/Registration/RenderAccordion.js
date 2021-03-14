@@ -21,7 +21,12 @@ function RenderAccordion({ summary, details, go }) {
             const value = data[obkeys];
             console.log(value, value);
             return (
-              <ListItemText key={index}>{`${obkeys}:${value}`} </ListItemText>
+              <ListItemText key={index}>
+                {`${obkeys} :`}
+                <span
+                  style={{ fontWeight: "bold", color: "blue" }}
+                >{`${value}`}</span>{" "}
+              </ListItemText>
             );
           })}
           <IconButton

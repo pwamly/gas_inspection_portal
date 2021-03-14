@@ -19,8 +19,8 @@ function Report() {
     <Router>
       <Switch>
         <Route path="/dashboard/reports" exact component={Table} />{" "}
-        <Route path="/dashboard/reports/edit" component={VehicleReg} />{" "}
-        <Route path="/dashboard/reports/view" component={PrintForm} />{" "}
+        <Route path="/dashboard/reports/edit" exact component={VehicleReg} />{" "}
+        <Route path="/dashboard/reports/view" exact component={View} />{" "}
       </Switch>{" "}
     </Router>
   );

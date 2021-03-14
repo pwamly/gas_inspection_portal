@@ -70,16 +70,6 @@ function Owner({ formData, setForm, navigation }) {
           autoComplete="off"
           fullWidth
         />
-        <TextField
-          label="Plate No"
-          value={plateno}
-          onChange={setForm}
-          name="plateno"
-          margin="normal"
-          variant="outlined"
-          autoComplete="off"
-          fullWidth
-        />
         <Button
           variant="contained"
           fullWidth

@@ -6,14 +6,16 @@ import TextField from "@material-ui/core/TextField";
 import Spinner from "../../Spinner/Spiner";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
+import { connect } from "react-redux";
 import MenuItem from "@material-ui/core/MenuItem";
+import { ADD_USER, EXIT_ADD_FORM } from "../../../actions";
 const spinerStyle = {
   display: "flex",
   flexDirection: "rows",
   gap: "12px",
 };
 
-function Regteam() {
+function Regteam({ adduser, teamdata, dispatch }) {
   const style = { display: "flex", flexDirection: "row", fontWeight: "bold" };
   const [cng, setCng] = useState("");
   const [open, setOpen] = React.useState(false);
@@ -27,6 +29,14 @@ function Regteam() {
   const signature = useRef("");
   const pass = useRef("");
 
+  const {
+    fname = "",
+    lname = "",
+    usphone = "",
+    usremail = "",
+    usrcng = "",
+    usrpass = "",
+  } = teamdata;
   const handleChange = (event) => {
     setCng(event.target.value);
   };
@@ -80,7 +90,7 @@ function Regteam() {
     <Card
       variant="outlined "
       style={{
-        marginTop: "10px",
+        marginTop: "30px",
         position: "absolute",
         left: "50%",
         top: "50%",
@@ -111,6 +121,7 @@ function Regteam() {
         autoComplete="off"
         fullWidth
         ref={formref}
+        defaultValue={fname}
       />{" "}
       <TextField
         label="Last Name "
@@ -119,6 +130,7 @@ function Regteam() {
         variant="outlined"
         autoComplete="off"
         fullWidth
+        defaultValue={lname}
         ref={formref}
       />{" "}
       <TextField
@@ -129,6 +141,7 @@ function Regteam() {
         autoComplete="off"
         fullWidth
         ref={formref}
+        defaultValue={usphone}
       />{" "}
       <TextField
         label="Email"
@@ -137,6 +150,7 @@ function Regteam() {
         variant="outlined"
         autoComplete="off"
         fullWidth
+        defaultValue={usremail}
         ref={formref}
       />{" "}
       <TextField
@@ -146,6 +160,7 @@ function Regteam() {
         variant="outlined"
         autoComplete="off"
         fullWidth
+        defaultValue={usrpass}
         ref={formref}
       />{" "}
       <InputLabel id="label">CNG-FSI</InputLabel>
@@ -157,30 +172,52 @@ function Regteam() {
         onOpen={handleOpen}
         value={cng}
         onChange={handleChange}
+        defaultValue={usrcng}
         ref={formref}
       >
         <MenuItem value="majengo">Majengo</MenuItem>
         <MenuItem value="masaka">Masaka</MenuItem>
         <MenuItem value="rajabu">Rajabu</MenuItem>
       </Select>
-      <Button
-        variant="contained"
-        fullWidth
-        color="primary"
-        style={{ marginTop: "1rem" }}
-        onClick={handlesave}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          gap: "10px",
+        }}
       >
-        {loading ? (
-          <div style={spinerStyle}>
-            <Spinner loading={loading} /> Loading...{" "}
-          </div>
-        ) : (
-          "Save"
-        )}{" "}
-      </Button>{" "}
+        {" "}
+        <Button
+          variant="contained"
+          width="sm"
+          color="primary"
+          style={{ marginTop: "1rem" }}
+          onClick={handlesave}
+        >
+          {loading ? (
+            <div style={spinerStyle}>
+              <Spinner loading={loading} /> Loading...{" "}
+            </div>
+          ) : (
+            "Save"
+          )}{" "}
+        </Button>{" "}
+        <Button
+          variant="contained"
+          width="sm"
+          style={{ marginTop: "1rem" }}
+          onClick={() => dispatch({ type: EXIT_ADD_FORM })}
+        >
+          Close
+        </Button>{" "}
+      </div>
       <h4></h4>{" "}
     </Card>
   );
 }
+const MapStateToprops = (store) => {
+  return { ...store };
+};
 
-export default Regteam;
+export default connect(MapStateToprops)(Regteam);

@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import { ADD_USER } from "../../../actions";
 
 function Index({ adduser }) {
-  return <div> {!adduser ? <Table /> : <Adduser />} </div>;
+  return (
+    <div style={{ height: "600px" }}>{!adduser ? <Table /> : <Adduser />} </div>
+  );
 }
 const MapStateToprops = (store) => {
   return { ...store };

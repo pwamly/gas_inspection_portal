@@ -12,6 +12,8 @@ const initstore = {
     showProfile: false,
     adduserbtn: true,
     token: "",
+    reportdata: {},
+    teamdata: {},
 };
 if (!store) {
     store = createStore(reducer, initstore);

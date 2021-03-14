@@ -8,6 +8,7 @@ import Masaka from "../../../assets/signatures/masaka.jpg";
 import signature from "../../../assets/signatures/sign.jpg";
 import Majengo from "../../../assets/signatures/majengo.jpg";
 import Rajabu from "../../../assets/signatures/rajabu.jpg";
+import { connect } from "react-redux";
 
 const defaultProps = {
   display: "flex",
@@ -22,67 +23,67 @@ const defaultProps = {
   borderColor: "text.primary",
 };
 
-function Printform() {
-  const row = {
-    createdAt: "5-10-2019",
-    validto: "5-5-2020",
-    name: "gwamako joel",
-    email: "gwamako@gmail.com",
-    phone: "255673000997",
-    location: "Dar es salaam",
-    newInstallation: "...v...",
-    periodic: ".....",
-    afterAccident: "....",
-    ownername: "KAZAIKI HOSPITALL",
-    vihecleRegno: "T361 ADU",
-    manYear: "2004",
-    make: "MISTUBISH",
-    model: "ROSA",
-    chasisno: "BE63EG301113",
-    engineno: "4M51EAA907413",
-    milliege: "130785",
-    biFuel: "...",
-    Dedicated: "...V...",
-    DualFuel: "....",
-    type: "SEQUENTIAL EFI",
-    manufacturer: "JAPAN",
-    serialno: "-",
-    installername: "",
-    cylinderno3: "3",
-    cylinderposition3: "",
-    cylinderSerialNo3: "12",
-    cylindertype3: "",
-    cmanufacturer3: "",
-    cmanuContact3: "",
-    servicepressure3: "",
-    cmanufacturedDate3: "",
-    waterVolume3: "",
-    cexpiryDate3: "5-10-2019",
-    tbscertificate3: "",
-    cylinderno1: "1",
-    cylinderposition1: "underneath",
-    cylindertype1: "2",
-    cylinderSerialNo1: "78",
-    cmanufacturer1: "BQ",
-    cmanuContact1: "china",
-    servicepressure1: "20Mpa",
-    cmanufacturedDate1: "10/2019",
-    waterVolume1: "120L",
-    cexpiryDate1: "10-2038",
-    tbscertificate1: "YES",
-    cylinderno2: "2",
-    cylinderSerialNo2: "5",
-    cylinderposition2: "underneath",
-    cylindertype2: "2",
-    cmanufacturer2: "BQ",
-    cmanuContact2: "china",
-    servicepressure2: "20Mpa",
-    cmanufacturedDate2: "10-2019",
-    waterVolume2: "120L",
-    cexpiryDate2: "10-2038",
-    tbscertificate2: "YES",
-    inspectorID: "",
-  };
+function Printform({ reportdata, dispatch }) {
+  const {
+    createdAt = "",
+    validto = "",
+    name = "",
+    email = "",
+    phone = "",
+    location = "",
+    newInstallation = "...v...",
+    periodic = ".....",
+    afterAccident = "....",
+    ownername = "",
+    vihecleRegno = "",
+    manYear = "",
+    make = "",
+    model = "",
+    chasisno = "",
+    engineno = "",
+    milliege = "",
+    biFuel = "...",
+    Dedicated = "...V...",
+    DualFuel = "....",
+    type = "",
+    manufacturer = "",
+    serialno = "-",
+    installername = "",
+    cylinderno3 = "3",
+    cylinderposition3 = "",
+    cylinderSerialNo3 = "",
+    cylindertype3 = "",
+    cmanufacturer3 = "",
+    cmanuContact3 = "",
+    servicepressure3 = "",
+    cmanufacturedDate3 = "",
+    waterVolume3 = "",
+    cexpiryDate3 = "",
+    tbscertificate3 = "",
+    cylinderno1 = "1",
+    cylinderposition1 = "",
+    cylindertype1 = "",
+    cylinderSerialNo1 = "",
+    cmanufacturer1 = "",
+    cmanuContact1 = "",
+    servicepressure1 = "",
+    cmanufacturedDate1 = "",
+    waterVolume1 = "",
+    cexpiryDate1 = "",
+    tbscertificate1 = "",
+    cylinderno2 = "2",
+    cylinderSerialNo2 = "",
+    cylinderposition2 = "",
+    cylindertype2 = "",
+    cmanufacturer2 = "",
+    cmanuContact2 = "",
+    servicepressure2 = "",
+    cmanufacturedDate2 = "",
+    waterVolume2 = "",
+    cexpiryDate2 = "",
+    tbscertificate2 = "",
+    inspectorID = "",
+  } = reportdata;
   const team = "majengo";
   let stamp = { name: Rajabu };
 
@@ -124,11 +125,11 @@ function Printform() {
           >
             VALID FROM{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-              {row.createdAt}{" "}
+              {createdAt}{" "}
             </span>{" "}
             <span>TO</span>
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-              {row.validto}
+              {validto}
             </span>{" "}
           </h4>{" "}
         </div>{" "}
@@ -141,13 +142,13 @@ function Printform() {
               INSPECTION TYPE:{" "}
             </h3>{" "}
             <h5 style={{ padding: "0px 14px 0px 0px" }} className="insp">
-              New Installation {row.newInstallation}{" "}
+              New Installation {newInstallation}{" "}
             </h5>{" "}
             <h5 style={{ padding: "0px 13px 0px 0px" }} className="insp">
-              Periodic {row.periodic}{" "}
+              Periodic {periodic}{" "}
             </h5>{" "}
             <h5 style={{ padding: "0px 10px 0px 0px" }} className="insp">
-              After Accident {row.afterAccident}{" "}
+              After Accident {afterAccident}{" "}
             </h5>{" "}
           </Box>{" "}
         </div>
@@ -201,36 +202,36 @@ function Printform() {
             <tr className="trow">
               <td style={{ borderRight: "solid 1px black" }}>
                 {" "}
-                <span style={{ fontStyle: "italic" }}>{row.ownername}</span>
+                <span style={{ fontStyle: "italic" }}>{ownername}</span>
               </td>{" "}
               <td style={{ borderRight: "solid 1px black" }}>
-                <span style={{ fontStyle: "italic" }}>{row.vihecleRegno}</span>{" "}
-              </td>{" "}
-              <td style={{ borderRight: "solid 1px black" }}>
-                {" "}
-                <span style={{ fontStyle: "italic" }}>{row.manYear}</span>
-              </td>{" "}
-              <td style={{ borderRight: "solid 1px black" }}>
-                <span style={{ fontStyle: "italic" }}>{row.make}</span>{" "}
+                <span style={{ fontStyle: "italic" }}>{vihecleRegno}</span>{" "}
               </td>{" "}
               <td style={{ borderRight: "solid 1px black" }}>
                 {" "}
-                <span style={{ fontStyle: "italic" }}>{row.model}</span>{" "}
+                <span style={{ fontStyle: "italic" }}>{manYear}</span>
+              </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}>
+                <span style={{ fontStyle: "italic" }}>{make}</span>{" "}
+              </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}>
+                {" "}
+                <span style={{ fontStyle: "italic" }}>{model}</span>{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
-                <span style={{ fontStyle: "italic" }}> {row.chasisno}</span>
+                <span style={{ fontStyle: "italic" }}> {chasisno}</span>
                 <div>
                   <div id="span1" class="t">
                     <span style={{ fontStyle: "italic", color: "blue" }}>
                       {" "}
-                      {row.engineno}
+                      {engineno}
                     </span>
                   </div>{" "}
                 </div>{" "}
               </td>{" "}
               <td style={{ borderLeft: "solid 1px black" }}>
                 {" "}
-                <span style={{ fontStyle: "italic" }}>{row.milliege}</span>
+                <span style={{ fontStyle: "italic" }}>{milliege}</span>
               </td>{" "}
             </tr>{" "}
           </tbody>{" "}
@@ -247,15 +248,15 @@ function Printform() {
             <tr className="trow" style={{ border: "solid 1px black" }}>
               <td style={{ width: "235px", borderRight: "solid 1px black" }}>
                 {" "}
-                Bi - fuel {row.biFuel}{" "}
+                Bi - fuel {biFuel}{" "}
               </td>{" "}
               <td style={{ width: "235px", borderRight: "solid 1px black" }}>
                 {" "}
-                Dedicated {row.Dedicated}{" "}
+                Dedicated {Dedicated}{" "}
               </td>{" "}
               <td style={{ width: "235px", borderRight: "solid 1px black" }}>
                 {" "}
-                Dual fuel {row.DualFuel}{" "}
+                Dual fuel {DualFuel}{" "}
               </td>{" "}
             </tr>{" "}
           </tbody>{" "}
@@ -290,9 +291,10 @@ function Printform() {
               <td
                 style={{
                   border: "solid 1px black",
+                  textAlign: "start",
                 }}
               >
-                {row.type}{" "}
+                <span>{type}</span>
               </td>{" "}
             </tr>{" "}
             <tr style={{ border: "solid 1px black" }}>
@@ -308,10 +310,12 @@ function Printform() {
               </td>{" "}
               <td
                 style={{
+                  textAlign: "start",
+                  paddingLeft: "5px",
                   border: "solid 1px black",
                 }}
               >
-                {row.manufacturer}{" "}
+                <span>{manufacturer} </span>
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -328,10 +332,12 @@ function Printform() {
               <td
                 style={{
                   border: "solid 1px black",
+                  textAlign: "start",
+                  paddingLeft: "5px",
                 }}
               >
                 {" "}
-                {row.serialno}{" "}
+                <span>{serialno}</span>{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -348,10 +354,12 @@ function Printform() {
               <td
                 style={{
                   border: "solid 1px black",
+                  textAlign: "start",
+                  paddingLeft: "5px",
                 }}
               >
                 {" "}
-                {row.installername}{" "}
+                <span>{installername}</span>{" "}
               </td>{" "}
             </tr>{" "}
           </tbody>{" "}
@@ -402,9 +410,9 @@ function Printform() {
               >
                 Cylinder No.{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {row.cylinderno1} </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {row.cylinderno2} </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {row.cylinderno3}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylinderno1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylinderno2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylinderno3}</td>{" "}
             </tr>{" "}
             <tr className="" style={{ height: "1px" }}>
               <td
@@ -419,15 +427,15 @@ function Printform() {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {row.cylinderSerialNo1}{" "}
+                {cylinderSerialNo1}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {row.cylinderSerialNo2}{" "}
+                {cylinderSerialNo2}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {row.cylinderSerialNo3}
+                {cylinderSerialNo3}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -442,13 +450,13 @@ function Printform() {
                 Cylinder position in the Vehicle{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black", width: "23.3%" }}>
-                {row.cylinderposition1}
+                {cylinderposition1}
               </td>{" "}
               <td style={{ border: "solid 1px black", width: "23.3%" }}>
-                {row.cylinderposition2}
+                {cylinderposition2}
               </td>{" "}
               <td style={{ border: "solid 1px black", width: "23.3%" }}>
-                {row.cylinderposition3}{" "}
+                {cylinderposition3}{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -462,14 +470,9 @@ function Printform() {
               >
                 Cylinder Type{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {row.cylindertype1}{" "}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{row.cylindertype2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.cylindertype3}
-              </td>{" "}
+              <td style={{ border: "solid 1px black" }}>{cylindertype1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}>{cylindertype2}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylindertype3}</td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -482,17 +485,9 @@ function Printform() {
               >
                 Manufacture Name{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.cmanufacturer1}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {row.cmanufacturer2}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.cmanufacturer3}
-              </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanufacturer1}</td>{" "}
+              <td style={{ border: "solid 1px black" }}>{cmanufacturer2}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanufacturer3}</td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -505,18 +500,9 @@ function Printform() {
               >
                 Manufacturer Address / Contact{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.cmanuContact1}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.cmanuContact2}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.cmanuContact3}
-              </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanuContact1}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanuContact2}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanuContact3}</td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -529,16 +515,9 @@ function Printform() {
               >
                 Service Pressure(MPa){" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.servicepressure1}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {row.servicepressure2}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {row.servicepressure3}{" "}
-              </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {servicepressure1}</td>{" "}
+              <td style={{ border: "solid 1px black" }}>{servicepressure2}</td>{" "}
+              <td style={{ border: "solid 1px black" }}>{servicepressure3} </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -553,14 +532,14 @@ function Printform() {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {row.cmanufacturedDate1}
+                {cmanufacturedDate1}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
-                {row.cmanufacturedDate2}
+                {cmanufacturedDate2}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {row.cmanufacturedDate3}
+                {cmanufacturedDate3}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -574,9 +553,9 @@ function Printform() {
               >
                 Water Volume(litres){" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{row.waterVolume1} </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{row.waterVolume2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>{row.waterVolume3} </td>{" "}
+              <td style={{ border: "solid 1px black" }}>{waterVolume1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}>{waterVolume2}</td>{" "}
+              <td style={{ border: "solid 1px black" }}>{waterVolume3} </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -588,12 +567,9 @@ function Printform() {
               >
                 Expiry Date{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{row.cexpiryDate1} </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{row.cexpiryDate2} </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.cexpiryDate3}{" "}
-              </td>{" "}
+              <td style={{ border: "solid 1px black" }}>{cexpiryDate1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}>{cexpiryDate2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cexpiryDate3} </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -606,16 +582,9 @@ function Printform() {
               >
                 Certificate of Conformity to Tanzania Standards(TBS){" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {row.tbscertificate1}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {row.tbscertificate2}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {row.tbscertificate3}{" "}
-              </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {tbscertificate1}</td>{" "}
+              <td style={{ border: "solid 1px black" }}>{tbscertificate2}</td>{" "}
+              <td style={{ border: "solid 1px black" }}>{tbscertificate3} </td>{" "}
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
@@ -783,6 +752,7 @@ function Printform() {
                       textAlign: "start",
                       padding: "2px",
                       fontStyle: "italic",
+                      marginTop: "0px",
                     }}
                   >
                     Inspection Procedure{" "}
@@ -862,5 +832,7 @@ function Printform() {
     </Container>
   );
 }
-
-export default Printform;
+const MapStateToprops = (store) => {
+  return { ...store };
+};
+export default connect(MapStateToprops)(Printform);

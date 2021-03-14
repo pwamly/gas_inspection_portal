@@ -5,7 +5,7 @@ import React, {
   useState,
   useRef,
 } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -17,7 +17,11 @@ import Paper from "@material-ui/core/Paper";
 import Pagination from "react-bootstrap/Pagination";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
-import { ADD_USER } from "../../../../actions";
+import {
+  ADD_USER,
+  SAVE_REPORT_DATA,
+  CLEAR_PROFILE_DATA,
+} from "../../../../actions";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -32,34 +36,9 @@ const useStyles = makeStyles({
   },
 });
 
-export function Actio() {
-  return (
-    <div
-      style={{
-        marginTop: "30px",
-        display: "flex",
-        flexDirection: "row",
-        gap: "15px",
-        paddingRight: "40px",
-      }}
-    >
-      <Link to="#">
-        {" "}
-        <FaEye
-          className="IconStyle"
-          onClick={(row) => {
-            console.log("jjjjjjjjjjjjjj", row);
-          }}
-        />
-      </Link>
-
-      <ImPencil className="IconStyle" />
-      <FaTrash id="trash" className="IconStyle" />
-    </div>
-  );
-}
-
 function BasicTable({ dispatch }) {
+  let history = useHistory();
+
   const Actions = useCallback(
     (row) => (
       <div
@@ -76,13 +55,29 @@ function BasicTable({ dispatch }) {
           <FaEye
             className="IconStyle"
             onClick={() => {
-              console.log("jjjjjjjjjjjjjj", row);
+              dispatch({ type: SAVE_REPORT_DATA, payload: row });
+              history.push("/dashboard/reports/view");
+            }}
+          />
+        </Link>
+        <Link>
+          {" "}
+          <ImPencil
+            className="IconStyle"
+            onClick={() => {
+              dispatch({ type: SAVE_REPORT_DATA, payload: row });
+              history.push("/dashboard/reports/edit");
             }}
           />
         </Link>
 
-        <ImPencil className="IconStyle" />
-        <FaTrash id="trash" className="IconStyle" />
+        <FaTrash
+          id="trash"
+          className="IconStyle"
+          onClick={() => {
+            window.location.replace("/dashboard/reports");
+          }}
+        />
       </div>
     ),
     []
@@ -98,9 +93,9 @@ function BasicTable({ dispatch }) {
       newInstallation: "...v...",
       periodic: ".....",
       afterAccident: "....",
-      ownername: "KAZAIKI HOSPITALL",
+      ownername: "BAMAKO",
       vihecleRegno: "T361 ADU",
-      manYear: "2004",
+      manYear: "2017-05-24",
       make: "MISTUBISH",
       model: "ROSA",
       chasisno: "BE63EG301113",
@@ -159,7 +154,7 @@ function BasicTable({ dispatch }) {
       afterAccident: "....",
       ownername: "KAZAIKI HOSPITALL",
       vihecleRegno: "T361 ADU",
-      manYear: "2004",
+      manYear: "2017-05-01",
       make: "MISTUBISH",
       model: "ROSA",
       chasisno: "BE63EG301113",
@@ -443,11 +438,6 @@ function BasicTable({ dispatch }) {
                   textDecoration: "none !important",
                 }}
               >
-                <AddIcon
-                  className="plus"
-                  onClick={() => dispatch({ type: ADD_USER })}
-                />
-
                 <Pagination.First
                   onClick={() => "goToPage(1)"}
                   disabled={true}

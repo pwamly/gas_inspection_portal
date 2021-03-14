@@ -7,13 +7,18 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import "../Navibar/navbar.css";
 import { logout as signout } from "../../../client";
-import { VIEW_USER } from "../../../actions";
+import { VIEW_USER, CLEAR_REPORT_DATA } from "../../../actions";
 
 function Index({ dispatch, props }) {
   const [sidebar, setSidebar] = useState(false);
   const showsidebar = () => setSidebar(!sidebar);
   const [modalShown, toggleModal] = useState(false);
 
+  function handle(title) {
+    if (title == "Registration") {
+      dispatch({ type: CLEAR_REPORT_DATA });
+    }
+  }
   const logout = {
     title: "Reports",
     path: "/reports",
@@ -52,6 +57,7 @@ function Index({ dispatch, props }) {
                   className="menu-bar"
                   to={item.path}
                   activeClassName="active"
+                  onClick={() => handle(item.title)}
                 >
                   {item.icon} <span> {item.title} </span>{" "}
                 </NavLink>{" "}
