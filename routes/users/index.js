@@ -1,12 +1,11 @@
 "use strict";
 
 import { Router } from "express";
-
+import getUsers from "./user";
+import paginator from "../../middleware/reports/paginator";
 const user = Router();
 
-user.post("/", () => {
-    console.log("post all users");
-});
+user.get("/", paginator, getUsers);
 
 user.delete("/", () => {
     console.log("delete users users");

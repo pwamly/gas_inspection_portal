@@ -7,6 +7,7 @@ const { Model, Op, json } = require("sequelize");
 module.exports = async function allreports(req, res) {
     try {
         const reports = await vehiclereports.findAll();
+
         if (reports) {
             console.log("success");
             return res.json(reports);
