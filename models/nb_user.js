@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
             token_version: { type: DataTypes.INTEGER(255), allowNull: true },
             recoveryCode: { type: DataTypes.TEXT, allowNull: true },
             userRole: { type: DataTypes.STRING, allowNull: true },
+            userRole: { type: DataTypes.STRING, allowNull: true },
+            signature: { type: DataTypes.STRING, allowNull: false },
         }, {
             tableName: "nb_user",
             modelName: "nb_user",

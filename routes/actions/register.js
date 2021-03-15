@@ -66,13 +66,16 @@ module.exports = async(req, res) => {
         waterVolume2,
         cexpiryDate2,
         tbscertificate2,
+        validfrom,
     } = req.body;
+
+    let initialdate = new Date(validfrom);
+    let validto = new Date(initialdate.setMonth(initialdate.getMonth() + 6));
     const payload = {
         id: uuidv4(),
         name,
         email,
         phone,
-        plateno,
         location,
         newInstallation,
         periodic,
@@ -126,28 +129,46 @@ module.exports = async(req, res) => {
         cexpiryDate2,
         tbscertificate2,
         inspectorID,
+        validfrom,
+        validto,
+        validfrom,
         createdAt: date,
         updatedAt: date,
     };
     try {
-        const [cylinder, created] = await vehiclereports.findOrCreate({
+        const cylinder = await vehiclereports.findOne({
             where: {
                 [Op.or]: {
-                    vihecleRegno,
                     cylinderSerialNo1,
                     cylinderSerialNo2,
                     cylinderSerialNo3,
                 },
             },
-            defaults: payload,
+            raw: true,
         });
+
         if (cylinder) {
             console.log("cylinder already exist", cylinder);
-        }
-        if (created) {
-            console.log("cylinder or vehicle created");
+            return res.status(403).json({
+                successful: false,
+                message: "Vehicle or cylinder already exist",
+            });
+        } else {
+            const created = await vehiclereports.create({
+                ...payload,
+            });
+            if (created) {
+                console.log("cylinder or vehicle created");
+                return res.json({
+                    successful: true,
+                    message: "vehicle registered",
+                });
+            }
         }
     } catch (error) {
-        console.log("error at report creation", error);
+        return res.json({
+            successful: false,
+            message: "Failed",
+        });
     }
 };

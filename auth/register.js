@@ -12,7 +12,10 @@ module.exports = async(req, res) => {
             email,
             username,
             password,
+            phone,
+            signature,
         } = req.body;
+
         const bodyPayload = {
             id: uuidv4(),
             first_name,
@@ -20,6 +23,9 @@ module.exports = async(req, res) => {
             email,
             username,
             password,
+            phone,
+            signature,
+            userRole: "user",
         };
 
         const [user, created] = await nb_user.findOrCreate({

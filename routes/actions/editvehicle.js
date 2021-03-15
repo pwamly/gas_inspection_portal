@@ -66,7 +66,11 @@ module.exports = async(req, res) => {
         waterVolume2,
         expiryDate2,
         tbscertificate2,
+        validfrom,
     } = req.body;
+
+    let initialdate = new Date(validfrom);
+    let validto = new Date(initialdate.setMonth(initialdate.getMonth() + 6));
 
     const payload = {
         name,
@@ -125,15 +129,29 @@ module.exports = async(req, res) => {
         waterVolume2,
         expiryDate2,
         tbscertificate2,
+        validfrom,
         inspectorID,
         updatedAt: date,
     };
     try {
         const update = await vehiclereports.update({...payload }, { where: { id } });
-        if (update) {
+        if (update == 1) {
             console.log("successful updated", update);
+            return res.json({
+                successful: true,
+                message: "successful updated",
+            });
+        } else {
+            return res.json({
+                successful: false,
+                message: "Up to date",
+            });
         }
     } catch (error) {
         console.log("error at report creation", error);
+        return res.status(403).json({
+            successful: false,
+            message: "Failed",
+        });
     }
 };

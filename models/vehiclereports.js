@@ -96,6 +96,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(128),
                 allowNull: false,
             },
+            newInstallation: {
+                type: DataTypes.STRING(128),
+                allowNull: false,
+            },
             cylinderposition3: {
                 type: DataTypes.STRING(128),
                 allowNull: true,
@@ -108,7 +112,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(128),
                 allowNull: true,
             },
-            cmanuContact3: {
+            cmanuContact1: {
                 type: DataTypes.STRING(128),
                 allowNull: true,
             },
@@ -117,6 +121,10 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
             },
             cmanufacturedDate3: {
+                type: DataTypes.STRING(128),
+                allowNull: true,
+            },
+            cmanuContact2: {
                 type: DataTypes.STRING(128),
                 allowNull: true,
             },
@@ -176,6 +184,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING(128),
                 allowNull: true,
             },
+            cylinderno3: {
+                type: DataTypes.STRING(128),
+                allowNull: true,
+            },
             cylinderSerialNo1: {
                 type: DataTypes.STRING(128),
                 allowNull: true,
@@ -222,6 +234,14 @@ module.exports = (sequelize, DataTypes) => {
             },
             inspectorID: {
                 type: DataTypes.STRING(128),
+                allowNull: false,
+            },
+            validto: {
+                type: DataTypes.DATE,
+                allowNull: false,
+            },
+            validfrom: {
+                type: DataTypes.DATE,
                 allowNull: false,
             },
             createdAt: {

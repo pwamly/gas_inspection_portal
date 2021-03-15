@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import { nb_user } from "../models";
 
 module.exports = async(req, res) => {
-    console.log("ggggggggggggggggggg");
     const { id } = req.payload;
     try {
         const {
@@ -14,6 +13,7 @@ module.exports = async(req, res) => {
             email,
             username,
             phone,
+            signature,
         } = req.body;
         const bodyPayload = {
             first_name,
@@ -21,6 +21,7 @@ module.exports = async(req, res) => {
             email,
             username,
             phone,
+            signature,
         };
 
         const updated = await nb_user.update({...bodyPayload }, { where: { id } });

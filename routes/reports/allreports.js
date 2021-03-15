@@ -41,7 +41,7 @@ module.exports = async(req, res) => {
 
             return res.json(data);
         } catch (error) {
-            console.log("zzzzzzzzzzzzzzzzzzzzzz", error);
+            console.log("error", error);
         }
 
         return;
