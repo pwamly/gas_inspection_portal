@@ -168,6 +168,8 @@ module.exports = async(req, res) => {
             });
         }
         if (cylinder1 || cylinder2 || cylinder3) {
+            const cylinder = {...cylinder3, ...cylinder1, ...cylinder2 };
+
             console.log("cylinder already exist", cylinder);
             return res.status(403).json({
                 successful: false,
