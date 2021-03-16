@@ -5,7 +5,7 @@ import Box from "@material-ui/core/Box";
 import BootstrapTable from "react-bootstrap-table-next";
 import "./print.css";
 import Masaka from "../../../assets/signatures/masaka.jpg";
-import signature from "../../../assets/signatures/sign.jpg";
+import sign from "../../../assets/signatures/sign.jpg";
 import Majengo from "../../../assets/signatures/majengo.jpg";
 import Rajabu from "../../../assets/signatures/rajabu.jpg";
 import { connect } from "react-redux";
@@ -23,7 +23,7 @@ const defaultProps = {
   borderColor: "text.primary",
 };
 
-function Printform({ reportdata, dispatch }) {
+function Printform({ reportdata, profile, dispatch }) {
   const {
     createdAt = "",
     validto = "",
@@ -84,14 +84,18 @@ function Printform({ reportdata, dispatch }) {
     tbscertificate2 = "",
     inspectorID = "",
   } = reportdata;
-  const team = "majengo";
-  let stamp = { name: Rajabu };
 
-  if (team == "majengo") {
+  const signature = profile.signature;
+  let stamp = {};
+
+  if (signature == "majengo") {
     stamp = { name: Majengo };
   }
-  if (team == "masaka") {
+  if (signature == "masaka") {
     stamp = { name: Masaka };
+  }
+  if (signature == "rajabu") {
+    stamp = { name: Rajabu };
   }
   return (
     <Container
@@ -125,11 +129,13 @@ function Printform({ reportdata, dispatch }) {
           >
             VALID FROM{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+              {" "}
               {createdAt}{" "}
             </span>{" "}
-            <span>TO</span>
+            <span> TO </span>{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-              {validto}
+              {" "}
+              {validto}{" "}
             </span>{" "}
           </h4>{" "}
         </div>{" "}
@@ -151,7 +157,7 @@ function Printform({ reportdata, dispatch }) {
               After Accident {afterAccident}{" "}
             </h5>{" "}
           </Box>{" "}
-        </div>
+        </div>{" "}
         <table className="vehicleinfo">
           <thead>
             <tr>
@@ -202,36 +208,36 @@ function Printform({ reportdata, dispatch }) {
             <tr className="trow">
               <td style={{ borderRight: "solid 1px black" }}>
                 {" "}
-                <span style={{ fontStyle: "italic" }}>{ownername}</span>
+                <span style={{ fontStyle: "italic" }}> {ownername} </span>{" "}
               </td>{" "}
               <td style={{ borderRight: "solid 1px black" }}>
-                <span style={{ fontStyle: "italic" }}>{vihecleRegno}</span>{" "}
-              </td>{" "}
-              <td style={{ borderRight: "solid 1px black" }}>
-                {" "}
-                <span style={{ fontStyle: "italic" }}>{manYear}</span>
-              </td>{" "}
-              <td style={{ borderRight: "solid 1px black" }}>
-                <span style={{ fontStyle: "italic" }}>{make}</span>{" "}
+                <span style={{ fontStyle: "italic" }}> {vihecleRegno} </span>{" "}
               </td>{" "}
               <td style={{ borderRight: "solid 1px black" }}>
                 {" "}
-                <span style={{ fontStyle: "italic" }}>{model}</span>{" "}
+                <span style={{ fontStyle: "italic" }}> {manYear} </span>{" "}
+              </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}>
+                <span style={{ fontStyle: "italic" }}> {make} </span>{" "}
+              </td>{" "}
+              <td style={{ borderRight: "solid 1px black" }}>
+                {" "}
+                <span style={{ fontStyle: "italic" }}> {model} </span>{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
-                <span style={{ fontStyle: "italic" }}> {chasisno}</span>
+                <span style={{ fontStyle: "italic" }}> {chasisno} </span>{" "}
                 <div>
                   <div id="span1" class="t">
                     <span style={{ fontStyle: "italic", color: "blue" }}>
                       {" "}
-                      {engineno}
-                    </span>
+                      {engineno}{" "}
+                    </span>{" "}
                   </div>{" "}
                 </div>{" "}
               </td>{" "}
               <td style={{ borderLeft: "solid 1px black" }}>
                 {" "}
-                <span style={{ fontStyle: "italic" }}>{milliege}</span>
+                <span style={{ fontStyle: "italic" }}> {milliege} </span>{" "}
               </td>{" "}
             </tr>{" "}
           </tbody>{" "}
@@ -294,7 +300,7 @@ function Printform({ reportdata, dispatch }) {
                   textAlign: "start",
                 }}
               >
-                <span>{type}</span>
+                <span> {type} </span>{" "}
               </td>{" "}
             </tr>{" "}
             <tr style={{ border: "solid 1px black" }}>
@@ -315,7 +321,7 @@ function Printform({ reportdata, dispatch }) {
                   border: "solid 1px black",
                 }}
               >
-                <span>{manufacturer} </span>
+                <span> {manufacturer} </span>{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -337,7 +343,7 @@ function Printform({ reportdata, dispatch }) {
                 }}
               >
                 {" "}
-                <span>{serialno}</span>{" "}
+                <span> {serialno} </span>{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -359,7 +365,7 @@ function Printform({ reportdata, dispatch }) {
                 }}
               >
                 {" "}
-                <span>{installername}</span>{" "}
+                <span> {installername} </span>{" "}
               </td>{" "}
             </tr>{" "}
           </tbody>{" "}
@@ -412,7 +418,7 @@ function Printform({ reportdata, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}> {cylinderno1} </td>{" "}
               <td style={{ border: "solid 1px black" }}> {cylinderno2} </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cylinderno3}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylinderno3} </td>{" "}
             </tr>{" "}
             <tr className="" style={{ height: "1px" }}>
               <td
@@ -435,7 +441,7 @@ function Printform({ reportdata, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cylinderSerialNo3}
+                {cylinderSerialNo3}{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -450,12 +456,15 @@ function Printform({ reportdata, dispatch }) {
                 Cylinder position in the Vehicle{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black", width: "23.3%" }}>
-                {cylinderposition1}
+                {" "}
+                {cylinderposition1}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black", width: "23.3%" }}>
-                {cylinderposition2}
+                {" "}
+                {cylinderposition2}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black", width: "23.3%" }}>
+                {" "}
                 {cylinderposition3}{" "}
               </td>{" "}
             </tr>{" "}
@@ -470,9 +479,9 @@ function Printform({ reportdata, dispatch }) {
               >
                 Cylinder Type{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{cylindertype1} </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{cylindertype2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cylindertype3}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylindertype1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylindertype2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cylindertype3} </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -485,9 +494,9 @@ function Printform({ reportdata, dispatch }) {
               >
                 Manufacture Name{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cmanufacturer1}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>{cmanufacturer2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cmanufacturer3}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanufacturer1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanufacturer2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanufacturer3} </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -500,9 +509,9 @@ function Printform({ reportdata, dispatch }) {
               >
                 Manufacturer Address / Contact{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cmanuContact1}</td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cmanuContact2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cmanuContact3}</td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanuContact1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanuContact2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cmanuContact3} </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -515,9 +524,18 @@ function Printform({ reportdata, dispatch }) {
               >
                 Service Pressure(MPa){" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {servicepressure1}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>{servicepressure2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>{servicepressure3} </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
+                {" "}
+                {servicepressure1}{" "}
+              </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
+                {" "}
+                {servicepressure2}{" "}
+              </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
+                {" "}
+                {servicepressure3}{" "}
+              </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -532,14 +550,15 @@ function Printform({ reportdata, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cmanufacturedDate1}
-              </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
-                {cmanufacturedDate2}
+                {cmanufacturedDate1}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cmanufacturedDate3}
+                {cmanufacturedDate2}{" "}
+              </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
+                {" "}
+                {cmanufacturedDate3}{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -553,9 +572,9 @@ function Printform({ reportdata, dispatch }) {
               >
                 Water Volume(litres){" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{waterVolume1} </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{waterVolume2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>{waterVolume3} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {waterVolume1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {waterVolume2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {waterVolume3} </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -567,8 +586,8 @@ function Printform({ reportdata, dispatch }) {
               >
                 Expiry Date{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{cexpiryDate1} </td>{" "}
-              <td style={{ border: "solid 1px black" }}>{cexpiryDate2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cexpiryDate1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {cexpiryDate2} </td>{" "}
               <td style={{ border: "solid 1px black" }}> {cexpiryDate3} </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -582,9 +601,9 @@ function Printform({ reportdata, dispatch }) {
               >
                 Certificate of Conformity to Tanzania Standards(TBS){" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {tbscertificate1}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>{tbscertificate2}</td>{" "}
-              <td style={{ border: "solid 1px black" }}>{tbscertificate3} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {tbscertificate1} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {tbscertificate2} </td>{" "}
+              <td style={{ border: "solid 1px black" }}> {tbscertificate3} </td>{" "}
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
@@ -768,7 +787,7 @@ function Printform({ reportdata, dispatch }) {
                         fontWeight: "normal",
                       }}
                     >
-                      <h5> &#8226;</h5>
+                      <h5> & #8226;</h5>
                       <h5
                         style={{
                           fontSize: "12px",
@@ -777,7 +796,7 @@ function Printform({ reportdata, dispatch }) {
                           fontWeight: "normal",
                         }}
                       >
-                        NFPA - 52: Vehicular Gaseous Fuel Systems Code.2010
+                        NFPA - 52: Vehicular Gaseous Fuel Systems Code .2010
                         Edition{" "}
                       </h5>{" "}
                     </p>{" "}
@@ -791,7 +810,7 @@ function Printform({ reportdata, dispatch }) {
                         fontWeight: "normal",
                       }}
                     >
-                      <h5> &#8226;</h5>
+                      <h5> & #8226;</h5>
                       <h5
                         style={{
                           fontSize: "12px",
@@ -822,7 +841,7 @@ function Printform({ reportdata, dispatch }) {
           }}
         >
           <div style={{ width: "200px", height: "150px" }}>
-            <img style={{ width: "200px", height: "150px" }} src={signature} />{" "}
+            <img style={{ width: "200px", height: "150px" }} src={sign} />{" "}
           </div>{" "}
           <div style={{ width: "200px", height: "120px" }}>
             <img style={{ width: "200px", height: "150px" }} src={stamp.name} />{" "}

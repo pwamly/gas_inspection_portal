@@ -26,17 +26,17 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
     servicepressure1,
     cmanufacturedDate1,
     waterVolume1,
-    expiryDate1,
     tbscertificate1,
     servicepressure2,
     cmanufacturedDate2,
     waterVolume2,
-    expiryDate2,
+    cexpiryDate1,
+    cexpiryDate2,
+    cexpiryDate3,
     tbscertificate2,
     servicepressure3,
     cmanufacturedDate3,
     waterVolume3,
-    expiryDate3,
     tbscertificate3,
   } = formData;
 
@@ -72,7 +72,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              defaultValue="2017-05-24"
+              defaultValue="0000-00-00"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -87,16 +87,16 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               autoComplete="off"
             />
             <TextField
-              value={expiryDate1}
+              value={cexpiryDate1}
               id="date"
               onChange={setForm}
-              name="expiryDate1"
+              name="cexpiryDate1"
               label="Expiry Date"
               type="date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              defaultValue="2017-05-24"
+              defaultValue="0000-00-00"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -132,7 +132,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              defaultValue="2017-05-24"
+              defaultValue="0000-00-00"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -148,16 +148,16 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
             />
 
             <TextField
-              value={expiryDate2}
+              value={cexpiryDate2}
               id="date"
               onChange={setForm}
-              name="expiryDate2"
+              name="cexpiryDate2"
               label="Expiry Date"
               type="date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              defaultValue="2017-05-24"
+              defaultValue="0000-00-00"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -195,7 +195,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              defaultValue="2017-05-24"
+              defaultValue="0000-00-00"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -211,16 +211,16 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               fullWidth
             />
             <TextField
-              value={expiryDate3}
+              value={cexpiryDate3}
               id="date"
               onChange={setForm}
-              name="expiryDate3"
+              name="cexpiryDate3"
               label="Expiry Date"
               type="date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              defaultValue="2017-05-24"
+              defaultValue="0000-00-00"
               InputLabelProps={{
                 shrink: true,
               }}

@@ -46,6 +46,7 @@ function ResetPass({ formData, setForm, navigation }) {
           margin="normal"
           variant="outlined"
           autoComplete="off"
+          type="password"
           fullWidth
         />
         <TextField
@@ -56,6 +57,7 @@ function ResetPass({ formData, setForm, navigation }) {
           margin="normal"
           variant="outlined"
           autoComplete="off"
+          type="password"
           fullWidth
         />
         <Button

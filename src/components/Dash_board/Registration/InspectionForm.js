@@ -17,7 +17,7 @@ const style = {
 };
 
 function InspectionForm({ formData, setForm, navigation }) {
-  const { newInstallation, periodic, afterAccident } = formData;
+  const { newInstallation, periodic, afterAccident, validfrom } = formData;
 
   async function handle() {
     let responsecode = "1234";
@@ -59,6 +59,21 @@ function InspectionForm({ formData, setForm, navigation }) {
           variant="outlined"
           autoComplete="off"
           fullWidth
+        />
+        <TextField
+          value={validfrom}
+          id="date"
+          onChange={setForm}
+          name="validfrom"
+          label="Vali from"
+          type="date"
+          margin="normal"
+          variant="outlined"
+          autoComplete="off"
+          defaultValue="0000-00-00"
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <div style={{ marginTop: "1rem" }}>
           {" "}

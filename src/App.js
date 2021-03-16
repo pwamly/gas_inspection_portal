@@ -36,10 +36,10 @@ function App() {
                 exact
                 component={Dashboard}
               ></ProtectRoute>{" "}
-              <ProtectRoute path="/" component={Dashboard}>
+              <ProtectRoute path="/dashboard" component={Dashboard}>
                 {" "}
               </ProtectRoute>{" "}
-              <Redirect exact to="/" />
+              <Redirect exact to="/dashboard" />
               <Route path="*" component={() => <h2> 404 Not Found </h2>} />
             </Switch>{" "}
           </Router>{" "}

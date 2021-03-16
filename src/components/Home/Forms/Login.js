@@ -75,6 +75,7 @@ function Login() {
           label="Password "
           margin="normal"
           inputRef={password}
+          type="password"
           variant="outlined"
           autoComplete="off"
           fullWidth

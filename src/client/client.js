@@ -80,6 +80,17 @@ export const login = async(payload) => {
     return false;
 };
 
+export const registerUser = async(payload) => {
+    try {
+        const repsonse = await instance.post("auth/register", {...payload });
+        console.log("response");
+    } catch (error) {
+        console.log("error in login", error);
+    }
+
+    return false;
+};
+
 export const editProfile = async(payload) => {
     try {
         const response = await instance.put("/auth/profile", {...payload });
@@ -138,6 +149,44 @@ export const postCode = async(data) => {
         return { isSuccessful: false };
     }
 };
+
+//.................................. api endpoints........................
+
+export const getAllReports = async() => {
+    try {
+        const reports = await instance.get("/api/reports");
+        if (reports) {
+            return reports;
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+
+export const getUsers = async() => {
+    try {
+        const users = await instance.get("/api/users");
+        if (users) {
+            return users;
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+
+export const postVehicleInfo = async(data) => {
+    try {
+        const response = await instance.post("/api/actions/registervehicle", {
+            ...data,
+        });
+        if (response) {
+            return response;
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+
 //..................end..................
 // ............. auth functions..........
 

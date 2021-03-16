@@ -6,7 +6,7 @@ export const ProtectRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       render={(props) =>
-        1 ? (
+        isLogged() ? (
           <Component {...props} />
         ) : (
           <Redirect

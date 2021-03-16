@@ -34,6 +34,9 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
     cmanufacturer2,
     cmanuContact2,
     cylinderno3,
+    cylinderSerialNo1,
+    cylinderSerialNo2,
+    cylinderSerialNo3,
     cylinderposition3,
     cylindertype3,
     cmanufacturer3,
@@ -61,6 +64,7 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
               margin="normal"
               variant="outlined"
               autoComplete="off"
+              defaultValue="1"
               maxWidth=""
             />
             <TextField
@@ -78,6 +82,16 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
               value={cylindertype1}
               onChange={setForm}
               name="cylindertype1"
+              margin="normal"
+              variant="outlined"
+              autoComplete="off"
+              maxWidth=""
+            />
+            <TextField
+              label="Cylinder Serial No"
+              value={cylinderSerialNo1}
+              onChange={setForm}
+              name="cylinderSerialNo1"
               margin="normal"
               variant="outlined"
               autoComplete="off"
@@ -113,6 +127,7 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
               margin="normal"
               variant="outlined"
               autoComplete="off"
+              defaultValue="2"
             />
             <TextField
               label="Cylinder position on vehicle"
@@ -129,6 +144,16 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
               value={cylindertype2}
               onChange={setForm}
               name="cylindertype2"
+              margin="normal"
+              variant="outlined"
+              autoComplete="off"
+              maxWidth=""
+            />
+            <TextField
+              label="Cylinder Serial No"
+              value={cylinderSerialNo2}
+              onChange={setForm}
+              name="cylinderSerialNo2"
               margin="normal"
               variant="outlined"
               autoComplete="off"
@@ -164,6 +189,7 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
               margin="normal"
               variant="outlined"
               autoComplete="off"
+              defaultValue="3"
               maxWidth=""
             />
             <TextField
@@ -181,6 +207,16 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
               value={cylindertype3}
               onChange={setForm}
               name="cylindertype3"
+              margin="normal"
+              variant="outlined"
+              autoComplete="off"
+              maxWidth=""
+            />
+            <TextField
+              label="Cylinder Serial No"
+              value={cylinderSerialNo3}
+              onChange={setForm}
+              name="cylinderSerialNo3"
               margin="normal"
               variant="outlined"
               autoComplete="off"

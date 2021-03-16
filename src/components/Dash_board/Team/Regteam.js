@@ -51,6 +51,7 @@ function Regteam({ adduser, teamdata, dispatch }) {
 
   async function handlesave() {
     console.log(
+      "yyyyyyyyyyyyyyyyyyyyyyyy",
       fsname.current.value,
       lsname.current.value,
       usrphone.current.value,
@@ -58,7 +59,7 @@ function Regteam({ adduser, teamdata, dispatch }) {
       cng,
       pass.current.value
     );
-    window.location.replace("/dashboard/team");
+    // window.location.replace("/dashboard/team");
     try {
       setLoading(true);
       // formref.current.reset();
@@ -163,7 +164,7 @@ function Regteam({ adduser, teamdata, dispatch }) {
         defaultValue={usrpass}
         ref={formref}
       />{" "}
-      <InputLabel id="label">CNG-FSI</InputLabel>
+      <InputLabel id="label"> CNG - FSI </InputLabel>{" "}
       <Select
         labelId="label"
         id="select"
@@ -175,10 +176,10 @@ function Regteam({ adduser, teamdata, dispatch }) {
         defaultValue={usrcng}
         ref={formref}
       >
-        <MenuItem value="majengo">Majengo</MenuItem>
-        <MenuItem value="masaka">Masaka</MenuItem>
-        <MenuItem value="rajabu">Rajabu</MenuItem>
-      </Select>
+        <MenuItem value="majengo"> Majengo </MenuItem>{" "}
+        <MenuItem value="masaka"> Masaka </MenuItem>{" "}
+        <MenuItem value="rajabu"> Rajabu </MenuItem>{" "}
+      </Select>{" "}
       <div
         style={{
           display: "flex",
@@ -209,10 +210,10 @@ function Regteam({ adduser, teamdata, dispatch }) {
           style={{ marginTop: "1rem" }}
           onClick={() => dispatch({ type: EXIT_ADD_FORM })}
         >
-          Close
+          Close{" "}
         </Button>{" "}
-      </div>
-      <h4></h4>{" "}
+      </div>{" "}
+      <h4> </h4>{" "}
     </Card>
   );
 }

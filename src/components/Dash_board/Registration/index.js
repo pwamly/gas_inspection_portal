@@ -74,6 +74,7 @@ function Index({ reportdata }) {
     cexpiryDate2 = "",
     tbscertificate2 = "",
     inspectorID = "",
+    validfrom = "",
   } = reportdata;
 
   const Default = {
@@ -124,12 +125,17 @@ function Index({ reportdata }) {
     cylindertype2,
     cmanufacturer2,
     cmanuContact2,
+    cylinderSerialNo1,
+    cylinderSerialNo2,
+    cylinderSerialNo3,
     servicepressure2,
     cmanufacturedDate2,
     waterVolume2,
     cexpiryDate2,
     tbscertificate2,
+    validfrom,
   };
+
   const steps = [
     { id: "Owner" },
     { id: "Inspection-type" },

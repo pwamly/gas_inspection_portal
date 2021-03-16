@@ -17,8 +17,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pagination from "react-bootstrap/Pagination";
+import { useGet, useGetList } from "../../../../hooks/index";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
+import { getUsers } from "../../../../client/client";
 import {
   ADD_USER,
   SAVE_PROFILE_DATA,
@@ -32,11 +34,9 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
 function BasicTable({ adduser, dispatch }) {
+  const { results: rows, loading, refresh } = useGetList(getUsers);
+
   const Actions = useCallback(
     (row) => (
       <div
@@ -48,6 +48,7 @@ function BasicTable({ adduser, dispatch }) {
           paddingRight: "40px",
         }}
       >
+        {console.log("nnnnnnnnnnnnnnnnnnnn", row)}
         <Link>
           {" "}
           <ImPencil
@@ -72,51 +73,13 @@ function BasicTable({ adduser, dispatch }) {
   );
   let history = useHistory();
   const columns = [
-    { label: "First name", show: true, name: "fname" },
-    { label: "Last name", show: true, name: "lname" },
-    { label: "Phone ", show: true, name: "name" },
+    { label: "First name", show: true, name: "first_name" },
+    { label: "Last name", show: true, name: "last_name" },
+    { label: "Phone ", show: true, name: "phone" },
     { label: "Email", show: true, name: "email" },
-    { label: "Role", show: true, name: "role" },
+    { label: "Role", show: true, name: "userRole" },
     { label: "Signature ", show: true, name: "signature" },
     { name: "formatter", label: "Actions", show: true, formatter: Actions },
-  ];
-
-  const rows = [
-    {
-      fname: "stephan",
-      lname: "pwamly",
-      phone: "2556730893",
-      role: "admin",
-      signature: "pwamlysig",
-    },
-    {
-      fname: "peter",
-      lname: "gwajima",
-      phone: "2556730800",
-      role: "user",
-      signature: "gwajisig",
-    },
-    {
-      fname: "peter",
-      lname: "gwajima",
-      phone: "2556730800",
-      role: "user",
-      signature: "gwajisig",
-    },
-    {
-      fname: "peter",
-      lname: "gwajima",
-      phone: "2556730800",
-      role: "user",
-      signature: "gwajisig",
-    },
-    {
-      fname: "peter",
-      lname: "gwajima",
-      phone: "2556730800",
-      role: "user",
-      signature: "gwajisig",
-    },
   ];
 
   const classes = useStyles();
@@ -128,6 +91,7 @@ function BasicTable({ adduser, dispatch }) {
   return (
     <div className="table-wrapper">
       <div style={{ textAlign: "center" }}>TEAM</div>
+
       <TableContainer
         component={Paper}
         style={{
@@ -152,7 +116,7 @@ function BasicTable({ adduser, dispatch }) {
           </TableHead>
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow key={row.name}>
+              <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>

@@ -10,7 +10,7 @@ import { useGet } from "../../../hooks";
 import Edit from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import Spinner from "../../Spinner/Spiner";
-import { EDIT_USER } from "../../../actions";
+import { EDIT_USER, EXIT_EDIT_USER, EXIT_VEW_USER } from "../../../actions";
 import { editProfile } from "../../../client";
 
 const spinerStyle = {
@@ -147,6 +147,17 @@ function Profile({ profile, edituser, dispatch }) {
               <Edit />
             </IconButton>{" "}
           </div>
+          <div style={{ display: "flex ", justifyContent: "center" }}>
+            {" "}
+            <Button
+              variant="contained"
+              width="sm"
+              style={{ marginTop: "1rem", paddingLeft: "0px" }}
+              onClick={() => dispatch({ type: EXIT_VEW_USER })}
+            >
+              Close{" "}
+            </Button>{" "}
+          </div>
         </Card>
       ) : (
         <Card
@@ -204,21 +215,39 @@ function Profile({ profile, edituser, dispatch }) {
             fullWidth
             ref={formref}
           />{" "}
-          <Button
-            variant="contained"
-            fullWidth
-            color="primary"
-            style={{ marginTop: "1rem" }}
-            onClick={handlesave}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              gap: "10px",
+            }}
           >
-            {loading ? (
-              <div style={spinerStyle}>
-                <Spinner loading={loading} /> Loading...{" "}
-              </div>
-            ) : (
-              "Save"
-            )}{" "}
-          </Button>{" "}
+            {" "}
+            <Button
+              variant="contained"
+              widht="sm"
+              color="primary"
+              style={{ marginTop: "1rem", paddingLeft: "0px" }}
+              onClick={handlesave}
+            >
+              {loading ? (
+                <div style={spinerStyle}>
+                  <Spinner loading={loading} /> Loading...{" "}
+                </div>
+              ) : (
+                "Save"
+              )}{" "}
+            </Button>{" "}
+            <Button
+              variant="contained"
+              width="sm"
+              style={{ marginTop: "1rem", paddingLeft: "0px" }}
+              onClick={() => dispatch({ type: EXIT_EDIT_USER })}
+            >
+              Close{" "}
+            </Button>{" "}
+          </div>
           <h4> </h4>{" "}
         </Card>
       )}{" "}

@@ -14,9 +14,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { useGet, useGetList } from "../../../../hooks/index";
 import Pagination from "react-bootstrap/Pagination";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
+import { getAllReports } from "../../../../client/client";
 import {
   ADD_USER,
   SAVE_REPORT_DATA,
@@ -37,6 +39,7 @@ const useStyles = makeStyles({
 });
 
 function BasicTable({ dispatch }) {
+  const { results: rows, loading, refresh } = useGetList(getAllReports);
   let history = useHistory();
 
   const Actions = useCallback(
@@ -82,127 +85,6 @@ function BasicTable({ dispatch }) {
     ),
     []
   );
-
-  const rows = [
-    {
-      id: "jsgjdinqldnwoqjdwqmmd;wdmw;",
-      name: "gwamako joel",
-      email: "gwamako@gmail.com",
-      phone: "255673000997",
-      location: "Dar es salaam",
-      newInstallation: "...v...",
-      periodic: ".....",
-      afterAccident: "....",
-      ownername: "BAMAKO",
-      vihecleRegno: "T361 ADU",
-      manYear: "2017-05-24",
-      make: "MISTUBISH",
-      model: "ROSA",
-      chasisno: "BE63EG301113",
-      engineno: "4M51EAA907413",
-      milliege: "130785",
-      biFuel: "...",
-      Dedicated: "...V...",
-      DualFuel: "....",
-      type: "SEQUENTIAL EFI",
-      manufacturer: "JAPAN",
-      serialno: "-",
-      installername: "",
-      cylinderno3: "3",
-      cylinderposition3: "",
-      cylinderSerialNo3: "12",
-      cylindertype3: "",
-      cmanufacturer3: "",
-      cmanuContact3: "",
-      servicepressure3: "",
-      cmanufacturedDate3: "",
-      waterVolume3: "",
-      cexpiryDate3: "5-10-2019",
-      tbscertificate3: "",
-      cylinderno1: "1",
-      cylinderposition1: "underneath",
-      cylindertype1: "2",
-      cylinderSerialNo1: "78",
-      cmanufacturer1: "BQ",
-      cmanuContact1: "china",
-      servicepressure1: "20Mpa",
-      cmanufacturedDate1: "10/2019",
-      waterVolume1: "120L",
-      cexpiryDate1: "10-2038",
-      tbscertificate1: "YES",
-      cylinderno2: "2",
-      cylinderSerialNo2: "5",
-      cylinderposition2: "underneath",
-      cylindertype2: "2",
-      cmanufacturer2: "BQ",
-      cmanuContact2: "china",
-      servicepressure2: "20Mpa",
-      cmanufacturedDate2: "10-2019",
-      waterVolume2: "120L",
-      cexpiryDate2: "10-2038",
-      tbscertificate2: "YES",
-      inspectorID: "",
-    },
-    {
-      id: "12123123123214141242414",
-      name: "Magufuli Baba",
-      email: "gwamako@gmail.com",
-      phone: "255673000997",
-      location: "Dar es salaam",
-      newInstallation: "...v...",
-      periodic: ".....",
-      afterAccident: "....",
-      ownername: "KAZAIKI HOSPITALL",
-      vihecleRegno: "T361 ADU",
-      manYear: "2017-05-01",
-      make: "MISTUBISH",
-      model: "ROSA",
-      chasisno: "BE63EG301113",
-      engineno: "4M51EAA907413",
-      milliege: "130785",
-      biFuel: "...",
-      Dedicated: "...V...",
-      DualFuel: "....",
-      type: "SEQUENTIAL EFI",
-      manufacturer: "JAPAN",
-      serialno: "-",
-      installername: "",
-      cylinderno3: "3",
-      cylinderposition3: "",
-      cylinderSerialNo3: "12",
-      cylindertype3: "",
-      cmanufacturer3: "",
-      cmanuContact3: "",
-      servicepressure3: "",
-      cmanufacturedDate3: "",
-      waterVolume3: "",
-      cexpiryDate3: "5-10-2019",
-      tbscertificate3: "",
-      cylinderno1: "1",
-      cylinderposition1: "underneath",
-      cylindertype1: "2",
-      cylinderSerialNo1: "78",
-      cmanufacturer1: "BQ",
-      cmanuContact1: "china",
-      servicepressure1: "20Mpa",
-      cmanufacturedDate1: "10/2019",
-      waterVolume1: "120L",
-      cexpiryDate1: "10-2038",
-      tbscertificate1: "YES",
-      cylinderno2: "2",
-      cylinderSerialNo2: "5",
-      cylinderposition2: "underneath",
-      cylindertype2: "2",
-      cmanufacturer2: "BQ",
-      cmanuContact2: "china",
-      servicepressure2: "20Mpa",
-      cmanufacturedDate2: "10-2019",
-      waterVolume2: "120L",
-      cexpiryDate2: "10-2038",
-      tbscertificate2: "YES",
-      inspectorID: "",
-    },
-  ];
 
   const columns = [
     { name: "name", label: "Name", show: true },
@@ -394,8 +276,20 @@ function BasicTable({ dispatch }) {
               border: "none !important",
             }}
           >
-            <TableRow style={{ border: "none !important" }}>
-              <TableCell style={{ border: "none !important" }}></TableCell>
+            <TableRow
+              style={{
+                border: "none !important",
+                height: "10px !important",
+                fontSize: "8px !important",
+              }}
+            >
+              <TableCell
+                style={{
+                  border: "none !important",
+                  height: "10px !important",
+                  fontSize: "8px !important",
+                }}
+              ></TableCell>
               {columns.map((th) => (
                 <TableCell style={{ border: "none !important" }}>
                   {th.label}

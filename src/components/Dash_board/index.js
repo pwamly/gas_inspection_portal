@@ -30,7 +30,8 @@ function Index({ modalShown, toggleModal, showProfile, dispatch }) {
   let initial;
   const vendorId = getUserId();
   const { result: user, loading, refresh } = useGet(vendorId, getProfile);
-  const { fname, lname, email, username, phone, userRole } = user || {};
+  const { fname, lname, email, username, phone, userRole, signature } =
+    user || {};
 
   if (fname && lname) {
     initial = `${fname} ${lname}`
@@ -43,7 +44,16 @@ function Index({ modalShown, toggleModal, showProfile, dispatch }) {
   useEffect(() => {
     dispatch({
       type: SAVE_INITIAL_DATA,
-      payload: { fname, lname, email, username, phone, userRole, initial },
+      payload: {
+        fname,
+        lname,
+        email,
+        username,
+        phone,
+        userRole,
+        initial,
+        signature,
+      },
     });
   }, [user]);
 
