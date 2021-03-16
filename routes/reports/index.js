@@ -1,7 +1,7 @@
 "use strict";
 
 import { Router } from "express";
-import { nb_user } from "../../models";
+import { vehiclereports } from "../../models";
 import allreports from "./allreports";
 import isAdmin from "../../middleware/auth/isAdmin";
 import reportByid from "./reportByid";
@@ -13,12 +13,27 @@ const reports = Router();
 reports.get("/", paginator, allreports);
 reports.put("/:id", reportByid);
 reports.get("/inspect", paginator, inspectReport);
-reports.delete("/deletevehicle/:id", async(req, res) => {
-    res.json({});
-});
-
-reports.post("/bulkdeletevehicle/", async(req, res) => {
-    res.json({});
+reports.delete("/deletevehicle/:id", isAdmin, async(req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await vehiclereports.destroy({ where: { id } });
+        if (response == 1) {
+            return res.json({
+                successful: true,
+                message: "Report Deleted!",
+            });
+        }
+        return res.status(403).json({
+            successful: false,
+            message: "Alredy deleted!",
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(403).json({
+            successful: false,
+            message: "Failed!",
+        });
+    }
 });
 
 module.exports = reports;
