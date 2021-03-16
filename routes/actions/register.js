@@ -136,18 +136,38 @@ module.exports = async(req, res) => {
         updatedAt: date,
     };
     try {
-        const cylinder = await vehiclereports.findOne({
-            where: {
-                [Op.or]: {
-                    cylinderSerialNo1,
-                    cylinderSerialNo2,
-                    cylinderSerialNo3,
+        let cylinder1, cylinder2, cylinder3;
+        if (cylinderSerialNo1 !== "" || null) {
+            cylinder1 = await vehiclereports.findOne({
+                where: {
+                    [Op.or]: {
+                        cylinderSerialNo1,
+                    },
                 },
-            },
-            raw: true,
-        });
-
-        if (cylinder) {
+                raw: true,
+            });
+        }
+        if (cylinderSerialNo2 !== "" || null) {
+            cylinder2 = await vehiclereports.findOne({
+                where: {
+                    [Op.or]: {
+                        cylinderSerialNo2,
+                    },
+                },
+                raw: true,
+            });
+        }
+        if (cylinderSerialNo3 !== "" || null) {
+            cylinder3 = await vehiclereports.findOne({
+                where: {
+                    [Op.or]: {
+                        cylinderSerialNo3,
+                    },
+                },
+                raw: true,
+            });
+        }
+        if (cylinder1 || cylinder2 || cylinder3) {
             console.log("cylinder already exist", cylinder);
             return res.status(403).json({
                 successful: false,
@@ -166,6 +186,7 @@ module.exports = async(req, res) => {
             }
         }
     } catch (error) {
+        console.log(error);
         return res.json({
             successful: false,
             message: "Failed",
