@@ -15,12 +15,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { useToasts } from "react-toast-notifications";
 import Paper from "@material-ui/core/Paper";
 import Pagination from "react-bootstrap/Pagination";
 import { useGet, useGetList } from "../../../../hooks/index";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
-import { getUsers } from "../../../../client/client";
+import { getUsers, deleteUser } from "../../../../client/client";
 import {
   ADD_USER,
   SAVE_PROFILE_DATA,
@@ -36,6 +37,8 @@ const useStyles = makeStyles({
 
 function BasicTable({ adduser, dispatch }) {
   const { results: rows, loading, refresh } = useGetList(getUsers);
+  const { addToast } = useToasts();
+  const [loadingdel, setLoadingdel] = useState(false);
 
   const Actions = useCallback(
     (row) => (
@@ -48,7 +51,6 @@ function BasicTable({ adduser, dispatch }) {
           paddingRight: "40px",
         }}
       >
-        {console.log("nnnnnnnnnnnnnnnnnnnn", row)}
         <Link>
           {" "}
           <ImPencil
@@ -64,7 +66,7 @@ function BasicTable({ adduser, dispatch }) {
           id="trash"
           className="IconStyle"
           onClick={() => {
-            window.location.replace("/dashboard/reports");
+            handledelete(row);
           }}
         />
       </div>
@@ -87,6 +89,29 @@ function BasicTable({ adduser, dispatch }) {
     dispatch({ type: CLEAR_PROFILE_DATA });
     dispatch({ type: ADD_USER });
   };
+
+  async function handledelete(row) {
+    const { id } = row;
+    try {
+      setLoadingdel(true);
+      let response = await deleteUser(id);
+
+      if (response) {
+        setLoadingdel(false);
+        addToast("deleted successfully", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        window.location.replace("/dashboard/team");
+        return;
+      }
+      setLoadingdel(false);
+      addToast("Wrong Credentials!", { appearance: "error" });
+    } catch (error) {
+      setLoadingdel(false);
+      addToast("Failed", { appearance: "error" });
+    }
+  }
 
   return (
     <div className="table-wrapper">

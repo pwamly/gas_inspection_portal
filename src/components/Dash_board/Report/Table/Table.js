@@ -12,13 +12,14 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
+import { useToasts } from "react-toast-notifications";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useGet, useGetList } from "../../../../hooks/index";
 import Pagination from "react-bootstrap/Pagination";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
-import { getAllReports } from "../../../../client/client";
+import { getAllReports, deleteReport } from "../../../../client/client";
 import {
   ADD_USER,
   SAVE_REPORT_DATA,
@@ -38,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-function BasicTable({ dispatch }) {
+function BasicTable({ dispatch, reportdata }) {
   const { results: rows, loading, refresh } = useGetList(getAllReports);
   let history = useHistory();
 
@@ -77,9 +78,7 @@ function BasicTable({ dispatch }) {
         <FaTrash
           id="trash"
           className="IconStyle"
-          onClick={() => {
-            window.location.replace("/dashboard/reports");
-          }}
+          onClick={() => handledelete(row)}
         />
       </div>
     ),
@@ -153,6 +152,8 @@ function BasicTable({ dispatch }) {
   const [status, setStatus] = useState("");
   const [opendate, setOpendate] = useState(false);
   const [openstatus, setOpenstatus] = useState(false);
+  const { addToast } = useToasts();
+  const [loadingdel, setLoadingdel] = useState(false);
 
   const handleChangedate = (event) => {
     setDate(event.target.value);
@@ -178,6 +179,28 @@ function BasicTable({ dispatch }) {
     setOpenstatus(true);
   };
 
+  async function handledelete(row) {
+    const { id } = row;
+    try {
+      setLoadingdel(true);
+      let response = await deleteReport(id);
+
+      if (response) {
+        setLoadingdel(false);
+        addToast("deleted successfully", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        window.location.replace("/dashboard/reports");
+        return;
+      }
+      setLoadingdel(false);
+      addToast("Wrong Credentials!", { appearance: "error" });
+    } catch (error) {
+      setLoadingdel(false);
+      addToast("Failed", { appearance: "error" });
+    }
+  }
   return (
     <div className="table-wrapper">
       <div style={{ textAlign: "center" }}>REPORTS</div>

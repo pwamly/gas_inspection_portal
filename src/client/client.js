@@ -187,6 +187,43 @@ export const postVehicleInfo = async(data) => {
     }
 };
 
+export const deleteReport = async(id) => {
+    try {
+        const response = await instance.delete(`/api/reports/deletevehicle/${id}`);
+
+        if (response) {
+            return response;
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+
+export const deleteUser = async(id) => {
+    try {
+        const response = await instance.delete(`/api/users/${id}`);
+
+        if (response) {
+            return response;
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+
+export const addUser = async(data) => {
+    try {
+        const response = await instance.post("/auth/register", {
+            ...data,
+        });
+
+        if (response) {
+            return response;
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
 //..................end..................
 // ............. auth functions..........
 

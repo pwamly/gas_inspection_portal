@@ -9,6 +9,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import { connect } from "react-redux";
 import MenuItem from "@material-ui/core/MenuItem";
 import { ADD_USER, EXIT_ADD_FORM } from "../../../actions";
+import { addUser } from "../../../client/client";
+
 const spinerStyle = {
   display: "flex",
   flexDirection: "rows",
@@ -50,33 +52,26 @@ function Regteam({ adduser, teamdata, dispatch }) {
   };
 
   async function handlesave() {
-    console.log(
-      "yyyyyyyyyyyyyyyyyyyyyyyy",
-      fsname.current.value,
-      lsname.current.value,
-      usrphone.current.value,
-      email.current.value,
-      cng,
-      pass.current.value
-    );
-    // window.location.replace("/dashboard/team");
     try {
       setLoading(true);
       // formref.current.reset();
-      let response;
-      //   const response = await postProfile({
-      //     firstname: fsname.current.value,
-      //     lastname: lsname.current.value,
-      //     phone: usrphone.current.value,
-      //   });
+      let response = await addUser({
+        firstname: fsname.current.value,
+        lastname: lsname.current.value,
+        email: email.current.value,
+        username: email.current.value,
+        signature: cng,
+        phone: usrphone.current.value,
+        password: pass.current.value,
+      });
 
       if (response) {
         setLoading(false);
-        addToast("... was Updated successfully", {
+        addToast(" User Added successfully", {
           appearance: "success",
           autoDismiss: true,
         });
-        window.location.replace(`/dashboard`);
+        window.location.replace(`/dashboard/team`);
         return;
       }
       setLoading(false);

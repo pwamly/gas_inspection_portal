@@ -787,7 +787,7 @@ function Printform({ reportdata, profile, dispatch }) {
                         fontWeight: "normal",
                       }}
                     >
-                      <h5> & #8226;</h5>
+                      <h5> &#8226;</h5>
                       <h5
                         style={{
                           fontSize: "12px",
@@ -810,7 +810,7 @@ function Printform({ reportdata, profile, dispatch }) {
                         fontWeight: "normal",
                       }}
                     >
-                      <h5> & #8226;</h5>
+                      <h5> &#8226;</h5>
                       <h5
                         style={{
                           fontSize: "12px",
