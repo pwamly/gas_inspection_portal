@@ -5,7 +5,7 @@
 module.exports = (req, res, next) => {
     const {
         page = 1,
-            pageSize = 25,
+            pageSize = 2,
             sortBy = "createdAt",
             sortOrder = "desc",
     } = req.query;

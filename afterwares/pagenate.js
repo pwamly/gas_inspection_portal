@@ -3,12 +3,12 @@
 function paginate({
     totalCount,
     currentPage = 1,
-    pageSize = 25,
+    pageSize = 10,
     maxPages = process.env.MAX_PAGES || 10,
     data,
 }) {
     // calculate total pages
-    pageSize = 25;
+    pageSize = 10;
     let totalPages = Math.ceil(totalCount / pageSize);
 
     // ensure current page isn't out of range

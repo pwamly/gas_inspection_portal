@@ -4,16 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 import { vehiclereports } from "../../models";
 import paginate from "../../afterwares/pagenate";
 const { Model, Op, json } = require("sequelize");
+import moment from "moment";
 
 module.exports = async(req, res) => {
-    let where = {
-        createdAt: {
-            [Op.gte]: new Date(),
-        },
-    };
+    let where = {};
 
-    const { q, pageInfo } = req.query;
-    const { sortBy, sortOrder, page, limit } = pageInfo;
+    const { q, pageInfo, day, status } = req.query;
+    const { sortBy, sortOrder, page, limit, offset } = pageInfo;
     try {
         if (q) {
             where = {
@@ -27,12 +24,13 @@ module.exports = async(req, res) => {
                     },
                 },
             };
-
+            //console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
             const { rows, count } = await vehiclereports.findAndCountAll({
                 order: [
                     [sortBy, sortOrder]
                 ],
                 where,
+                logging: console.log,
                 raw: true,
             });
 
@@ -45,13 +43,85 @@ module.exports = async(req, res) => {
 
             return res.json(data);
         } else {
+            if (day == "day") {
+                where = {
+                    ...where,
+                    createdAt: {
+                        [Op.gte]: moment().subtract(1, "days").toDate(),
+                    },
+                };
+            }
+            if (day == "week") {
+                where = {
+                    ...where,
+                    createdAt: {
+                        [Op.gte]: moment().subtract(7, "days").toDate(),
+                    },
+                };
+            }
+
+            if (day == "month") {
+                where = {
+                    ...where,
+                    createdAt: {
+                        [Op.gte]: moment().subtract(30, "days").toDate(),
+                    },
+                };
+            }
+
+            if (status == "expired") {
+                where = {
+                    ...where,
+                    validto: {
+                        [Op.gt]: now,
+                    },
+                };
+            }
+            if (status == "notexpired") {
+                where = {
+                    ...where,
+                    validto: {
+                        [Op.lt]: new Date(),
+                    },
+                };
+            }
+
+            if (Object.keys(where).length !== 0) {
+                const { rows, count } = await vehiclereports.findAndCountAll({
+                    order: [
+                        [sortBy, sortOrder]
+                    ],
+                    where,
+                    logging: console.log,
+                    raw: true,
+                });
+                if (rows) {
+                    const data = paginate({
+                        totalCount: count,
+                        currentPage: page,
+                        pageSize: limit,
+                        data: rows,
+                    });
+                    return res.json(data);
+                }
+                return;
+            }
             const { rows, count } = await vehiclereports.findAndCountAll({
+                logging: console.log,
+                offset,
+                limit,
                 order: [
                     [sortBy, sortOrder]
                 ],
                 raw: true,
             });
+
             if (rows) {
+                console.log(
+                    "yyyyyyyyyyyyyyyyyyyyyyyyyyyy offset",
+                    offset + "limit",
+                    limit
+                );
                 const data = paginate({
                     totalCount: count,
                     currentPage: page,
