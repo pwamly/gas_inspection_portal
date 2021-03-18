@@ -149,7 +149,7 @@ module.exports = async(req, res) => {
         }
     } catch (error) {
         console.log("error at report creation", error);
-        return res.status(403).json({
+        return res.status(401).json({
             successful: false,
             message: "Failed",
         });
