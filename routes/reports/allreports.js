@@ -22,6 +22,21 @@ module.exports = async(req, res) => {
                     phone: {
                         [Op.like]: "%" + q + "%",
                     },
+                    name: {
+                        [Op.like]: "%" + q + "%",
+                    },
+                    location: {
+                        [Op.like]: "%" + q + "%",
+                    },
+                    cylinderSerialNo1: {
+                        [Op.like]: "%" + q + "%",
+                    },
+                    cylinderSerialNo2: {
+                        [Op.like]: "%" + q + "%",
+                    },
+                    cylinderSerialNo3: {
+                        [Op.like]: "%" + q + "%",
+                    },
                 },
             };
             //console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
@@ -73,7 +88,7 @@ module.exports = async(req, res) => {
                 where = {
                     ...where,
                     validto: {
-                        [Op.gt]: now,
+                        [Op.lt]: new Date(),
                     },
                 };
             }
@@ -81,7 +96,7 @@ module.exports = async(req, res) => {
                 where = {
                     ...where,
                     validto: {
-                        [Op.lt]: new Date(),
+                        [Op.gt]: new Date(),
                     },
                 };
             }
@@ -117,11 +132,7 @@ module.exports = async(req, res) => {
             });
 
             if (rows) {
-                console.log(
-                    "yyyyyyyyyyyyyyyyyyyyyyyyyyyy offset",
-                    offset + "limit",
-                    limit
-                );
+                console.log(offset + "limit", limit);
                 const data = paginate({
                     totalCount: count,
                     currentPage: page,
