@@ -16,9 +16,10 @@ profile.get("/:id", async(req, res) => {
         email,
         signature,
         userRole,
+        phone,
     } = data;
 
-    res.json({ fname, lname, username, email, signature, userRole });
+    res.json({ fname, lname, username, email, signature, userRole, phone });
 });
 
 module.exports = profile;

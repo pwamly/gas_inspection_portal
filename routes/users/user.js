@@ -10,6 +10,14 @@ module.exports = async(req, res) => {
     const { sortBy, sortOrder, page, limit } = pageInfo;
     try {
         const { rows, count } = await nb_user.findAndCountAll({
+            attributes: [
+                "first_name",
+                "last_name",
+                "username",
+                "email",
+                "userRole",
+                "phone",
+            ],
             order: [
                 [sortBy, sortOrder]
             ],

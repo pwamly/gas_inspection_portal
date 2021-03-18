@@ -77,6 +77,7 @@ module.exports = (sequelize, DataTypes) => {
                         email,
                         token_version,
                         userRole,
+                        phone,
                     } = user;
                     const profile = {
                         id,
@@ -85,6 +86,7 @@ module.exports = (sequelize, DataTypes) => {
                         username,
                         email,
                         userRole,
+                        phone,
                     };
 
                     const access_token = sign(profile, process.env.ACCESSTOKEN_SECRETE, {
