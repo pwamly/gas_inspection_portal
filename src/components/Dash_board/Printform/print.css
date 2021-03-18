@@ -84,6 +84,7 @@ td {
 
 .tbs {
     width: 351px;
+    padding-top: 20px;
     display: table;
     margin-left: 45px;
     border-collapse: collapse !important;

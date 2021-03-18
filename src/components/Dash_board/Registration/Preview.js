@@ -99,6 +99,7 @@ function Preview(data) {
           appearance: "success",
           autoDismiss: true,
         });
+        return;
       }
       setLoading(false);
       addToast("Wrong Credentials!", { appearance: "error" });

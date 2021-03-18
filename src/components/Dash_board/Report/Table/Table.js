@@ -40,9 +40,26 @@ const useStyles = makeStyles({
 });
 
 function BasicTable({ dispatch, reportdata }) {
-  const { results: rows, loading, refresh } = useGetList(getAllReports);
-  let history = useHistory();
+  const classes = useStyles();
+  const formref = useRef();
+  const fsname = useRef("");
+  const [date, setDate] = useState("");
+  const [status, setStatus] = useState("");
+  const [opendate, setOpendate] = useState(false);
+  const [openstatus, setOpenstatus] = useState(false);
+  const { addToast } = useToasts();
+  const [loadingdel, setLoadingdel] = useState(false);
+  const [paramsSearch, setSearch] = useState("");
+  const [paramsStatus, setExpire] = useState("");
+  const [paramsDate, setDateparam] = useState("");
+  const handleChangedate = (event) => {
+    setDate(event.target.value);
+  };
+  const params = { ...paramsDate, ...paramsSearch, ...paramsStatus };
+  const { results: data, loading, refresh } = useGetList(getAllReports, params);
 
+  let history = useHistory();
+  const [rows, setRows] = useState(data);
   const Actions = useCallback(
     (row) => (
       <div
@@ -145,20 +162,6 @@ function BasicTable({ dispatch, reportdata }) {
     { name: "formatter", label: "Actions", show: true, formatter: Actions },
   ];
 
-  const classes = useStyles();
-  const formref = useRef();
-  const fsname = useRef("");
-  const [date, setDate] = useState("");
-  const [status, setStatus] = useState("");
-  const [opendate, setOpendate] = useState(false);
-  const [openstatus, setOpenstatus] = useState(false);
-  const { addToast } = useToasts();
-  const [loadingdel, setLoadingdel] = useState(false);
-
-  const handleChangedate = (event) => {
-    setDate(event.target.value);
-  };
-
   const handleClosedate = () => {
     setOpendate(false);
   };
@@ -178,6 +181,15 @@ function BasicTable({ dispatch, reportdata }) {
   const handleOpenstatus = () => {
     setOpenstatus(true);
   };
+
+  useEffect(() => {
+    const search = async () => {
+      const res = await getAllReports(params);
+      setRows(res.data);
+    };
+
+    search();
+  }, [paramsDate, paramsSearch, paramsStatus]);
 
   async function handledelete(row) {
     const { id } = row;
@@ -218,11 +230,11 @@ function BasicTable({ dispatch, reportdata }) {
           style={{ height: "10px !important", marginLeft: "20px" }}
           label="Search"
           margin="normal"
-          inputRef={fsname}
+          onChange={(e) => setSearch({ q: e.target.value })}
           variant="outlined"
           autoComplete="off"
+          value={paramsSearch}
           width="sm"
-          ref={formref}
         />{" "}
         <div
           style={{
@@ -242,9 +254,8 @@ function BasicTable({ dispatch, reportdata }) {
             open={opendate}
             onClose={handleClosedate}
             onOpen={handleOpendate}
-            value={date}
-            onChange={handleChangedate}
-            ref={formref}
+            value={paramsDate}
+            onChange={(e) => setDateparam({ day: e.target.value })}
           >
             <MenuItem value="day">Today</MenuItem>
             <MenuItem value="week">This week</MenuItem>
@@ -269,12 +280,11 @@ function BasicTable({ dispatch, reportdata }) {
             open={openstatus}
             onClose={handleClosestatus}
             onOpen={handleOpenstatus}
-            value={status}
-            onChange={handleChangestatus}
-            ref={formref}
+            value={paramsStatus}
+            onChange={(e) => setExpire({ status: e.target.value })}
           >
-            <MenuItem value="day">Expired</MenuItem>
-            <MenuItem value="week">Not expired</MenuItem>
+            <MenuItem value="expired">Expired</MenuItem>
+            <MenuItem value="notexpired">Not expired</MenuItem>
           </Select>
         </div>
       </div>

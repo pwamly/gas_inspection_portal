@@ -27,6 +27,7 @@ function Printform({ reportdata, profile, dispatch }) {
   const {
     createdAt = "",
     validto = "",
+    validfrom = "",
     name = "",
     email = "",
     phone = "",
@@ -130,12 +131,12 @@ function Printform({ reportdata, profile, dispatch }) {
             VALID FROM{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
               {" "}
-              {createdAt}{" "}
+              {validfrom.slice(0, 10).replace("T", " ")}
             </span>{" "}
             <span> TO </span>{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
               {" "}
-              {validto}{" "}
+              {new Date(validto).toISOString().slice(0, 10).replace("T", " ")}
             </span>{" "}
           </h4>{" "}
         </div>{" "}
@@ -215,7 +216,10 @@ function Printform({ reportdata, profile, dispatch }) {
               </td>{" "}
               <td style={{ borderRight: "solid 1px black" }}>
                 {" "}
-                <span style={{ fontStyle: "italic" }}> {manYear} </span>{" "}
+                <span style={{ fontStyle: "italic" }}>
+                  {" "}
+                  {manYear.slice(0, 4).replace("T", " ")}
+                </span>{" "}
               </td>{" "}
               <td style={{ borderRight: "solid 1px black" }}>
                 <span style={{ fontStyle: "italic" }}> {make} </span>{" "}
@@ -550,15 +554,24 @@ function Printform({ reportdata, profile, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cmanufacturedDate1}{" "}
+                {new Date(cmanufacturedDate1)
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace("T", " ")}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cmanufacturedDate2}{" "}
+                {new Date(cmanufacturedDate2)
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace("T", " ")}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cmanufacturedDate3}{" "}
+                {new Date(cmanufacturedDate3)
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace("T", " ")}{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -586,9 +599,27 @@ function Printform({ reportdata, profile, dispatch }) {
               >
                 Expiry Date{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cexpiryDate1} </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cexpiryDate2} </td>{" "}
-              <td style={{ border: "solid 1px black" }}> {cexpiryDate3} </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
+                {" "}
+                {new Date(cexpiryDate1)
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace("T", " ")}
+              </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
+                {" "}
+                {new Date(cexpiryDate2)
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace("T", " ")}
+              </td>{" "}
+              <td style={{ border: "solid 1px black" }}>
+                {" "}
+                {new Date(cexpiryDate3)
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace("T", " ")}{" "}
+              </td>{" "}
             </tr>{" "}
             <tr className="">
               <td
@@ -607,6 +638,23 @@ function Printform({ reportdata, profile, dispatch }) {
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
+        <div
+          style={{
+            width: "705px",
+            marginLeft: "45px",
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "20px",
+            gap: "70px",
+          }}
+        >
+          <div style={{ width: "200px", height: "150px" }}>
+            <img style={{ width: "200px", height: "150px" }} src={sign} />{" "}
+          </div>{" "}
+          <div style={{ width: "200px", height: "120px" }}>
+            <img style={{ width: "200px", height: "150px" }} src={stamp.name} />{" "}
+          </div>{" "}
+        </div>
         <table className="tbs">
           <thead>
             <tr>
@@ -830,23 +878,6 @@ function Printform({ reportdata, profile, dispatch }) {
             </tr>{" "}
           </tbody>{" "}
         </table>{" "}
-        <div
-          style={{
-            width: "705px",
-            marginLeft: "45px",
-            display: "flex",
-            flexDirection: "row",
-            marginTop: "20px",
-            gap: "70px",
-          }}
-        >
-          <div style={{ width: "200px", height: "150px" }}>
-            <img style={{ width: "200px", height: "150px" }} src={sign} />{" "}
-          </div>{" "}
-          <div style={{ width: "200px", height: "120px" }}>
-            <img style={{ width: "200px", height: "150px" }} src={stamp.name} />{" "}
-          </div>{" "}
-        </div>{" "}
       </div>{" "}
     </Container>
   );

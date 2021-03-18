@@ -152,11 +152,21 @@ export const postCode = async(data) => {
 
 //.................................. api endpoints........................
 
-export const getAllReports = async() => {
+export const getAllReports = async(data) => {
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", data);
     try {
-        const reports = await instance.get("/api/reports");
-        if (reports) {
-            return reports;
+        if (data) {
+            const reports = await instance.get("/api/reports", {
+                params: data,
+            });
+            if (reports) {
+                return reports;
+            }
+        } else {
+            const reports = await instance.get("/api/reports");
+            if (reports) {
+                return reports;
+            }
         }
     } catch (error) {
         return { isSuccessful: false };
