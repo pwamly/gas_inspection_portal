@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-
+import { Link, useHistory } from "react-router-dom";
 const style = {
   maxWidth: 300,
   padding: "20px",
@@ -18,6 +18,7 @@ const style = {
 
 function Owner({ formData, setForm, navigation }) {
   const { name, email, phone, plateno, location } = formData;
+  let history = useHistory();
 
   async function handle() {
     let responsecode = "1234";
@@ -70,25 +71,26 @@ function Owner({ formData, setForm, navigation }) {
           autoComplete="off"
           fullWidth
         />
-        <TextField
-          label="Plate No"
-          value={plateno}
-          onChange={setForm}
-          name="plateno"
-          margin="normal"
-          variant="outlined"
-          autoComplete="off"
-          fullWidth
-        />
-        <Button
-          variant="contained"
-          fullWidth
-          color="primary"
-          style={{ marginTop: "1rem" }}
-          onClick={handle}
-        >
-          Next{" "}
-        </Button>{" "}
+        <div style={{ marginTop: "1rem" }}>
+          {" "}
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginRight: "2px" }}
+            onClick={() => history.push("/dashboard/reports")}
+          >
+            Back{" "}
+          </Button>{" "}
+          <Button
+            variant="contained"
+            width="sm"
+            color="primary"
+            style={{ marginTop: "1rem" }}
+            onClick={handle}
+          >
+            Next{" "}
+          </Button>{" "}
+        </div>{" "}
       </Card>{" "}
     </Container>
   );

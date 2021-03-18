@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import RenderAccordion from "./RenderAccordion";
+import { postVehicleInfo, EditReport } from "../../../../client/client";
+import { useToasts } from "react-toast-notifications";
+import Spinner from "../../../Spinner/Spiner";
+import { connect } from "react-redux";
+
+const style = {
+  maxWidth: 300,
+  padding: "20px",
+  borderRadius: "16px",
+  margin: "auto",
+  transition: "0.3s",
+  boxShadow: "0 8px 40px -12px rgba(0,0,0,0.4)",
+  "&:hover": {
+    boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.4)",
+  },
+};
+
+const spinerStyle = {
+  display: "flex",
+  flexDirection: "rows",
+  gap: "12px",
+};
 
 function Preview(data) {
-  const { formData, navigation, nameid } = data;
+  const { formData, navigation, nameid, reportdata } = data;
   const {
     name,
     email,
     phone,
-    plateno,
     location,
+    validfrom,
     newInstallation,
     periodic,
     afterAccident,
@@ -37,7 +59,7 @@ function Preview(data) {
     servicepressure1,
     cmanufacturedDate1,
     waterVolume1,
-    expiryDate1,
+    cexpiryDate1,
     tbscertificate1,
     cylinderno2,
     cylinderposition2,
@@ -46,8 +68,11 @@ function Preview(data) {
     cmanuContact2,
     servicepressure2,
     cmanufacturedDate2,
+    cylinderSerialNo1,
+    cylinderSerialNo2,
+    cylinderSerialNo3,
     waterVolume2,
-    expiryDate2,
+    cexpiryDate2,
     tbscertificate2,
     cylinderno3,
     cylinderposition3,
@@ -57,10 +82,33 @@ function Preview(data) {
     servicepressure3,
     cmanufacturedDate3,
     waterVolume3,
-    expiryDate3,
+    cexpiryDate3,
     tbscertificate3,
   } = formData;
 
+  const { addToast } = useToasts();
+  const [loading, setLoading] = useState(false);
+  const { id } = reportdata;
+  async function handle() {
+    try {
+      setLoading(true);
+      const response = await EditReport({ ...formData, id });
+
+      if (response) {
+        setLoading(false);
+        addToast("... was updated successfully", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+        return;
+      }
+      setLoading(false);
+      addToast("Wrong Credentials!", { appearance: "error" });
+    } catch (error) {
+      setLoading(false);
+      addToast("Failed", { appearance: "error" });
+    }
+  }
   const { go } = navigation;
   return (
     <Container maxWidth="sm" style={{ height: "90%" }}>
@@ -72,7 +120,6 @@ function Preview(data) {
           { "Full Name": name },
           { Email: email },
           { Phone: phone },
-          { "Plate No": plateno },
           { Location: location },
         ]}
         go={go}
@@ -85,6 +132,7 @@ function Preview(data) {
           { "New installation": newInstallation },
           { Periodic: periodic },
           { "After Accident": afterAccident },
+          { "Valid From": validfrom },
         ]}
         go={go}
         nameid={nameid}
@@ -132,12 +180,13 @@ function Preview(data) {
           { "Cylinder No": cylinderno1 },
           { "Cylinder Position": cylinderposition1 },
           { "Cylinder Type": cylindertype1 },
+          { "Cylinder Serial No": cylinderSerialNo1 },
           { "Manufacture Name": cmanufacturer1 },
           { "Manufacturer Address": cmanuContact1 },
           { "Service Presssure(MPa)": servicepressure1 },
           { "Manufactured Date": cmanufacturedDate1 },
           { "Water volume(Ltr)": waterVolume1 },
-          { "Expiry Date": expiryDate1 },
+          { "Expiry Date": cexpiryDate1 },
           { "TBS Certificate": tbscertificate1 },
         ]}
         go={go}
@@ -149,12 +198,13 @@ function Preview(data) {
           { "Cylinder No": cylinderno2 },
           { "Cylinder Position": cylinderposition2 },
           { "Cylinder Type": cylindertype2 },
+          { "Cylinder Serial No": cylinderSerialNo2 },
           { "Manufacture Name": cmanufacturer2 },
           { "Manufacturer Address": cmanuContact2 },
           { "Service Presssure(MPa)": servicepressure2 },
           { "Manufactured Date": cmanufacturedDate2 },
           { "Water volume(Ltr)": waterVolume2 },
-          { "Expiry Date": expiryDate2 },
+          { "Expiry Date": cexpiryDate2 },
           { "TBS Certificate": tbscertificate2 },
         ]}
         go={go}
@@ -166,24 +216,36 @@ function Preview(data) {
           { "Cylinder No": cylinderno3 },
           { "Cylinder Position": cylinderposition3 },
           { "Cylinder Type": cylindertype3 },
+          { "Cylinder Serial No": cylinderSerialNo3 },
           { "Manufacture Name": cmanufacturer3 },
           { "Manufacturer Address": cmanuContact3 },
           { "Service Presssure(MPa)": servicepressure3 },
           { "Manufactured Date": cmanufacturedDate3 },
           { "Water volume(Ltr)": waterVolume3 },
-          { "Expiry Date": expiryDate3 },
+          { "Expiry Date": cexpiryDate3 },
           { "TBS Certificate": tbscertificate3 },
         ]}
         go={go}
       />{" "}
       <Button
-        color="primary"
         variant="contained"
-        style={{ marginTop: "1rem", marginBottom: "5px" }}
+        width="md"
+        color="primary"
+        style={{ marginTop: "1rem" }}
+        onClick={handle}
       >
-        Submit{" "}
+        {loading ? (
+          <div style={spinerStyle}>
+            <Spinner loading={loading} /> Loading...{" "}
+          </div>
+        ) : (
+          "Update"
+        )}{" "}
       </Button>{" "}
     </Container>
   );
 }
-export default Preview;
+const MapStateToprops = (store) => {
+  return { ...store };
+};
+export default connect(MapStateToprops)(Preview);

@@ -58,7 +58,7 @@ function VehicleInfo({ formData, setForm, navigation }) {
           label="Name of Owner"
           value={ownername}
           onChange={setForm}
-          name="newInstallation"
+          name="ownername"
           margin="normal"
           variant="outlined"
           autoComplete="off"

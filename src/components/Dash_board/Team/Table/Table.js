@@ -172,8 +172,14 @@ function BasicTable({ adduser, dispatch }) {
               >
                 <AddIcon className="plus" onClick={handleAdduser} />
                 <Pagination.First onClick={() => ""} disabled={true} />
-                <Pagination.Prev onClick={() => "goToPage(currentPage - 1)"} />
-                <Pagination.Next onClick={() => " goToPage(currentPage + 1)"} />
+                <Pagination.Prev
+                  onClick={() => "goToPage(currentPage - 1)"}
+                  disabled={true}
+                />
+                <Pagination.Next
+                  onClick={() => " goToPage(currentPage + 1)"}
+                  disabled={true}
+                />
                 <Pagination.Last onClick={() => "goToPage(pages)"} />
               </Pagination>
             </div>

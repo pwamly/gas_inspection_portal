@@ -26,17 +26,17 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
     servicepressure1,
     cmanufacturedDate1,
     waterVolume1,
-    expiryDate1,
     tbscertificate1,
     servicepressure2,
     cmanufacturedDate2,
     waterVolume2,
-    expiryDate2,
+    cexpiryDate1,
+    cexpiryDate2,
+    cexpiryDate3,
     tbscertificate2,
     servicepressure3,
     cmanufacturedDate3,
     waterVolume3,
-    expiryDate3,
     tbscertificate3,
   } = formData;
 
@@ -50,7 +50,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
   return (
     <Container>
       <Card style={stylemain}>
-        <h3> CNG CYLINDERS INFORMATION Cont ... </h3>{" "}
+        <h3> CNG CYLINDERS INFORMATION Cont... </h3>{" "}
         <Card fullWidth style={style}>
           <Card>
             <TextField
@@ -63,14 +63,19 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               autoComplete="off"
             />
             <TextField
-              label="Manufactured Date"
               value={cmanufacturedDate1}
+              id="date"
               onChange={setForm}
               name="cmanufacturedDate1"
+              label="Manufactured Date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
-            />
+              defaultValue="0000-00-00"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />{" "}
             <TextField
               label="Water volume(litres)"
               value={waterVolume1}
@@ -81,13 +86,18 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               autoComplete="off"
             />
             <TextField
-              label="Expiry Date"
-              value={expiryDate1}
+              value={cexpiryDate1}
+              id="date"
               onChange={setForm}
-              name="expiryDate1"
+              name="cexpiryDate1"
+              label="Expiry Date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
+              defaultValue="0000-00-00"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <TextField
               label="TBS certificare"
@@ -110,14 +120,19 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               autoComplete="off"
             />
             <TextField
-              label="Manufactured Date"
               value={cmanufacturedDate2}
+              id="date"
               onChange={setForm}
               name="cmanufacturedDate2"
+              label="Manufactured Date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
-            />
+              defaultValue="0000-00-00"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />{" "}
             <TextField
               label="Water volume(litres)"
               value={waterVolume2}
@@ -128,13 +143,18 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               autoComplete="off"
             />
             <TextField
-              label="Expiry Date"
-              value={expiryDate2}
+              value={cexpiryDate2}
+              id="date"
               onChange={setForm}
-              name="expiryDate2"
+              name="cexpiryDate2"
+              label="Expiry Date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
+              defaultValue="0000-00-00"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <TextField
               label="TBS certificare"
@@ -158,15 +178,19 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               fullWidth
             />
             <TextField
-              label="Manufactured Date"
               value={cmanufacturedDate3}
+              id="date"
               onChange={setForm}
               name="cmanufacturedDate3"
+              label="Manufactured Date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              fullWidth
-            />
+              defaultValue="0000-00-00"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />{" "}
             <TextField
               label="Water volume(litres)"
               value={waterVolume3}
@@ -178,14 +202,18 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               fullWidth
             />
             <TextField
-              label="Expiry Date"
-              value={expiryDate3}
+              value={cexpiryDate3}
+              id="date"
               onChange={setForm}
-              name="expiryDate3"
+              name="cexpiryDate3"
+              label="Expiry Date"
               margin="normal"
               variant="outlined"
               autoComplete="off"
-              fullWidth
+              defaultValue="0000-00-00"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <TextField
               label="TBS certificare"

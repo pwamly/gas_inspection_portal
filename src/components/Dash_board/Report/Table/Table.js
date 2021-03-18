@@ -52,11 +52,20 @@ function BasicTable({ dispatch, reportdata }) {
   const [paramsSearch, setSearch] = useState("");
   const [paramsStatus, setExpire] = useState("");
   const [paramsDate, setDateparam] = useState("");
+  const [page, setPage] = useState(1);
   const handleChangedate = (event) => {
     setDate(event.target.value);
   };
-  const params = { ...paramsDate, ...paramsSearch, ...paramsStatus };
-  const { results: data, loading, refresh } = useGetList(getAllReports, params);
+  const params = { ...paramsDate, ...paramsSearch, ...paramsStatus, page };
+  const {
+    results: data,
+    loading,
+    currentPage,
+    pages,
+    havePreviousPage,
+    haveNextPage,
+    refresh,
+  } = useGetList(getAllReports, params);
 
   let history = useHistory();
   const [rows, setRows] = useState(data);
@@ -87,6 +96,7 @@ function BasicTable({ dispatch, reportdata }) {
             className="IconStyle"
             onClick={() => {
               dispatch({ type: SAVE_REPORT_DATA, payload: row });
+              console.log("uuuuuuuuuuuuuuuuuuuuu", row);
               history.push("/dashboard/reports/edit");
             }}
           />
@@ -125,21 +135,10 @@ function BasicTable({ dispatch, reportdata }) {
     { name: "manufacturer", label: "Manufacturer", show: true },
     { name: "serialno", label: "Serial No", show: true },
     { name: "installername", label: "Installer name", show: true },
-    { name: "cylinderno3", label: "Cylinder No", show: true },
-    { name: "cylinderposition3", label: "Cylinder position", show: true },
-    { name: "cylinderSerialNo3", label: "Cylinder Serial No", show: true },
-    { name: "cylindertype3", label: "Cylinder Type", show: true },
-    { name: "cmanufacturer3", label: "Cylinder Manufacturer", show: true },
-    { name: "cmanuContact3", label: "Cylinder Manu Contact", show: true },
-    { name: "servicepressure3", label: "Service Pressure", show: true },
-    { name: "cmanufacturedDate3", label: "Cylinder manu date", show: true },
-    { name: "waterVolume3", label: "Water Vol", show: true },
-    { name: "cexpiryDate3", label: "Expiry Date", show: true },
-    { name: "tbscertificate3", label: "Tbs Certicicate", show: true },
     { name: "cylinderno1", label: "Cylinder No", show: true },
+    { name: "cylinderSerialNo1", label: "Cylinder Serial No", show: true },
     { name: "cylinderposition1", label: "Cylinder Position", show: true },
     { name: "cylindertype1", label: "Cylinder Type", show: true },
-    { name: "cylinderSerialNo1", label: "Cylinder Serial No", show: true },
     { name: "cmanufacturer1", label: "Cylinder manu", show: true },
     { name: "cmanuContact1", label: "Cylinder Contact", show: true },
     { name: "servicepressure1", label: "Service Pressure", show: true },
@@ -158,6 +157,17 @@ function BasicTable({ dispatch, reportdata }) {
     { name: "waterVolume2", label: "Water Volume", show: true },
     { name: "cexpiryDate2", label: "Cylinder Expiry Date", show: true },
     { name: "tbscertificate2", label: "Tbs Certificate", show: true },
+    { name: "cylinderno3", label: "Cylinder No", show: true },
+    { name: "cylinderSerialNo3", label: "Cylinder Serial No", show: true },
+    { name: "cylinderposition3", label: "Cylinder position", show: true },
+    { name: "cylindertype3", label: "Cylinder Type", show: true },
+    { name: "cmanufacturer3", label: "Cylinder Manufacturer", show: true },
+    { name: "cmanuContact3", label: "Cylinder Manu Contact", show: true },
+    { name: "servicepressure3", label: "Service Pressure", show: true },
+    { name: "cmanufacturedDate3", label: "Cylinder manu date", show: true },
+    { name: "waterVolume3", label: "Water Vol", show: true },
+    { name: "cexpiryDate3", label: "Expiry Date", show: true },
+    { name: "tbscertificate3", label: "Tbs Certicicate", show: true },
     { name: "inspectorID", label: "Inspector ID", show: true },
     { name: "formatter", label: "Actions", show: true, formatter: Actions },
   ];
@@ -189,7 +199,7 @@ function BasicTable({ dispatch, reportdata }) {
     };
 
     search();
-  }, [paramsDate, paramsSearch, paramsStatus]);
+  }, [paramsDate, paramsSearch, paramsStatus, page]);
 
   async function handledelete(row) {
     const { id } = row;
@@ -213,6 +223,7 @@ function BasicTable({ dispatch, reportdata }) {
       addToast("Failed", { appearance: "error" });
     }
   }
+
   return (
     <div className="table-wrapper">
       <div style={{ textAlign: "center" }}>REPORTS</div>
@@ -227,13 +238,13 @@ function BasicTable({ dispatch, reportdata }) {
         }}
       >
         <TextField
+          id="search"
           style={{ height: "10px !important", marginLeft: "20px" }}
-          label="Search"
+          label="Search Cylinder Serial No "
           margin="normal"
           onChange={(e) => setSearch({ q: e.target.value })}
           variant="outlined"
           autoComplete="off"
-          value={paramsSearch}
           width="sm"
         />{" "}
         <div
@@ -254,7 +265,6 @@ function BasicTable({ dispatch, reportdata }) {
             open={opendate}
             onClose={handleClosedate}
             onOpen={handleOpendate}
-            value={paramsDate}
             onChange={(e) => setDateparam({ day: e.target.value })}
           >
             <MenuItem value="day">Today</MenuItem>
@@ -280,7 +290,6 @@ function BasicTable({ dispatch, reportdata }) {
             open={openstatus}
             onClose={handleClosestatus}
             onOpen={handleOpenstatus}
-            value={paramsStatus}
             onChange={(e) => setExpire({ status: e.target.value })}
           >
             <MenuItem value="expired">Expired</MenuItem>
@@ -347,6 +356,7 @@ function BasicTable({ dispatch, reportdata }) {
                   if (column.name == "formatter") {
                     return <TableCell>{column.formatter(row)}</TableCell>;
                   }
+
                   return (
                     <TableCell style={{ border: "none !important" }}>
                       {row[column.name] || "N/A"}
@@ -365,13 +375,19 @@ function BasicTable({ dispatch, reportdata }) {
                   textDecoration: "none !important",
                 }}
               >
-                <Pagination.First
-                  onClick={() => "goToPage(1)"}
-                  disabled={true}
+                <Pagination.First onClick={() => setPage(1)} disabled={true} />
+                <Pagination.Prev
+                  onClick={() => setPage(currentPage - 1)}
+                  disabled={!havePreviousPage}
                 />
-                <Pagination.Prev onClick={() => "goToPage(currentPage - 1)"} />
-                <Pagination.Next onClick={() => " goToPage(currentPage + 1)"} />
-                <Pagination.Last onClick={() => "goToPage(pages)"} />
+                <Pagination.Next
+                  onClick={() => setPage(currentPage + 1)}
+                  disabled={!haveNextPage}
+                />
+                <Pagination.Last
+                  onClick={() => setPage(pages)}
+                  disabled={pages > currentPage ? false : true}
+                />
               </Pagination>
             </div>
           </caption>

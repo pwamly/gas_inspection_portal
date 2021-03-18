@@ -153,7 +153,6 @@ export const postCode = async(data) => {
 //.................................. api endpoints........................
 
 export const getAllReports = async(data) => {
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", data);
     try {
         if (data) {
             const reports = await instance.get("/api/reports", {
@@ -204,6 +203,21 @@ export const deleteReport = async(id) => {
         if (response) {
             return response;
         }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+
+export const EditReport = async(data) => {
+    try {
+        const { id } = data;
+        const isSuccessful = await instance.put(`/api/actions/editvehicle/${id}`, {
+            ...data,
+        });
+        if (isSuccessful) {
+            return { isSuccessful: true };
+        }
+        return { isSuccessful: false };
     } catch (error) {
         return { isSuccessful: false };
     }

@@ -131,12 +131,14 @@ function Printform({ reportdata, profile, dispatch }) {
             VALID FROM{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
               {" "}
-              {validfrom.slice(0, 10).replace("T", " ")}
+              {validfrom !== "" ? validfrom.slice(0, 10).replace("T", " ") : ""}
             </span>{" "}
             <span> TO </span>{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
               {" "}
-              {new Date(validto).toISOString().slice(0, 10).replace("T", " ")}
+              {validto !== ""
+                ? new Date(validto).toISOString().slice(0, 10).replace("T", " ")
+                : ""}
             </span>{" "}
           </h4>{" "}
         </div>{" "}
@@ -218,7 +220,7 @@ function Printform({ reportdata, profile, dispatch }) {
                 {" "}
                 <span style={{ fontStyle: "italic" }}>
                   {" "}
-                  {manYear.slice(0, 4).replace("T", " ")}
+                  {manYear !== "" ? manYear.slice(0, 4).replace("T", " ") : ""}
                 </span>{" "}
               </td>{" "}
               <td style={{ borderRight: "solid 1px black" }}>
@@ -554,24 +556,30 @@ function Printform({ reportdata, profile, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {new Date(cmanufacturedDate1)
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace("T", " ")}{" "}
+                {cmanufacturedDate1 !== ""
+                  ? new Date(cmanufacturedDate1)
+                      .toISOString()
+                      .slice(0, 10)
+                      .replace("T", " ")
+                  : ""}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {new Date(cmanufacturedDate2)
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace("T", " ")}{" "}
+                {cmanufacturedDate2 !== ""
+                  ? new Date(cmanufacturedDate2)
+                      .toISOString()
+                      .slice(0, 10)
+                      .replace("T", " ")
+                  : ""}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {new Date(cmanufacturedDate3)
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace("T", " ")}{" "}
+                {cmanufacturedDate3 !== ""
+                  ? new Date(cmanufacturedDate3)
+                      .toISOString()
+                      .slice(0, 10)
+                      .replace("T", " ")
+                  : ""}{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -601,24 +609,30 @@ function Printform({ reportdata, profile, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {new Date(cexpiryDate1)
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace("T", " ")}
+                {cexpiryDate1 !== ""
+                  ? new Date(cexpiryDate1)
+                      .toISOString()
+                      .slice(0, 10)
+                      .replace("T", " ")
+                  : ""}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {new Date(cexpiryDate2)
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace("T", " ")}
+                {cexpiryDate2 !== ""
+                  ? new Date(cexpiryDate2)
+                      .toISOString()
+                      .slice(0, 10)
+                      .replace("T", " ")
+                  : ""}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {new Date(cexpiryDate3)
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace("T", " ")}{" "}
+                {cexpiryDate3 !== ""
+                  ? new Date(cexpiryDate3)
+                      .toISOString()
+                      .slice(0, 10)
+                      .replace("T", " ")
+                  : ""}{" "}
               </td>{" "}
             </tr>{" "}
             <tr className="">
@@ -645,11 +659,29 @@ function Printform({ reportdata, profile, dispatch }) {
             display: "flex",
             flexDirection: "row",
             marginTop: "20px",
-            gap: "70px",
+            gap: "30px",
           }}
         >
-          <div style={{ width: "200px", height: "150px" }}>
-            <img style={{ width: "200px", height: "150px" }} src={sign} />{" "}
+          <div style={{ width: "400px", height: "150px" }}>
+            <div
+              style={{
+                width: "320px",
+                height: "150px",
+                border: "1px solid black !important",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "20px",
+              }}
+              src={sign}
+            >
+              {" "}
+              <span>Signature......................</span>
+              <span>Date..........................</span>
+              <span style={{ fontWeight: "bold", fontStyle: "italic" }}>
+                Certfied CNG Fuel System Inspector
+              </span>
+            </div>{" "}
           </div>{" "}
           <div style={{ width: "200px", height: "120px" }}>
             <img style={{ width: "200px", height: "150px" }} src={stamp.name} />{" "}
@@ -801,11 +833,17 @@ function Printform({ reportdata, profile, dispatch }) {
                   </tbody>{" "}
                 </table>{" "}
               </td>{" "}
-              <td style={{ border: "solid 1px black" }}>
+              <td
+                style={{
+                  border: "solid 1px black",
+                  padding: "0px!important",
+                  margin: "0px !important",
+                }}
+              >
                 <div
                   style={{
                     width: "377px",
-                    height: "200px",
+                    height: "225px",
                     display: "flex",
                     flexDirection: "column",
                     gap: "55px",
@@ -819,7 +857,8 @@ function Printform({ reportdata, profile, dispatch }) {
                       textAlign: "start",
                       padding: "2px",
                       fontStyle: "italic",
-                      marginTop: "0px",
+                      marginTop: "0px !important",
+                      paddingTop: "0px !important",
                     }}
                   >
                     Inspection Procedure{" "}
