@@ -54,9 +54,11 @@ function BasicTable({ dispatch, reportdata }) {
   const [paramsStatus, setExpire] = useState("");
   const [paramsDate, setDateparam] = useState("");
   const [page, setPage] = useState(1);
+  const [pageNo, setPageNo] = useState(1);
   const handleChangedate = (event) => {
     setDate(event.target.value);
   };
+  let pgno;
   const params = { ...paramsDate, ...paramsSearch, ...paramsStatus, page };
   const {
     results: data,
@@ -65,10 +67,12 @@ function BasicTable({ dispatch, reportdata }) {
     pages,
     havePreviousPage,
     haveNextPage,
+    setCurrentPage,
     refresh,
   } = useGetList(getAllReports, params);
 
   let history = useHistory();
+  let pgn = pageNo;
   const [rows, setRows] = useState(data);
   const Actions = useCallback(
     (row) => (
@@ -169,7 +173,7 @@ function BasicTable({ dispatch, reportdata }) {
     { name: "waterVolume3", label: "Water Vol", show: true },
     { name: "cexpiryDate3", label: "Expiry Date", show: true },
     { name: "tbscertificate3", label: "Tbs Certicicate", show: true },
-    { name: "inspectorID", label: "Inspector ID", show: true },
+    { name: "inspectorID", label: "Inspector Name", show: true },
     { name: "formatter", label: "Actions", show: true, formatter: Actions },
   ];
 
@@ -341,31 +345,34 @@ function BasicTable({ dispatch, reportdata }) {
             </TableRow>
           </TableHead>
           <TableBody style={{ border: "none !important" }}>
-            {rows.map((row, index) => (
-              <TableRow key={row.id} style={{ border: "none !important" }}>
-                <TableCell
-                  component="th"
-                  scope="row"
-                  style={{ border: "none !important" }}
-                >
-                  {index + 1}
-                </TableCell>
-                {columns.map((column) => {
-                  if (column.show == false) {
-                    return null;
-                  }
-                  if (column.name == "formatter") {
-                    return <TableCell>{column.formatter(row)}</TableCell>;
-                  }
-
-                  return (
-                    <TableCell style={{ border: "none !important" }}>
-                      {row[column.name] || "N/A"}
+            {rows &&
+              rows.map((row, index) => {
+                return (
+                  <TableRow key={row.id} style={{ border: "none !important" }}>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{ border: "none !important" }}
+                    >
+                      <span> {pgn++}</span>
                     </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
+                    {columns.map((column) => {
+                      if (column.show == false) {
+                        return null;
+                      }
+                      if (column.name == "formatter") {
+                        return <TableCell>{column.formatter(row)}</TableCell>;
+                      }
+
+                      return (
+                        <TableCell style={{ border: "none !important" }}>
+                          {row[column.name] || "N/A"}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
           </TableBody>
           <caption>
             <div style={{ float: "left", marginLeft: "50px" }}>
@@ -385,16 +392,22 @@ function BasicTable({ dispatch, reportdata }) {
                 </Button>{" "}
                 <Pagination.First onClick={() => setPage(1)} disabled={true} />
                 <Pagination.Prev
-                  onClick={() => setPage(currentPage - 1)}
-                  disabled={!havePreviousPage}
+                  onClick={() => {
+                    setPage(page - 1);
+                    setPageNo(pageNo - 10);
+                  }}
+                  disabled={page > 1 ? false : true}
                 />
                 <Pagination.Next
-                  onClick={() => setPage(currentPage + 1)}
-                  disabled={!haveNextPage}
+                  onClick={() => {
+                    setPage(page + 1);
+                    setPageNo(pageNo + 10);
+                  }}
+                  disabled={pages > page ? false : true}
                 />
                 <Pagination.Last
                   onClick={() => setPage(pages)}
-                  disabled={pages > currentPage ? false : true}
+                  disabled={pages > page ? false : true}
                 />
               </Pagination>
             </div>

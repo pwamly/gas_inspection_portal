@@ -63,6 +63,14 @@ export const useGetList = (onGet, params) => {
         shouldRefresh,
     ]);
 
+    console.log(
+        "gggggggggggggggggggggggg",
+        pages,
+        currentPage,
+        havePreviousPage,
+        haveNextPage
+    );
+
     return {
         results,
         pages,
