@@ -58,7 +58,7 @@ function BasicTable({ dispatch, reportdata }) {
   };
   const params = { ...paramsDate, ...paramsSearch, ...paramsStatus, page };
   const {
-    results: data,
+    results: rows,
     loading,
     currentPage,
     pages,
@@ -66,9 +66,9 @@ function BasicTable({ dispatch, reportdata }) {
     haveNextPage,
     refresh,
   } = useGetList(getAllReports, params);
-
+  const data = [];
   let history = useHistory();
-  const [rows, setRows] = useState(data);
+  const [rowsf, setRows] = useState(data);
   const Actions = useCallback(
     (row) => (
       <div
