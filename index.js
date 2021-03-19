@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT;
 
 //const orig = "http://localhost:5500";
-const orig = "http://3.136.108.40:5500";
+const orig = "http://18.224.3.249:5500";
 
 app.use(cors({ origin: orig, credentials: true }));
 app.use(bodyParser.json());
