@@ -58,7 +58,7 @@ function BasicTable({ dispatch, reportdata }) {
   };
   const params = { ...paramsDate, ...paramsSearch, ...paramsStatus, page };
   const {
-    results: rows,
+    results: data,
     loading,
     currentPage,
     pages,
@@ -66,9 +66,9 @@ function BasicTable({ dispatch, reportdata }) {
     haveNextPage,
     refresh,
   } = useGetList(getAllReports, params);
-  const data = [];
+
   let history = useHistory();
-  const [rowsf, setRows] = useState(data);
+  const [rows, setRows] = useState(data);
   const Actions = useCallback(
     (row) => (
       <div
@@ -96,7 +96,7 @@ function BasicTable({ dispatch, reportdata }) {
             className="IconStyle"
             onClick={() => {
               dispatch({ type: SAVE_REPORT_DATA, payload: row });
-              console.log("uuuuuuuuuuuuuuuuuuuuu", row);
+
               history.push("/dashboard/reports/edit");
             }}
           />
