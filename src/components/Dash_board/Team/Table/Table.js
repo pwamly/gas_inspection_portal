@@ -21,6 +21,7 @@ import Pagination from "react-bootstrap/Pagination";
 import { useGet, useGetList } from "../../../../hooks/index";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
+import Button from "@material-ui/core/Button";
 import { getUsers, deleteUser } from "../../../../client/client";
 import {
   ADD_USER,
@@ -170,6 +171,13 @@ function BasicTable({ adduser, dispatch }) {
                   textDecoration: "none !important",
                 }}
               >
+                <Button
+                  variant="text"
+                  style={{ marginRight: "10px", fontSize: "12px" }}
+                  onClick={() => history.push("/dashboard/")}
+                >
+                  Close{" "}
+                </Button>{" "}
                 <AddIcon className="plus" onClick={handleAdduser} />
                 <Pagination.First onClick={() => ""} disabled={true} />
                 <Pagination.Prev

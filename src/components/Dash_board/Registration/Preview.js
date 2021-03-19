@@ -5,6 +5,7 @@ import RenderAccordion from "./RenderAccordion";
 import { postVehicleInfo } from "../../../client/client";
 import { useToasts } from "react-toast-notifications";
 import Spinner from "../../Spinner/Spiner";
+import { useHistory } from "react-router-dom";
 
 const style = {
   maxWidth: 300,
@@ -25,6 +26,8 @@ const spinerStyle = {
 };
 
 function Preview(data) {
+  let history = useHistory;
+
   const { formData, navigation, nameid } = data;
   const {
     name,
@@ -226,21 +229,26 @@ function Preview(data) {
         ]}
         go={go}
       />{" "}
-      <Button
-        variant="contained"
-        width="md"
-        color="primary"
-        style={{ marginTop: "1rem" }}
-        onClick={handle}
-      >
-        {loading ? (
-          <div style={spinerStyle}>
-            <Spinner loading={loading} /> Loading...{" "}
-          </div>
-        ) : (
-          "Save"
-        )}{" "}
-      </Button>{" "}
+      <div style={{ marginTop: "1rem" }}>
+        {" "}
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginRight: "2px" }}
+          onClick={() => window.location.replace("/dashboard/")}
+        >
+          Back{" "}
+        </Button>{" "}
+        <Button variant="contained" width="md" color="primary" onClick={handle}>
+          {loading ? (
+            <div style={spinerStyle}>
+              <Spinner loading={loading} /> Loading...{" "}
+            </div>
+          ) : (
+            "Save"
+          )}{" "}
+        </Button>{" "}
+      </div>{" "}
     </Container>
   );
 }

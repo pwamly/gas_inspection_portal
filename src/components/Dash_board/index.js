@@ -83,7 +83,6 @@ function Index({ modalShown, toggleModal, showProfile, dispatch }) {
               </Switch>{" "}
             </Container>{" "}
           </Router>{" "}
-          <Footer />{" "}
         </div>{" "}
       </IconContext.Provider>{" "}
     </>

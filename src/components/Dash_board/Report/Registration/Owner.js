@@ -85,7 +85,6 @@ function Owner({ formData, setForm, navigation }) {
             variant="contained"
             width="sm"
             color="primary"
-            style={{ marginTop: "1rem" }}
             onClick={handle}
           >
             Next{" "}

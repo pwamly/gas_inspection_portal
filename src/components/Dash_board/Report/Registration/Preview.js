@@ -6,6 +6,7 @@ import { postVehicleInfo, EditReport } from "../../../../client/client";
 import { useToasts } from "react-toast-notifications";
 import Spinner from "../../../Spinner/Spiner";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const style = {
   maxWidth: 300,
@@ -26,6 +27,7 @@ const spinerStyle = {
 };
 
 function Preview(data) {
+  let history = useHistory();
   const { formData, navigation, nameid, reportdata } = data;
   const {
     name,
@@ -100,6 +102,7 @@ function Preview(data) {
           appearance: "success",
           autoDismiss: true,
         });
+        history.location.push("/dashboard/reports");
         return;
       }
       setLoading(false);
@@ -227,21 +230,26 @@ function Preview(data) {
         ]}
         go={go}
       />{" "}
-      <Button
-        variant="contained"
-        width="md"
-        color="primary"
-        style={{ marginTop: "1rem" }}
-        onClick={handle}
-      >
-        {loading ? (
-          <div style={spinerStyle}>
-            <Spinner loading={loading} /> Loading...{" "}
-          </div>
-        ) : (
-          "Update"
-        )}{" "}
-      </Button>{" "}
+      <div style={{ marginTop: "1rem" }}>
+        {" "}
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginRight: "2px" }}
+          onClick={() => history.push("/dashboard/reports")}
+        >
+          Back{" "}
+        </Button>{" "}
+        <Button variant="contained" width="md" color="primary" onClick={handle}>
+          {loading ? (
+            <div style={spinerStyle}>
+              <Spinner loading={loading} /> Loading...{" "}
+            </div>
+          ) : (
+            "Update"
+          )}{" "}
+        </Button>{" "}
+      </div>{" "}
     </Container>
   );
 }
