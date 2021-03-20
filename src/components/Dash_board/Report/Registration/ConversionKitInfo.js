@@ -31,6 +31,16 @@ function ConversionKit({ formData, setForm, navigation }) {
       <Card variant="outlined" style={style}>
         <h3> CONVERSION KIT INFORMATION </h3>{" "}
         <TextField
+          label="Type"
+          value={type}
+          onChange={setForm}
+          name="type"
+          margin="normal"
+          variant="outlined"
+          autoComplete="off"
+          fullWidth
+        />
+        <TextField
           label="Manufacturer"
           value={manufacturer}
           onChange={setForm}

@@ -565,7 +565,7 @@ function Printform({ reportdata, profile, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cmanufacturedDate2 !== ""
+                {cmanufacturedDate2 && cmanufacturedDate2.search("2021") !== -1
                   ? new Date(cmanufacturedDate2)
                       .toISOString()
                       .slice(0, 10)
@@ -573,8 +573,7 @@ function Printform({ reportdata, profile, dispatch }) {
                   : ""}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
-                {" "}
-                {cmanufacturedDate3 !== ""
+                {cmanufacturedDate3 && cmanufacturedDate3.search("2021") !== -1
                   ? new Date(cmanufacturedDate3)
                       .toISOString()
                       .slice(0, 10)
@@ -618,16 +617,16 @@ function Printform({ reportdata, profile, dispatch }) {
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cexpiryDate2 !== ""
+                {cexpiryDate2 && cexpiryDate2.search("2021") !== -1
                   ? new Date(cexpiryDate2)
                       .toISOString()
                       .slice(0, 10)
                       .replace("T", " ")
-                  : ""}
+                  : ""}{" "}
               </td>{" "}
               <td style={{ border: "solid 1px black" }}>
                 {" "}
-                {cexpiryDate3 !== ""
+                {cexpiryDate3 && cexpiryDate3.search("2021") !== -1
                   ? new Date(cexpiryDate3)
                       .toISOString()
                       .slice(0, 10)
