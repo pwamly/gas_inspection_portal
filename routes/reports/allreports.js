@@ -1,7 +1,7 @@
 "use strict";
 
 import { v4 as uuidv4 } from "uuid";
-import { vehiclereports } from "../../models";
+import { vehiclereports, nb_user } from "../../models";
 import paginate from "../../afterwares/pagenate";
 const { Model, Op, json } = require("sequelize");
 import moment from "moment";
@@ -11,6 +11,8 @@ module.exports = async(req, res) => {
 
     const { q, pageInfo, day, status } = req.query;
     const { sortBy, sortOrder, page, limit, offset } = pageInfo;
+    const team = await nb_user.findAll();
+    console.log("kkkkkkkkkkkkkkkkkkkkk", team);
     try {
         if (q) {
             where = {
@@ -48,6 +50,7 @@ module.exports = async(req, res) => {
                 logging: console.log,
                 raw: true,
             });
+            rows.map((el) => {});
 
             const data = paginate({
                 totalCount: count,
