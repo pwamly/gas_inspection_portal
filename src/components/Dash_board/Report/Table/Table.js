@@ -32,6 +32,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { FaEye, FaRegEye, FaTrash, FaPrint } from "react-icons/fa";
 import { ImPencil } from "react-icons/im";
+import Spin from "../../../Spinner/Loader";
 import "./tablereport.css";
 
 const useStyles = makeStyles({
@@ -199,7 +200,9 @@ function BasicTable({ dispatch, reportdata }) {
 
   useEffect(() => {
     const search = async () => {
+      setLoadingdel(true);
       const res = await getAllReports(params);
+      setLoadingdel(false);
       setRows(res.data);
     };
 
@@ -247,7 +250,10 @@ function BasicTable({ dispatch, reportdata }) {
           style={{ height: "10px !important", marginLeft: "20px" }}
           label="Search Cylinder Serial No "
           margin="normal"
-          onChange={(e) => setSearch({ q: e.target.value })}
+          onChange={(e) => {
+            setLoadingdel(true);
+            setSearch({ q: e.target.value });
+          }}
           variant="outlined"
           autoComplete="off"
           width="sm"
@@ -345,7 +351,7 @@ function BasicTable({ dispatch, reportdata }) {
             </TableRow>
           </TableHead>
           <TableBody style={{ border: "none !important" }}>
-            {rows &&
+            {!loading ? (
               rows.map((row, index) => {
                 return (
                   <TableRow key={row.id} style={{ border: "none !important" }}>
@@ -372,7 +378,19 @@ function BasicTable({ dispatch, reportdata }) {
                     })}
                   </TableRow>
                 );
-              })}
+              })
+            ) : (
+              <div
+                style={{
+                  position: "fixed",
+                  top: "50%",
+                  zIndex: "4",
+                  left: "50%",
+                }}
+              >
+                <Spin />
+              </div>
+            )}
           </TableBody>
           <caption>
             <div style={{ float: "left", marginLeft: "50px" }}>
