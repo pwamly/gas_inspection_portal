@@ -1,7 +1,7 @@
 "use strict";
 
 import { v4 as uuidv4 } from "uuid";
-import { vehiclereports, nb_user } from "../../models";
+import { vehiclehistory, nb_user } from "../../models";
 import paginate from "../../afterwares/pagenate";
 const { Model, Op, json } = require("sequelize");
 import moment from "moment";
@@ -42,7 +42,7 @@ module.exports = async(req, res) => {
                 },
             };
             //console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
-            const { rows, count } = await vehiclereports.findAndCountAll({
+            const { rows, count } = await vehiclehistory.findAndCountAll({
                 order: [
                     [sortBy, sortOrder]
                 ],
@@ -169,7 +169,7 @@ module.exports = async(req, res) => {
             }
 
             if (Object.keys(where).length !== 0) {
-                const { rows, count } = await vehiclereports.findAndCountAll({
+                const { rows, count } = await vehiclehistory.findAndCountAll({
                     order: [
                         [sortBy, sortOrder]
                     ],
@@ -263,7 +263,7 @@ module.exports = async(req, res) => {
                 }
                 return;
             }
-            const { rows, count } = await vehiclereports.findAndCountAll({
+            const { rows, count } = await vehiclehistory.findAndCountAll({
                 logging: console.log,
                 offset,
                 limit,

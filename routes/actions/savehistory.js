@@ -1,20 +1,116 @@
 "use strict";
 
 import { v4 as uuidv4 } from "uuid";
-import { vehiclereports } from "../../models";
-import savehistory from "./savehistory";
+import { vehiclehistory } from "../../models";
 const { Model, Op } = require("sequelize");
 
-module.exports = async(req, res) => {
-    const { id: inspectorID } = req.payload;
+module.exports = async(oldreport) => {
     const date = new Date();
+    let {
+        id,
+        inspectorID,
+        name,
+        email,
+        phone,
+        location,
+        newInstallation,
+        periodic,
+        afterAccident,
+        ownername,
+        vihecleRegno,
+        manYear,
+        make,
+        model,
+        chasisno,
+        engineno,
+        milliege,
+        biFuel,
+        Dedicated,
+        DualFuel,
+        type,
+        manufacturer,
+        serialno,
+        installername,
+        cylinderno3,
+        cylinderposition3,
+        cylinderSerialNo3,
+        cylindertype3,
+        cmanufacturer3,
+        cmanuContact3,
+        servicepressure3,
+        cmanufacturedDate3,
+        waterVolume3,
+        cexpiryDate3,
+        tbscertificate3,
+        cylinderno1,
+        cylinderposition1,
+        cylindertype1,
+        cylinderSerialNo1,
+        cmanufacturer1,
+        cmanuContact1,
+        servicepressure1,
+        cmanufacturedDate1,
+        waterVolume1,
+        cexpiryDate1,
+        tbscertificate1,
+        cylinderno2,
+        cylinderSerialNo2,
+        cylinderposition2,
+        cylindertype2,
+        cmanufacturer2,
+        cmanuContact2,
+        servicepressure2,
+        cmanufacturedDate2,
+        waterVolume2,
+        cexpiryDate2,
+        tbscertificate2,
+        validfrom,
+        validto,
+        createdAt,
+    } = oldreport;
 
-    const {
+    if (cexpiryDate1) {
+        cexpiryDate1 = new Date(cexpiryDate1)
+            .toISOString()
+            .slice(0, 10)
+            .replace("T", " ");
+    }
+    if (cexpiryDate2) {
+        cexpiryDate2 = new Date(cexpiryDate2)
+            .toISOString()
+            .slice(0, 10)
+            .replace("T", " ");
+    }
+    if (cexpiryDate3) {
+        cexpiryDate3 = new Date(cexpiryDate3)
+            .toISOString()
+            .slice(0, 10)
+            .replace("T", " ");
+    }
+    if (cmanufacturedDate1) {
+        cmanufacturedDate1 = new Date(cmanufacturedDate1)
+            .toISOString()
+            .slice(0, 10)
+            .replace("T", " ");
+    }
+    if (cmanufacturedDate2) {
+        cmanufacturedDate2 = new Date(cmanufacturedDate2)
+            .toISOString()
+            .slice(0, 10)
+            .replace("T", " ");
+    }
+    if (cmanufacturedDate3) {
+        cmanufacturedDate3 = new Date(cmanufacturedDate3)
+            .toISOString()
+            .slice(0, 10)
+            .replace("T", " ");
+    }
+
+    const payload = {
         id,
         name,
         email,
         phone,
-        plateno,
         location,
         newInstallation,
         periodic,
@@ -43,7 +139,7 @@ module.exports = async(req, res) => {
         servicepressure3,
         cmanufacturedDate3,
         waterVolume3,
-        expiryDate3,
+        cexpiryDate3,
         tbscertificate3,
         cylinderno1,
         cylinderposition1,
@@ -54,7 +150,7 @@ module.exports = async(req, res) => {
         servicepressure1,
         cmanufacturedDate1,
         waterVolume1,
-        expiryDate1,
+        cexpiryDate1,
         tbscertificate1,
         cylinderno2,
         cylinderSerialNo2,
@@ -65,97 +161,32 @@ module.exports = async(req, res) => {
         servicepressure2,
         cmanufacturedDate2,
         waterVolume2,
-        expiryDate2,
+        cexpiryDate2,
         tbscertificate2,
-        validfrom,
-    } = req.body;
-
-    let initialdate = new Date(validfrom);
-    let validto = new Date(initialdate.setMonth(initialdate.getMonth() + 6));
-
-    const payload = {
-        name,
-        email,
-        phone,
-        plateno,
-        location,
-        newInstallation,
-        periodic,
-        afterAccident,
-        ownername,
-        vihecleRegno,
-        manYear,
-        make,
-        model,
-        chasisno,
-        engineno,
-        milliege,
-        biFuel,
-        Dedicated,
-        DualFuel,
-        type,
-        manufacturer,
-        serialno,
-        installername,
-        cylinderno3,
-        cylinderposition3,
-        cylinderSerialNo3,
-        cylindertype3,
-        cmanufacturer3,
-        cmanuContact3,
-        servicepressure3,
-        cmanufacturedDate3,
-        waterVolume3,
-        expiryDate3,
-        tbscertificate3,
-        cylinderno1,
-        cylinderposition1,
-        cylindertype1,
-        cylinderSerialNo1,
-        cmanufacturer1,
-        cmanuContact1,
-        servicepressure1,
-        cmanufacturedDate1,
-        waterVolume1,
-        expiryDate1,
-        tbscertificate1,
-        cylinderno2,
-        cylinderSerialNo2,
-        cylinderposition2,
-        cylindertype2,
-        cmanufacturer2,
-        cmanuContact2,
-        servicepressure2,
-        cmanufacturedDate2,
-        waterVolume2,
-        expiryDate2,
-        tbscertificate2,
-        validfrom,
         inspectorID,
+        validfrom,
         validto,
+        validfrom,
+        createdAt,
         updatedAt: date,
     };
+    console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm", payload);
     try {
-        const oldreport = await vehiclereports.findOne({ where: { id } });
-        const savedhistory = await savehistory(oldreport);
-        const update = await vehiclereports.update({...payload }, { where: { id } });
-        if (update == 1) {
-            console.log("successful updated", update);
-            return res.json({
+        const created = await vehiclehistory.create({
+            ...payload,
+        });
+        if (created) {
+            console.log("history saved");
+            return {
                 successful: true,
-                message: "successful updated",
-            });
-        } else {
-            return res.json({
-                successful: false,
-                message: "Up to date",
-            });
+                message: "history saved",
+            };
         }
     } catch (error) {
-        console.log("error at report creation", error);
-        return res.status(401).json({
+        console.log(error);
+        return {
             successful: false,
             message: "Failed",
-        });
+        };
     }
 };

@@ -3,6 +3,8 @@
 import { Router } from "express";
 import { vehiclereports } from "../../models";
 import allreports from "./allreports";
+import history from "./history";
+import dashboarddata from "./dashboarddata";
 import isAdmin from "../../middleware/auth/isAdmin";
 import reportByid from "./reportByid";
 import inspectReport from "./inspectreport";
@@ -13,6 +15,8 @@ const reports = Router();
 reports.get("/", paginator, allreports);
 reports.put("/:id", reportByid);
 reports.get("/inspect", paginator, inspectReport);
+reports.get("/history", paginator, history);
+reports.get("/dashboard", dashboarddata);
 reports.delete("/deletevehicle/:id", isAdmin, async(req, res) => {
     const { id } = req.params;
     try {
