@@ -3,7 +3,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { vehiclehistory, nb_user } from "../../models";
 import paginate from "../../afterwares/pagenate";
-const { Model, Op, json } = require("sequelize");
+const { Model, Op } = require("sequelize");
 import moment from "moment";
 
 module.exports = async(req, res) => {
@@ -12,6 +12,14 @@ module.exports = async(req, res) => {
     const { q, pageInfo, day, status } = req.query;
     const { sortBy, sortOrder, page, limit, offset } = pageInfo;
     const team = await nb_user.findAll();
+
+    const isValidDate = (strDate) => {
+        let myDatestr = new Date(strDate);
+        if (!isNaN(myDatestr.getMonth())) {
+            return true;
+        }
+        return false;
+    };
 
     try {
         if (q) {
@@ -63,50 +71,50 @@ module.exports = async(req, res) => {
 
                     //... beautify dates..
                     newdata.map((el) => {
-                        if (el.cexpiryDate1) {
+                        if (isValidDate(el.cexpiryDate1) == true) {
                             el.cexpiryDate1 = new Date(el.cexpiryDate1)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cexpiryDate2) {
+                        if (isValidDate(el.cexpiryDate2) == true) {
                             el.cexpiryDate2 = new Date(el.cexpiryDate2)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cexpiryDate3) {
+                        if (isValidDate(el.cexpiryDate3) == true) {
                             el.cexpiryDate3 = new Date(el.cexpiryDate3)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cmanufacturedDate1) {
+                        if (isValidDate(el.cmanufacturedDate1) == true) {
                             el.cmanufacturedDate1 = new Date(el.cmanufacturedDate1)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cmanufacturedDate2) {
+                        if (isValidDate(el.cmanufacturedDate2) == true) {
                             el.cmanufacturedDate2 = new Date(el.cmanufacturedDate2)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cmanufacturedDate3) {
+                        if (isValidDate(el.cmanufacturedDate3) == true) {
                             el.cmanufacturedDate3 = new Date(el.cmanufacturedDate3)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
 
-                        if (el.createdAt) {
+                        if (isValidDate(el.createdAt) == true) {
                             el.createdAt = new Date(el.createdAt)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.updatedAt) {
+                        if (isValidDate(el.updatedAt) == true) {
                             el.updatedAt = new Date(el.updatedAt)
                                 .toISOString()
                                 .slice(0, 10)
@@ -188,61 +196,61 @@ module.exports = async(req, res) => {
                             return el;
                         });
                         newdata.map((el) => {
-                            if (el.cexpiryDate1) {
+                            if (isValidDate(el.cexpiryDate1) == true) {
                                 el.cexpiryDate1 = new Date(el.cexpiryDate1)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.cexpiryDate2) {
+                            if (isValidDate(el.cexpiryDate2) == true) {
                                 el.cexpiryDate2 = new Date(el.cexpiryDate2)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.cexpiryDate3) {
+                            if (isValidDate(el.cexpiryDate3) == true) {
                                 el.cexpiryDate3 = new Date(el.cexpiryDate3)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.cmanufacturedDate1) {
+                            if (isValidDate(el.cmanufacturedDate1) == true) {
                                 el.cmanufacturedDate1 = new Date(el.cmanufacturedDate1)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.cmanufacturedDate2) {
+                            if (isValidDate(el.cmanufacturedDate2) == true) {
                                 el.cmanufacturedDate2 = new Date(el.cmanufacturedDate2)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.cmanufacturedDate3) {
+                            if (isValidDate(el.cmanufacturedDate3) == true) {
                                 el.cmanufacturedDate3 = new Date(el.cmanufacturedDate3)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.validto) {
+                            if (isValidDate(el.validto) == true) {
                                 el.validto = new Date(el.validto)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.validfrom) {
+                            if (isValidDate(el.validfrom) == true) {
                                 el.validfrom = new Date(el.validfrom)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.createdAt) {
+                            if (isValidDate(el.createdAt) == true) {
                                 el.createdAt = new Date(el.createdAt)
                                     .toISOString()
                                     .slice(0, 10)
                                     .replace("T", " ");
                             }
-                            if (el.updatedAt) {
+                            if (isValidDate(el.updatedAt) == true) {
                                 el.updatedAt = new Date(el.updatedAt)
                                     .toISOString()
                                     .slice(0, 10)
@@ -284,61 +292,62 @@ module.exports = async(req, res) => {
                         return el;
                     });
                     newdata.map((el) => {
-                        if (el.cexpiryDate1) {
+                        if (isValidDate(el.cexpiryDate1) == true) {
                             el.cexpiryDate1 = new Date(el.cexpiryDate1)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cexpiryDate2) {
+                        if (isValidDate(el.cexpiryDate2) == true) {
                             el.cexpiryDate2 = new Date(el.cexpiryDate2)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cexpiryDate3) {
+                        if (isValidDate(el.cexpiryDate3) == true) {
                             el.cexpiryDate3 = new Date(el.cexpiryDate3)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cmanufacturedDate1) {
+                        if (isValidDate(el.cmanufacturedDate1) == true) {
                             el.cmanufacturedDate1 = new Date(el.cmanufacturedDate1)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cmanufacturedDate2) {
+                        if (isValidDate(el.cmanufacturedDate2) == true) {
                             el.cmanufacturedDate2 = new Date(el.cmanufacturedDate2)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.cmanufacturedDate3) {
+                        if (isValidDate(el.cmanufacturedDate3) == true) {
                             el.cmanufacturedDate3 = new Date(el.cmanufacturedDate3)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.validto) {
+                        if (isValidDate(el.validto) == true) {
                             el.validto = new Date(el.validto)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.validfrom) {
+                        if (isValidDate(el.validfrom) == true) {
                             el.validfrom = new Date(el.validfrom)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.createdAt) {
+                        if (isValidDate(el.createdAt) == true) {
                             el.createdAt = new Date(el.createdAt)
                                 .toISOString()
                                 .slice(0, 10)
                                 .replace("T", " ");
                         }
-                        if (el.updatedAt) {
+
+                        if (isValidDate(el.updatedAt) == true) {
                             el.updatedAt = new Date(el.updatedAt)
                                 .toISOString()
                                 .slice(0, 10)
