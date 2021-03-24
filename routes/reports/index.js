@@ -27,13 +27,13 @@ reports.delete("/deletevehicle/:id", isAdmin, async(req, res) => {
                 message: "Report Deleted!",
             });
         }
-        return res.status(403).json({
+        return res.status(401).json({
             successful: false,
             message: "Alredy deleted!",
         });
     } catch (error) {
         console.log(error);
-        return res.status(403).json({
+        return res.status(401).json({
             successful: false,
             message: "Failed!",
         });
@@ -49,7 +49,7 @@ reports.delete("/deletehistory/:id", isAdmin, async(req, res) => {
                 message: "History  Deleted!",
             });
         }
-        return res.status(403).json({
+        return res.status(401).json({
             successful: false,
             message: "Alredy deleted!",
         });
