@@ -1,7 +1,7 @@
 "use strict";
 
 import { Router } from "express";
-import { vehiclereports } from "../../models";
+import { vehiclereports, vehiclehistory } from "../../models";
 import allreports from "./allreports";
 import history from "./history";
 import dashboarddata from "./dashboarddata";
@@ -39,5 +39,26 @@ reports.delete("/deletevehicle/:id", isAdmin, async(req, res) => {
         });
     }
 });
-
+reports.delete("/deletehistory/:id", isAdmin, async(req, res) => {
+    const { id } = req.params;
+    try {
+        const response = await vehiclehistory.destroy({ where: { id } });
+        if (response == 1) {
+            return res.json({
+                successful: true,
+                message: "History  Deleted!",
+            });
+        }
+        return res.status(403).json({
+            successful: false,
+            message: "Alredy deleted!",
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(403).json({
+            successful: false,
+            message: "Failed!",
+        });
+    }
+});
 module.exports = reports;

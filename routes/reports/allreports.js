@@ -50,6 +50,12 @@ module.exports = async(req, res) => {
                 },
             };
             //console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
+            const { total, count: Tcount } = await vehiclereports.findAndCountAll({
+                where,
+                logging: console.log,
+                raw: true,
+            });
+
             const { rows, count } = await vehiclereports.findAndCountAll({
                 order: [
                     [sortBy, sortOrder]
@@ -123,6 +129,7 @@ module.exports = async(req, res) => {
 
                         return el;
                     });
+                    newdata = {...newdata, total: Tcount };
                     const data = paginate({
                         totalCount: count,
                         currentPage: page,
@@ -177,6 +184,11 @@ module.exports = async(req, res) => {
             }
 
             if (Object.keys(where).length !== 0) {
+                const { total, count: Tcount } = await vehiclereports.findAndCountAll({
+                    where,
+                    logging: console.log,
+                    raw: true,
+                });
                 const { rows, count } = await vehiclereports.findAndCountAll({
                     order: [
                         [sortBy, sortOrder]
@@ -259,7 +271,7 @@ module.exports = async(req, res) => {
 
                             return el;
                         });
-
+                        newdata = {...newdata, total: Tcount };
                         const data = paginate({
                             totalCount: count,
                             currentPage: page,
@@ -271,6 +283,10 @@ module.exports = async(req, res) => {
                 }
                 return;
             }
+            const { total, count: Tcount } = await vehiclereports.findAndCountAll({
+                logging: console.log,
+                raw: true,
+            });
             const { rows, count } = await vehiclereports.findAndCountAll({
                 logging: console.log,
                 offset,
@@ -356,6 +372,8 @@ module.exports = async(req, res) => {
 
                         return el;
                     });
+
+                    newdata = {...newdata, total: Tcount };
                     const data = paginate({
                         totalCount: count,
                         currentPage: page,
