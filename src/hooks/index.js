@@ -25,6 +25,7 @@ export const useGetList = (onGet, params) => {
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState([]);
     const [pages, setPages] = useState(0);
+    const [total, setTotal] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [haveNextPage, setHaveNextPage] = useState(false);
     const [havePreviousPage, setHavePreviousPage] = useState(false);
@@ -39,6 +40,7 @@ export const useGetList = (onGet, params) => {
             .then((response) => {
                 setResults(response.data);
                 setPages(response.pagination.totalPages);
+                setTotal(response.total);
                 if (currentPage > 1) {
                     setHavePreviousPage(true);
                 } else {
@@ -62,15 +64,6 @@ export const useGetList = (onGet, params) => {
     const refresh = useCallback(() => setShouldRefresh(!shouldRefresh), [
         shouldRefresh,
     ]);
-
-    console.log(
-        "gggggggggggggggggggggggg",
-        pages,
-        currentPage,
-        havePreviousPage,
-        haveNextPage
-    );
-
     return {
         results,
         pages,
@@ -78,6 +71,8 @@ export const useGetList = (onGet, params) => {
         havePreviousPage,
         haveNextPage,
         loading,
+        total,
+        setTotal,
         setCurrentPage,
         sortBy,
         searchBy,

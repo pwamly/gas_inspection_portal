@@ -69,6 +69,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               name="cmanufacturedDate1"
               label="Manufactured Date"
               margin="normal"
+              type="date"
               variant="outlined"
               autoComplete="off"
               defaultValue="0000-00-00"
@@ -89,6 +90,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               value={cexpiryDate1}
               id="date"
               onChange={setForm}
+              type="date"
               name="cexpiryDate1"
               label="Expiry Date"
               margin="normal"
@@ -123,6 +125,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               value={cmanufacturedDate2}
               id="date"
               onChange={setForm}
+              type="date"
               name="cmanufacturedDate2"
               label="Manufactured Date"
               margin="normal"
@@ -146,6 +149,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               value={cexpiryDate2}
               id="date"
               onChange={setForm}
+              type="date"
               name="cexpiryDate2"
               label="Expiry Date"
               margin="normal"
@@ -182,6 +186,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               id="date"
               onChange={setForm}
               name="cmanufacturedDate3"
+              type="date"
               label="Manufactured Date"
               margin="normal"
               variant="outlined"
@@ -207,6 +212,7 @@ function CgnCylinderInfoCont({ formData, setForm, navigation }) {
               onChange={setForm}
               name="cexpiryDate3"
               label="Expiry Date"
+              type="date"
               margin="normal"
               variant="outlined"
               autoComplete="off"

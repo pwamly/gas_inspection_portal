@@ -65,7 +65,8 @@ function InspectionForm({ formData, setForm, navigation }) {
           id="date"
           onChange={setForm}
           name="validfrom"
-          label="Vali from"
+          type="date"
+          label="Valid from"
           margin="normal"
           variant="outlined"
           autoComplete="off"

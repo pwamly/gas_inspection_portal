@@ -94,7 +94,9 @@ function BasicTable({ dispatch, reportdata, historytable }) {
     havePreviousPage,
     haveNextPage,
     setCurrentPage,
+    total,
     refresh,
+    setTotal,
   } = useGetList(getAllReports, params);
 
   let history = useHistory();
@@ -127,7 +129,6 @@ function BasicTable({ dispatch, reportdata, historytable }) {
             className="IconStyle"
             onClick={() => {
               dispatch({ type: SAVE_REPORT_DATA, payload: row });
-
               history.push("/dashboard/reports/edit");
             }}
           />
@@ -166,7 +167,7 @@ function BasicTable({ dispatch, reportdata, historytable }) {
         <FaTrash
           id="trash"
           className="IconStyle"
-          onClick={() => handledelete(row)}
+          onClick={() => handledeletehistory(row)}
         />
       </div>
     ),
@@ -273,6 +274,7 @@ function BasicTable({ dispatch, reportdata, historytable }) {
         setHistoryRows(res.data);
       } else {
         setRows(res.data);
+        setTotal(res.total);
       }
     };
 
@@ -284,18 +286,16 @@ function BasicTable({ dispatch, reportdata, historytable }) {
     try {
       setLoadingdel(true);
       let response;
-      if (deletehistory) {
-        response = await deletehistory(id);
-      } else {
-        response = await deleteReport(id);
-      }
-
+      response = await deleteReport(id);
       if (response) {
         setLoadingdel(false);
         addToast("deleted successfully", {
           appearance: "success",
           autoDismiss: true,
         });
+        if (historytable && response) {
+          return;
+        }
         window.location.replace("/dashboard/reports");
         return;
       }
@@ -306,7 +306,31 @@ function BasicTable({ dispatch, reportdata, historytable }) {
       addToast("Failed", { appearance: "error" });
     }
   }
+  async function handledeletehistory(row) {
+    const { id } = row;
+    try {
+      setLoadingdel(true);
+      let response;
+      response = await deletehistory(id);
+      if (response) {
+        setLoadingdel(false);
+        addToast("deleted successfully", {
+          appearance: "success",
+          autoDismiss: true,
+        });
 
+        dispatch({ type: SHOW_HISTORY_TABLE, payload: false });
+        dispatch({ type: SHOW_HISTORY_TABLE, payload: true });
+
+        return;
+      }
+      setLoadingdel(false);
+      addToast("Wrong Credentials!", { appearance: "error" });
+    } catch (error) {
+      setLoadingdel(false);
+      addToast("Failed", { appearance: "error" });
+    }
+  }
   return (
     <div className="table-wrapper">
       <div style={{ textAlign: "center" }}>
@@ -422,8 +446,7 @@ function BasicTable({ dispatch, reportdata, historytable }) {
         >
           {!historytable && (
             <InputLabel style={{ paddingTop: "3px" }} id="label">
-              Total number :{" "}
-              <span style={{ color: "black" }}>{rows.total}</span>
+              Total number : <span style={{ color: "black" }}>{total}</span>
             </InputLabel>
           )}
         </div>

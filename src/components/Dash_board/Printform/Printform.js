@@ -24,6 +24,17 @@ const defaultProps = {
 };
 
 function Printform({ reportdata, profile, dispatch }) {
+  const isValidDate = (strDate) => {
+    if (strDate) {
+      let myDatestr = new Date(strDate);
+      if (!isNaN(myDatestr.getMonth())) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   const {
     createdAt = "",
     validto = "",
@@ -130,13 +141,14 @@ function Printform({ reportdata, profile, dispatch }) {
           >
             VALID FROM{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-              {" "}
-              {validfrom !== "" ? validfrom.slice(0, 10).replace("T", " ") : ""}
+              {isValidDate(validfrom) == true
+                ? validfrom.slice(0, 10).replace("T", " ")
+                : ""}
             </span>{" "}
             <span> TO </span>{" "}
             <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
               {" "}
-              {validto !== ""
+              {isValidDate(validto) == true
                 ? new Date(validto).toISOString().slice(0, 10).replace("T", " ")
                 : ""}
             </span>{" "}

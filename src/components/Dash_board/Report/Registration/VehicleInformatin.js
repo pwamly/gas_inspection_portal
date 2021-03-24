@@ -78,6 +78,7 @@ function VehicleInfo({ formData, setForm, navigation }) {
           label="Year of Man."
           value={manYear}
           onChange={setForm}
+          type="date"
           name="manYear"
           margin="normal"
           variant="outlined"
