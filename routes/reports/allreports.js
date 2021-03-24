@@ -129,13 +129,14 @@ module.exports = async(req, res) => {
 
                         return el;
                     });
-                    newdata = {...newdata, total: Tcount };
+
                     const data = paginate({
                         totalCount: count,
                         currentPage: page,
                         pageSize: limit,
                         data: newdata,
                     });
+                    data = {...data, total: Tcount };
                     return res.json(data);
                 }
             }
@@ -271,13 +272,14 @@ module.exports = async(req, res) => {
 
                             return el;
                         });
-                        newdata = {...newdata, total: Tcount };
-                        const data = paginate({
+
+                        let data = paginate({
                             totalCount: count,
                             currentPage: page,
                             pageSize: limit,
                             data: newdata,
                         });
+                        data = {...data, total: Tcount };
                         return res.json(data);
                     }
                 }
@@ -373,13 +375,13 @@ module.exports = async(req, res) => {
                         return el;
                     });
 
-                    newdata = {...newdata, total: Tcount };
-                    const data = paginate({
+                    let data = paginate({
                         totalCount: count,
                         currentPage: page,
                         pageSize: limit,
                         data: newdata,
                     });
+                    data = {...data, total: Tcount };
                     return res.json(data);
                 }
             }
