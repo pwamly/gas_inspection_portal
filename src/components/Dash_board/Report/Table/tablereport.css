@@ -40,3 +40,8 @@ ul {
 #trash:hover {
     color: blue !important;
 }
+
+#switchlabel:hover {
+    color: blue;
+    cursor: pointer;
+}

@@ -14,6 +14,7 @@ const initstore = {
     token: "",
     reportdata: {},
     teamdata: {},
+    historytable: false,
 };
 if (!store) {
     store = createStore(reducer, initstore);

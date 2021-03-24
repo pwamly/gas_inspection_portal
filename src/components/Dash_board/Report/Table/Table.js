@@ -20,11 +20,17 @@ import { useGet, useGetList } from "../../../../hooks/index";
 import Pagination from "react-bootstrap/Pagination";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
-import { getAllReports, deleteReport } from "../../../../client/client";
+import {
+  getAllReports,
+  deleteReport,
+  getAllhistory,
+  deletehistory,
+} from "../../../../client/client";
 import {
   ADD_USER,
   SAVE_REPORT_DATA,
   CLEAR_PROFILE_DATA,
+  SHOW_HISTORY_TABLE,
 } from "../../../../actions";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -41,7 +47,7 @@ const useStyles = makeStyles({
   },
 });
 
-function BasicTable({ dispatch, reportdata }) {
+function BasicTable({ dispatch, reportdata, historytable }) {
   const classes = useStyles();
   const formref = useRef();
   const fsname = useRef("");
@@ -59,8 +65,27 @@ function BasicTable({ dispatch, reportdata }) {
   const handleChangedate = (event) => {
     setDate(event.target.value);
   };
-  let pgno;
+
+  let pgno, query;
   const params = { ...paramsDate, ...paramsSearch, ...paramsStatus, page };
+
+  if (historytable) {
+    query = getAllhistory;
+  } else {
+    query = getAllReports;
+  }
+
+  const {
+    results: historydata,
+    loading: historyloading,
+    currentPage: historycurrentPage,
+    pages: historypages,
+    havePreviousPage: historyhavePreviousPage,
+    haveNextPage: historyhaveNextPage,
+    setCurrentPage: historysetCurrentPage,
+    refresh: historyrefresh,
+  } = useGetList(getAllhistory, params);
+
   const {
     results: data,
     loading,
@@ -75,6 +100,7 @@ function BasicTable({ dispatch, reportdata }) {
   let history = useHistory();
   let pgn = pageNo;
   const [rows, setRows] = useState(data);
+  const [historyrows, setHistoryRows] = useState(historydata);
   const Actions = useCallback(
     (row) => (
       <div
@@ -97,7 +123,6 @@ function BasicTable({ dispatch, reportdata }) {
           />
         </Link>
         <Link>
-          {" "}
           <ImPencil
             className="IconStyle"
             onClick={() => {
@@ -108,6 +133,36 @@ function BasicTable({ dispatch, reportdata }) {
           />
         </Link>
 
+        <FaTrash
+          id="trash"
+          className="IconStyle"
+          onClick={() => handledelete(row)}
+        />
+      </div>
+    ),
+    []
+  );
+  const Actionshistory = useCallback(
+    (row) => (
+      <div
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          flexDirection: "row",
+          gap: "15px",
+          paddingRight: "40px",
+        }}
+      >
+        <Link to="#">
+          {" "}
+          <FaEye
+            className="IconStyle"
+            onClick={() => {
+              dispatch({ type: SAVE_REPORT_DATA, payload: row });
+              history.push("/dashboard/reports/view");
+            }}
+          />
+        </Link>
         <FaTrash
           id="trash"
           className="IconStyle"
@@ -175,7 +230,12 @@ function BasicTable({ dispatch, reportdata }) {
     { name: "cexpiryDate3", label: "Expiry Date", show: true },
     { name: "tbscertificate3", label: "Tbs Certicicate", show: true },
     { name: "inspectorID", label: "Inspector Name", show: true },
-    { name: "formatter", label: "Actions", show: true, formatter: Actions },
+    {
+      name: "formatter",
+      label: "Actions",
+      show: true,
+      formatter: !historytable ? Actions : Actionshistory,
+    },
   ];
 
   const handleClosedate = () => {
@@ -201,19 +261,34 @@ function BasicTable({ dispatch, reportdata }) {
   useEffect(() => {
     const search = async () => {
       setLoadingdel(true);
-      const res = await getAllReports(params);
+      let res;
+      if (historytable) {
+        res = await getAllhistory(params);
+      } else {
+        res = await getAllReports(params);
+      }
+
       setLoadingdel(false);
-      setRows(res.data);
+      if (historytable) {
+        setHistoryRows(res.data);
+      } else {
+        setRows(res.data);
+      }
     };
 
     search();
-  }, [paramsDate, paramsSearch, paramsStatus, page]);
+  }, [paramsDate, paramsSearch, paramsStatus, page, historytable]);
 
   async function handledelete(row) {
     const { id } = row;
     try {
       setLoadingdel(true);
-      let response = await deleteReport(id);
+      let response;
+      if (deletehistory) {
+        response = await deletehistory(id);
+      } else {
+        response = await deleteReport(id);
+      }
 
       if (response) {
         setLoadingdel(false);
@@ -234,7 +309,9 @@ function BasicTable({ dispatch, reportdata }) {
 
   return (
     <div className="table-wrapper">
-      <div style={{ textAlign: "center" }}>REPORTS</div>
+      <div style={{ textAlign: "center" }}>
+        {historytable ? "HISTORY " : "REPORTS"}
+      </div>
       <div
         style={{
           height: "50px",
@@ -307,6 +384,49 @@ function BasicTable({ dispatch, reportdata }) {
             <MenuItem value="notexpired">Not expired</MenuItem>
           </Select>
         </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "35px",
+            gap: "20px",
+          }}
+        >
+          {!historytable ? (
+            <InputLabel
+              className="switchlabel"
+              style={{ paddingTop: "3px" }}
+              id="switchlabel"
+              onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
+            >
+              Switch to History
+            </InputLabel>
+          ) : (
+            <InputLabel
+              className="switchlabel"
+              style={{ paddingTop: "3px" }}
+              id="switchlabel"
+              onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
+            >
+              Switch to Reports
+            </InputLabel>
+          )}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "35px",
+            gap: "20px",
+          }}
+        >
+          {!historytable && (
+            <InputLabel style={{ paddingTop: "3px" }} id="label">
+              Total number :{" "}
+              <span style={{ color: "black" }}>{rows.total}</span>
+            </InputLabel>
+          )}
+        </div>
       </div>
       <TableContainer
         component={Paper}
@@ -314,123 +434,255 @@ function BasicTable({ dispatch, reportdata }) {
           border: "none !important",
         }}
       >
-        <Table
-          id="repotable"
-          className={classes.table}
-          aria-label="simple table"
-          style={{
-            border: "none !important",
-            padding: "auto",
-          }}
-        >
-          <TableHead
+        {historytable ? (
+          <Table
+            id="repotable"
+            className={classes.table}
+            aria-label="simple table"
             style={{
-              background: "rgb(241, 239, 239)",
               border: "none !important",
+              padding: "auto",
             }}
           >
-            <TableRow
+            <TableHead
               style={{
+                background: "rgb(241, 239, 239)",
                 border: "none !important",
-                height: "10px !important",
-                fontSize: "8px !important",
               }}
             >
-              <TableCell
+              <TableRow
                 style={{
                   border: "none !important",
                   height: "10px !important",
                   fontSize: "8px !important",
                 }}
-              ></TableCell>
-              {columns.map((th) => (
-                <TableCell style={{ border: "none !important" }}>
-                  {th.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody style={{ border: "none !important" }}>
-            {!loading ? (
-              rows.map((row, index) => {
-                return (
-                  <TableRow key={row.id} style={{ border: "none !important" }}>
-                    <TableCell
-                      component="th"
-                      scope="row"
+              >
+                <TableCell
+                  style={{
+                    border: "none !important",
+                    height: "10px !important",
+                    fontSize: "8px !important",
+                  }}
+                ></TableCell>
+                {columns.map((th) => (
+                  <TableCell style={{ border: "none !important" }}>
+                    {th.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody style={{ border: "none !important" }}>
+              {!loading ? (
+                historyrows.map((row, index) => {
+                  return (
+                    <TableRow
+                      key={row.id}
                       style={{ border: "none !important" }}
                     >
-                      <span> {pgn++}</span>
-                    </TableCell>
-                    {columns.map((column) => {
-                      if (column.show == false) {
-                        return null;
-                      }
-                      if (column.name == "formatter") {
-                        return <TableCell>{column.formatter(row)}</TableCell>;
-                      }
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={{ border: "none !important" }}
+                      >
+                        <span> {pgn++}</span>
+                      </TableCell>
+                      {columns.map((column) => {
+                        if (column.show == false) {
+                          return null;
+                        }
+                        if (column.name == "formatter") {
+                          return <TableCell>{column.formatter(row)}</TableCell>;
+                        }
 
-                      return (
-                        <TableCell style={{ border: "none !important" }}>
-                          {row[column.name] || "N/A"}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })
-            ) : (
-              <div
-                style={{
-                  position: "fixed",
-                  top: "50%",
-                  zIndex: "4",
-                  left: "50%",
-                }}
-              >
-                <Spin />
-              </div>
-            )}
-          </TableBody>
-          <caption>
-            <div style={{ float: "left", marginLeft: "50px" }}>
-              <Pagination
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  textDecoration: "none !important",
-                }}
-              >
-                <Button
-                  variant="text"
-                  style={{ marginRight: "2px", fontSize: "12px" }}
-                  onClick={() => window.location.replace("/dashboard")}
+                        return (
+                          <TableCell style={{ border: "none !important" }}>
+                            {row[column.name] || "N/A"}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })
+              ) : (
+                <div
+                  style={{
+                    position: "fixed",
+                    top: "50%",
+                    zIndex: "4",
+                    left: "50%",
+                  }}
                 >
-                  Close{" "}
-                </Button>{" "}
-                <Pagination.First onClick={() => setPage(1)} disabled={true} />
-                <Pagination.Prev
-                  onClick={() => {
-                    setPage(page - 1);
-                    setPageNo(pageNo - 10);
+                  <Spin />
+                </div>
+              )}
+            </TableBody>
+            <caption>
+              <div style={{ float: "left", marginLeft: "50px" }}>
+                <Pagination
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    textDecoration: "none !important",
                   }}
-                  disabled={page > 1 ? false : true}
-                />
-                <Pagination.Next
-                  onClick={() => {
-                    setPage(page + 1);
-                    setPageNo(pageNo + 10);
+                >
+                  <Button
+                    variant="text"
+                    style={{ marginRight: "2px", fontSize: "12px" }}
+                    onClick={() => window.location.replace("/dashboard")}
+                  >
+                    Close{" "}
+                  </Button>{" "}
+                  <Pagination.First
+                    onClick={() => setPage(1)}
+                    disabled={true}
+                  />
+                  <Pagination.Prev
+                    onClick={() => {
+                      setPage(page - 1);
+                      setPageNo(pageNo - 10);
+                    }}
+                    disabled={page > 1 ? false : true}
+                  />
+                  <Pagination.Next
+                    onClick={() => {
+                      setPage(page + 1);
+                      setPageNo(pageNo + 10);
+                    }}
+                    disabled={historypages > page ? false : true}
+                  />
+                  <Pagination.Last
+                    onClick={() => setPage(pages)}
+                    disabled={historypages > page ? false : true}
+                  />
+                </Pagination>
+              </div>
+            </caption>
+          </Table>
+        ) : (
+          <Table
+            id="repotable"
+            className={classes.table}
+            aria-label="simple table"
+            style={{
+              border: "none !important",
+              padding: "auto",
+            }}
+          >
+            <TableHead
+              style={{
+                background: "rgb(241, 239, 239)",
+                border: "none !important",
+              }}
+            >
+              <TableRow
+                style={{
+                  border: "none !important",
+                  height: "10px !important",
+                  fontSize: "8px !important",
+                }}
+              >
+                <TableCell
+                  style={{
+                    border: "none !important",
+                    height: "10px !important",
+                    fontSize: "8px !important",
                   }}
-                  disabled={pages > page ? false : true}
-                />
-                <Pagination.Last
-                  onClick={() => setPage(pages)}
-                  disabled={pages > page ? false : true}
-                />
-              </Pagination>
-            </div>
-          </caption>
-        </Table>
+                ></TableCell>
+                {columns.map((th) => (
+                  <TableCell style={{ border: "none !important" }}>
+                    {th.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody style={{ border: "none !important" }}>
+              {!loading ? (
+                rows.map((row, index) => {
+                  return (
+                    <TableRow
+                      key={row.id}
+                      style={{ border: "none !important" }}
+                    >
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={{ border: "none !important" }}
+                      >
+                        <span> {pgn++}</span>
+                      </TableCell>
+                      {columns.map((column) => {
+                        if (column.show == false) {
+                          return null;
+                        }
+                        if (column.name == "formatter") {
+                          return <TableCell>{column.formatter(row)}</TableCell>;
+                        }
+
+                        return (
+                          <TableCell style={{ border: "none !important" }}>
+                            {row[column.name] || "N/A"}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })
+              ) : (
+                <div
+                  style={{
+                    position: "fixed",
+                    top: "50%",
+                    zIndex: "4",
+                    left: "50%",
+                  }}
+                >
+                  <Spin />
+                </div>
+              )}
+            </TableBody>
+            <caption>
+              <div style={{ float: "left", marginLeft: "50px" }}>
+                <Pagination
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    textDecoration: "none !important",
+                  }}
+                >
+                  <Button
+                    variant="text"
+                    style={{ marginRight: "2px", fontSize: "12px" }}
+                    onClick={() => window.location.replace("/dashboard")}
+                  >
+                    Close{" "}
+                  </Button>{" "}
+                  <Pagination.First
+                    onClick={() => setPage(1)}
+                    disabled={true}
+                  />
+                  <Pagination.Prev
+                    onClick={() => {
+                      setPage(page - 1);
+                      setPageNo(pageNo - 10);
+                    }}
+                    disabled={page > 1 ? false : true}
+                  />
+                  <Pagination.Next
+                    onClick={() => {
+                      setPage(page + 1);
+                      setPageNo(pageNo + 10);
+                    }}
+                    disabled={pages > page ? false : true}
+                  />
+                  <Pagination.Last
+                    onClick={() => setPage(pages)}
+                    disabled={pages > page ? false : true}
+                  />
+                </Pagination>
+              </div>
+            </caption>
+          </Table>
+        )}{" "}
       </TableContainer>
     </div>
   );

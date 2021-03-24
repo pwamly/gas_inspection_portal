@@ -17,6 +17,7 @@ import {
     SAVE_FORM_DATA,
     SAVE_PROFILE_DATA,
     CLEAR_REPORT_DATA,
+    SHOW_HISTORY_TABLE,
 } from "./actions";
 // import { removeUser, registerUser } from "./client/";
 let removeUser, registerUser;
@@ -127,6 +128,9 @@ function reducer(state, action) {
     }
     if (action.type === CLEAR_PROFILE_DATA) {
         return {...state, teamdata: {} };
+    }
+    if (action.type === SHOW_HISTORY_TABLE) {
+        return {...state, historytable: !state.historytable };
     }
 
     return state;

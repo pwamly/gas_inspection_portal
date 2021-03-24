@@ -172,6 +172,26 @@ export const getAllReports = async(data) => {
     }
 };
 
+export const getAllhistory = async(data) => {
+    try {
+        if (data) {
+            const reports = await instance.get("/api/reports/history", {
+                params: data,
+            });
+            if (reports) {
+                return reports;
+            }
+        } else {
+            const reports = await instance.get("/api/reports/history");
+            if (reports) {
+                return reports;
+            }
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+
 export const getUsers = async() => {
     try {
         const users = await instance.get("/api/users");
@@ -199,6 +219,17 @@ export const postVehicleInfo = async(data) => {
 export const deleteReport = async(id) => {
     try {
         const response = await instance.delete(`/api/reports/deletevehicle/${id}`);
+
+        if (response) {
+            return response;
+        }
+    } catch (error) {
+        return { isSuccessful: false };
+    }
+};
+export const deletehistory = async(id) => {
+    try {
+        const response = await instance.delete(`/api/reports/deletehistory/${id}`);
 
         if (response) {
             return response;
