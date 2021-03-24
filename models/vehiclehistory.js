@@ -7,9 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         "vehiclehistory", {
             id: {
                 type: DataTypes.UUID,
-                allowNull: false,
-                primaryKey: true,
+                allowNull: true,
                 defaultValue: DataTypes.UUID4,
+                unique: true,
+                primaryKey: true,
+            },
+            regId: {
+                type: DataTypes.STRING(60),
+                allowNull: false,
                 unique: false,
             },
             name: {
@@ -249,6 +254,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.DATE,
             },
             updatedAt: {
+                primaryKey: true,
                 allowNull: false,
                 type: DataTypes.DATE,
             },

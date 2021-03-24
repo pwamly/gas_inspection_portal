@@ -4,10 +4,18 @@ import { v4 as uuidv4 } from "uuid";
 import { vehiclehistory } from "../../models";
 const { Model, Op } = require("sequelize");
 
+const isValidDate = (strDate) => {
+    let myDatestr = new Date(strDate);
+    if (!isNaN(myDatestr.getMonth())) {
+        return true;
+    }
+    return false;
+};
+
 module.exports = async(oldreport) => {
     const date = new Date();
     let {
-        id,
+        id: regId,
         inspectorID,
         name,
         email,
@@ -69,45 +77,58 @@ module.exports = async(oldreport) => {
         createdAt,
     } = oldreport;
 
-    if (cexpiryDate1) {
+    if (isValidDate(cexpiryDate1)) {
         cexpiryDate1 = new Date(cexpiryDate1)
             .toISOString()
             .slice(0, 10)
             .replace("T", " ");
+    } else {
+        cexpiryDate3 = "1970-00-00";
     }
-    if (cexpiryDate2) {
+    if (isValidDate(cexpiryDate2)) {
         cexpiryDate2 = new Date(cexpiryDate2)
             .toISOString()
             .slice(0, 10)
             .replace("T", " ");
+    } else {
+        cexpiryDate2 = "1970-00-00";
     }
-    if (cexpiryDate3) {
+    if (isValidDate(cexpiryDate3)) {
         cexpiryDate3 = new Date(cexpiryDate3)
             .toISOString()
             .slice(0, 10)
             .replace("T", " ");
+    } else {
+        cexpiryDate3 = "1970-00-00";
     }
-    if (cmanufacturedDate1) {
+    if (isValidDate(cmanufacturedDate1)) {
         cmanufacturedDate1 = new Date(cmanufacturedDate1)
             .toISOString()
             .slice(0, 10)
             .replace("T", " ");
+    } else {
+        cmanufacturedDate1 = "1970-00-00";
     }
-    if (cmanufacturedDate2) {
+    if (isValidDate(cmanufacturedDate2)) {
         cmanufacturedDate2 = new Date(cmanufacturedDate2)
             .toISOString()
             .slice(0, 10)
             .replace("T", " ");
+    } else {
+        cmanufacturedDate2 = "1970-00-00";
     }
-    if (cmanufacturedDate3) {
+    if (isValidDate(cmanufacturedDate3)) {
         cmanufacturedDate3 = new Date(cmanufacturedDate3)
             .toISOString()
             .slice(0, 10)
             .replace("T", " ");
+    } else {
+        cmanufacturedDate3 = "1970-00-00";
     }
 
     const payload = {
-        id,
+        id: uuidv4(),
+        regId,
         name,
         email,
         phone,
@@ -170,7 +191,6 @@ module.exports = async(oldreport) => {
         createdAt,
         updatedAt: date,
     };
-    console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm", payload);
     try {
         const created = await vehiclehistory.create({
             ...payload,
