@@ -3,6 +3,7 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
+import { Breakpoint, BreakpointProvider } from "react-socks";
 
 const style = {
   display: "flex",
@@ -12,7 +13,6 @@ const stylemain = {
   padding: "20px",
   borderRadius: "16px",
   margin: "auto",
-
   width: "800px",
   transition: "0.3s",
   boxShadow: "0 8px 40px -12px rgba(0,0,0,0.4)",
@@ -21,6 +21,24 @@ const stylemain = {
   },
 };
 
+const stylesm = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+  padding: "10%",
+};
+
+const stylemainsm = {
+  padding: "20px",
+  borderRadius: "16px",
+  margin: "auto",
+  width: "fit-content",
+  transition: "0.3s",
+  boxShadow: "0 8px 40px -12px rgba(0,0,0,0.4)",
+  "&:hover": {
+    boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.4)",
+  },
+};
 function CgnCylinderInfo({ formData, setForm, navigation }) {
   const {
     cylinderno1,
@@ -51,219 +69,437 @@ function CgnCylinderInfo({ formData, setForm, navigation }) {
   }
 
   return (
-    <Container>
-      <Card style={stylemain}>
-        <h3> CNG CYLINDERS INFORMATION </h3>{" "}
-        <Card fullWidth style={style}>
-          <Card>
-            <TextField
-              label="Cylinder No."
-              value={cylinderno1}
-              onChange={setForm}
-              name="cylinderno1"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              defaultValue="1"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder position on vehicle"
-              value={cylinderposition1}
-              onChange={setForm}
-              name="cylinderposition1"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder Type"
-              value={cylindertype1}
-              onChange={setForm}
-              name="cylindertype1"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder Serial No"
-              value={cylinderSerialNo1}
-              onChange={setForm}
-              name="cylinderSerialNo1"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Manufacturer Name"
-              value={cmanufacturer1}
-              onChange={setForm}
-              name="cmanufacturer1"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Manufacturer Contact"
-              value={cmanuContact1}
-              onChange={setForm}
-              name="cmanuContact1"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
+    <Container style={{ marginTop: "50px" }}>
+      <Breakpoint medium up>
+        {" "}
+        <Card style={stylemain}>
+          <h3> CNG CYLINDERS INFORMATION </h3>{" "}
+          <Card fullWidth style={style}>
+            <Card>
+              <TextField
+                label="Cylinder No."
+                value={cylinderno1}
+                onChange={setForm}
+                name="cylinderno1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                defaultValue="1"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder position on vehicle"
+                value={cylinderposition1}
+                onChange={setForm}
+                name="cylinderposition1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Type"
+                value={cylindertype1}
+                onChange={setForm}
+                name="cylindertype1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Serial No"
+                value={cylinderSerialNo1}
+                onChange={setForm}
+                name="cylinderSerialNo1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Name"
+                value={cmanufacturer1}
+                onChange={setForm}
+                name="cmanufacturer1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Contact"
+                value={cmanuContact1}
+                onChange={setForm}
+                name="cmanuContact1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+            </Card>{" "}
+            <Card>
+              <TextField
+                label="Cylinder No."
+                value={cylinderno2}
+                onChange={setForm}
+                name="cylinderno2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                defaultValue="2"
+              />
+              <TextField
+                label="Cylinder position on vehicle"
+                value={cylinderposition2}
+                onChange={setForm}
+                name="cylinderposition2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Type"
+                value={cylindertype2}
+                onChange={setForm}
+                name="cylindertype2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Serial No"
+                value={cylinderSerialNo2}
+                onChange={setForm}
+                name="cylinderSerialNo2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Name"
+                value={cmanufacturer2}
+                onChange={setForm}
+                name="cmanufacturer2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Contact"
+                value={cmanuContact2}
+                onChange={setForm}
+                name="cmanuContact2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+            </Card>{" "}
+            <Card>
+              <TextField
+                label="Cylinder No."
+                value={cylinderno3}
+                onChange={setForm}
+                name="cylinderno3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                defaultValue="3"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder position on vehicle"
+                value={cylinderposition3}
+                onChange={setForm}
+                name="cylinderposition3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Type"
+                value={cylindertype3}
+                onChange={setForm}
+                name="cylindertype3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Serial No"
+                value={cylinderSerialNo3}
+                onChange={setForm}
+                name="cylinderSerialNo3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Name"
+                value={cmanufacturer3}
+                onChange={setForm}
+                name="cmanufacturer3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Contact"
+                value={cmanuContact3}
+                onChange={setForm}
+                name="cmanuContact3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+            </Card>{" "}
           </Card>{" "}
-          <Card>
-            <TextField
-              label="Cylinder No."
-              value={cylinderno2}
-              onChange={setForm}
-              name="cylinderno2"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              defaultValue="2"
-            />
-            <TextField
-              label="Cylinder position on vehicle"
-              value={cylinderposition2}
-              onChange={setForm}
-              name="cylinderposition2"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder Type"
-              value={cylindertype2}
-              onChange={setForm}
-              name="cylindertype2"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder Serial No"
-              value={cylinderSerialNo2}
-              onChange={setForm}
-              name="cylinderSerialNo2"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Manufacturer Name"
-              value={cmanufacturer2}
-              onChange={setForm}
-              name="cmanufacturer2"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Manufacturer Contact"
-              value={cmanuContact2}
-              onChange={setForm}
-              name="cmanuContact2"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-          </Card>{" "}
-          <Card>
-            <TextField
-              label="Cylinder No."
-              value={cylinderno3}
-              onChange={setForm}
-              name="cylinderno3"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              defaultValue="3"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder position on vehicle"
-              value={cylinderposition3}
-              onChange={setForm}
-              name="cylinderposition3"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder Type"
-              value={cylindertype3}
-              onChange={setForm}
-              name="cylindertype3"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Cylinder Serial No"
-              value={cylinderSerialNo3}
-              onChange={setForm}
-              name="cylinderSerialNo3"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Manufacturer Name"
-              value={cmanufacturer3}
-              onChange={setForm}
-              name="cmanufacturer3"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-            <TextField
-              label="Manufacturer Contact"
-              value={cmanuContact3}
-              onChange={setForm}
-              name="cmanuContact3"
-              margin="normal"
-              variant="outlined"
-              autoComplete="off"
-              maxWidth=""
-            />
-          </Card>{" "}
+          <div style={{ marginTop: "1rem" }}>
+            {" "}
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginRight: "2px" }}
+              onClick={() => navigation.previous()}
+            >
+              Back{" "}
+            </Button>{" "}
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginRight: "1rem" }}
+              onClick={() => navigation.next()}
+            >
+              Next{" "}
+            </Button>{" "}
+          </div>{" "}
         </Card>{" "}
-        <div style={{ marginTop: "1rem" }}>
-          {" "}
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginRight: "2px" }}
-            onClick={() => navigation.previous()}
-          >
-            Back{" "}
-          </Button>{" "}
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginRight: "1rem" }}
-            onClick={() => navigation.next()}
-          >
-            Next{" "}
-          </Button>{" "}
-        </div>{" "}
-      </Card>{" "}
+      </Breakpoint>
+      <Breakpoint small down>
+        {" "}
+        <Card style={stylemainsm}>
+          <h3> CNG CYLINDERS INFORMATION </h3>{" "}
+          <Card fullWidth style={stylesm}>
+            <Card>
+              <TextField
+                label="Cylinder No."
+                value={cylinderno1}
+                onChange={setForm}
+                name="cylinderno1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                defaultValue="1"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder position on vehicle"
+                value={cylinderposition1}
+                onChange={setForm}
+                name="cylinderposition1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Type"
+                value={cylindertype1}
+                onChange={setForm}
+                name="cylindertype1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Serial No"
+                value={cylinderSerialNo1}
+                onChange={setForm}
+                name="cylinderSerialNo1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Name"
+                value={cmanufacturer1}
+                onChange={setForm}
+                name="cmanufacturer1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Contact"
+                value={cmanuContact1}
+                onChange={setForm}
+                name="cmanuContact1"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+            </Card>{" "}
+            <Card>
+              <TextField
+                label="Cylinder No."
+                value={cylinderno2}
+                onChange={setForm}
+                name="cylinderno2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                defaultValue="2"
+              />
+              <TextField
+                label="Cylinder position on vehicle"
+                value={cylinderposition2}
+                onChange={setForm}
+                name="cylinderposition2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Type"
+                value={cylindertype2}
+                onChange={setForm}
+                name="cylindertype2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Serial No"
+                value={cylinderSerialNo2}
+                onChange={setForm}
+                name="cylinderSerialNo2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Name"
+                value={cmanufacturer2}
+                onChange={setForm}
+                name="cmanufacturer2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Contact"
+                value={cmanuContact2}
+                onChange={setForm}
+                name="cmanuContact2"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+            </Card>{" "}
+            <Card>
+              <TextField
+                label="Cylinder No."
+                value={cylinderno3}
+                onChange={setForm}
+                name="cylinderno3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                defaultValue="3"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder position on vehicle"
+                value={cylinderposition3}
+                onChange={setForm}
+                name="cylinderposition3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Type"
+                value={cylindertype3}
+                onChange={setForm}
+                name="cylindertype3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Cylinder Serial No"
+                value={cylinderSerialNo3}
+                onChange={setForm}
+                name="cylinderSerialNo3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Name"
+                value={cmanufacturer3}
+                onChange={setForm}
+                name="cmanufacturer3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+              <TextField
+                label="Manufacturer Contact"
+                value={cmanuContact3}
+                onChange={setForm}
+                name="cmanuContact3"
+                margin="normal"
+                variant="outlined"
+                autoComplete="off"
+                maxWidth=""
+              />
+            </Card>{" "}
+          </Card>{" "}
+          <div style={{ marginTop: "1rem" }}>
+            {" "}
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginRight: "2px" }}
+              onClick={() => navigation.previous()}
+            >
+              Back{" "}
+            </Button>{" "}
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginRight: "1rem" }}
+              onClick={() => navigation.next()}
+            >
+              Next{" "}
+            </Button>{" "}
+          </div>{" "}
+        </Card>{" "}
+      </Breakpoint>
     </Container>
   );
 }

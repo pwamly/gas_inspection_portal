@@ -8,6 +8,7 @@ const style = {
   maxWidth: 300,
   padding: "20px",
   borderRadius: "16px",
+
   margin: "auto",
   transition: "0.3s",
   boxShadow: "0 8px 40px -12px rgba(0,0,0,0.4)",
@@ -27,7 +28,7 @@ function Owner({ formData, setForm, navigation }) {
   }
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="xs" style={{ marginTop: "50px" }}>
       <Card variant="outlined" style={style}>
         <h3> OWNER INFORMATION </h3>{" "}
         <TextField

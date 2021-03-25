@@ -337,7 +337,7 @@ function BasicTable({ dispatch, reportdata, historytable }) {
   }
   return (
     <div className="table-wrapper">
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", padding: "15px" }}>
         {historytable ? "HISTORY " : "REPORTS"}
       </div>
 
@@ -355,8 +355,9 @@ function BasicTable({ dispatch, reportdata, historytable }) {
             id="search"
             style={{
               height: "10px !important",
-              width: "fit-content",
               margin: "auto",
+              variant: "contained",
+              width: "300px",
             }}
             label="Search Cylinder Serial No "
             margin="normal"
@@ -372,13 +373,15 @@ function BasicTable({ dispatch, reportdata, historytable }) {
             style={{
               display: "flex",
               flexDirection: "row",
-              width: "fit-content",
               margin: "auto",
-              gap: "20px",
+              gap: "5px",
+              border: "1px solid grey",
+              width: "300px",
+              height: "50px",
             }}
           >
             {" "}
-            <InputLabel style={{ paddingTop: "3px" }} id="label">
+            <InputLabel style={{ padding: "15px" }} id="label">
               Filter By Date
             </InputLabel>
             <Select
@@ -398,13 +401,15 @@ function BasicTable({ dispatch, reportdata, historytable }) {
             style={{
               display: "flex",
               flexDirection: "row",
-              width: "fit-content",
+              border: "1px solid grey",
+              width: "300px",
+              height: "50px",
               margin: "auto",
               gap: "30px",
             }}
           >
             {" "}
-            <InputLabel style={{ paddingTop: "3px" }} id="label">
+            <InputLabel style={{ padding: "15px" }} id="label">
               Filter By Cylinder Status
             </InputLabel>
             <Select
@@ -426,10 +431,12 @@ function BasicTable({ dispatch, reportdata, historytable }) {
               width: "fit-content",
               margin: "auto",
               gap: "20px",
+              height: "50px",
             }}
           >
             {!historytable ? (
               <InputLabel
+                textAlign="center"
                 className="switchlabel"
                 style={{ paddingTop: "3px" }}
                 id="switchlabel"
