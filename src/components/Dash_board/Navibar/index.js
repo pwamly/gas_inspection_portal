@@ -22,7 +22,7 @@ function Index({ dispatch, props }) {
   const logout = {
     title: "Reports",
     path: "/reports",
-    icon: <IoIcons.IoIosPaper />,
+    icon: <IoIcons.IoIosLogOut />,
     cName: "nav-text",
   };
   return (

@@ -12,7 +12,7 @@ export const SidebarData = [{
     {
         title: "Registration",
         path: "/dashboard/registration",
-        icon: < AiIcons.AiFillHome / > ,
+        icon: < AiIcons.AiOutlineEdit / > ,
         cName: "nav-text",
     },
     {
@@ -24,7 +24,7 @@ export const SidebarData = [{
     {
         title: "feeds",
         path: "#",
-        icon: < FaIcons.FaCartPlus / > ,
+        icon: < FaIcons.FaBlog / > ,
         cName: "nav-text",
     },
     {

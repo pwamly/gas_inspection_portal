@@ -52,7 +52,9 @@ class Example extends PureComponent {
             width="sm"
             color="primary"
             style={{ marginTop: "1rem", paddingLeft: "0px" }}
-            onClick={() => history.push("/dashboard/reports")}
+            onClick={() => {
+              window.location.replace("/dashboard/reports");
+            }}
           >
             Back
           </Button>

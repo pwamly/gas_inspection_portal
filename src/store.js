@@ -15,6 +15,7 @@ const initstore = {
     reportdata: {},
     teamdata: {},
     historytable: false,
+    pdf: false,
 };
 if (!store) {
     store = createStore(reducer, initstore);

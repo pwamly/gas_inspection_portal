@@ -16,7 +16,7 @@ import Spline from "./Charts/Spline";
 import Profile from "../Dash_board/Profile/Profile";
 import { SAVE_INITIAL_DATA } from "../../actions";
 import Report from "./Report/Report";
-
+import { Breakpoint, BreakpointProvider } from "react-socks";
 import {
   Redirect,
   BrowserRouter as Router,
@@ -26,7 +26,7 @@ import {
 
 const { getProfile } = httpActions;
 
-function Index({ modalShown, toggleModal, showProfile, dispatch }) {
+function Index({ modalShown, toggleModal, showProfile, dispatch, pdf }) {
   let initial;
   const vendorId = getUserId();
   const { result: user, loading, refresh } = useGet(vendorId, getProfile);
@@ -61,30 +61,32 @@ function Index({ modalShown, toggleModal, showProfile, dispatch }) {
     <>
       {" "}
       {showProfile && <Profile />}{" "}
-      <IconContext.Provider value={{ color: "#fff" }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Router>
-            <Navbar props={initial} />{" "}
-            <Container className="dashboard">
-              <Switch>
-                <ProtectRoute path="/dashboard" exact component={Spline} />{" "}
-                <ProtectRoute
-                  path="/dashboard/registration"
-                  exact
-                  component={RegistrationForm}
-                />{" "}
-                <ProtectRoute path="/dashboard/team" component={Team} />{" "}
-                <ProtectRoute path="/dashboard/reports" component={Report} />{" "}
-              </Switch>{" "}
-            </Container>{" "}
-          </Router>{" "}
-        </div>{" "}
-      </IconContext.Provider>{" "}
+      <BreakpointProvider>
+        <IconContext.Provider value={{ color: "#fff" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Router>
+              {!pdf && <Navbar props={initial} />}
+              <Container className="dashboard">
+                <Switch>
+                  <ProtectRoute path="/dashboard" exact component={Spline} />{" "}
+                  <ProtectRoute
+                    path="/dashboard/registration"
+                    exact
+                    component={RegistrationForm}
+                  />{" "}
+                  <ProtectRoute path="/dashboard/team" component={Team} />{" "}
+                  <ProtectRoute path="/dashboard/reports" component={Report} />{" "}
+                </Switch>{" "}
+              </Container>{" "}
+            </Router>{" "}
+          </div>{" "}
+        </IconContext.Provider>{" "}
+      </BreakpointProvider>
     </>
   );
 }

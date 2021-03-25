@@ -20,6 +20,7 @@ import { useGet, useGetList } from "../../../../hooks/index";
 import Pagination from "react-bootstrap/Pagination";
 import { connect } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
+import { Breakpoint, BreakpointProvider } from "react-socks";
 import {
   getAllReports,
   deleteReport,
@@ -31,6 +32,7 @@ import {
   SAVE_REPORT_DATA,
   CLEAR_PROFILE_DATA,
   SHOW_HISTORY_TABLE,
+  SHOW_PDF,
 } from "../../../../actions";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -120,6 +122,7 @@ function BasicTable({ dispatch, reportdata, historytable }) {
             className="IconStyle"
             onClick={() => {
               dispatch({ type: SAVE_REPORT_DATA, payload: row });
+              dispatch({ type: SHOW_PDF });
               history.push("/dashboard/reports/view");
             }}
           />
@@ -160,6 +163,7 @@ function BasicTable({ dispatch, reportdata, historytable }) {
             className="IconStyle"
             onClick={() => {
               dispatch({ type: SAVE_REPORT_DATA, payload: row });
+              dispatch({ type: SHOW_PDF });
               history.push("/dashboard/reports/view");
             }}
           />
@@ -336,121 +340,248 @@ function BasicTable({ dispatch, reportdata, historytable }) {
       <div style={{ textAlign: "center" }}>
         {historytable ? "HISTORY " : "REPORTS"}
       </div>
-      <div
-        style={{
-          height: "50px",
-          width: "100%",
-          marginBottom: "30px",
-          display: "flex",
-          flexDirection: "row",
-          gap: "30px",
-        }}
-      >
-        <TextField
-          id="search"
-          style={{ height: "10px !important", marginLeft: "20px" }}
-          label="Search Cylinder Serial No "
-          margin="normal"
-          onChange={(e) => {
-            setLoadingdel(true);
-            setSearch({ q: e.target.value });
-          }}
-          variant="outlined"
-          autoComplete="off"
-          width="sm"
-        />{" "}
+
+      <Breakpoint small down>
         <div
           style={{
+            height: "fit-content",
+            marginBottom: "30px",
             display: "flex",
-            flexDirection: "row",
-            marginTop: "35px",
-            gap: "20px",
+            flexDirection: "column",
+            gap: "30px",
           }}
         >
-          {" "}
-          <InputLabel style={{ paddingTop: "3px" }} id="label">
-            Filter By Date
-          </InputLabel>
-          <Select
-            labelId="label"
-            id="selectdate"
-            open={opendate}
-            onClose={handleClosedate}
-            onOpen={handleOpendate}
-            onChange={(e) => setDateparam({ day: e.target.value })}
+          <TextField
+            id="search"
+            style={{
+              height: "10px !important",
+              width: "fit-content",
+              margin: "auto",
+            }}
+            label="Search Cylinder Serial No "
+            margin="normal"
+            onChange={(e) => {
+              setLoadingdel(true);
+              setSearch({ q: e.target.value });
+            }}
+            variant="outlined"
+            autoComplete="off"
+            width="sm"
+          />{" "}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "fit-content",
+              margin: "auto",
+              gap: "20px",
+            }}
           >
-            <MenuItem value="day">Today</MenuItem>
-            <MenuItem value="week">This week</MenuItem>
-            <MenuItem value="month">This month</MenuItem>
-          </Select>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginTop: "35px",
-            gap: "20px",
-          }}
-        >
-          {" "}
-          <InputLabel style={{ paddingTop: "3px" }} id="label">
-            Filter By Cylinder Status
-          </InputLabel>
-          <Select
-            labelId="label"
-            id="selectstatus"
-            open={openstatus}
-            onClose={handleClosestatus}
-            onOpen={handleOpenstatus}
-            onChange={(e) => setExpire({ status: e.target.value })}
-          >
-            <MenuItem value="expired">Expired</MenuItem>
-            <MenuItem value="notexpired">Not expired</MenuItem>
-          </Select>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginTop: "35px",
-            gap: "20px",
-          }}
-        >
-          {!historytable ? (
-            <InputLabel
-              className="switchlabel"
-              style={{ paddingTop: "3px" }}
-              id="switchlabel"
-              onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
-            >
-              Switch to History
-            </InputLabel>
-          ) : (
-            <InputLabel
-              className="switchlabel"
-              style={{ paddingTop: "3px" }}
-              id="switchlabel"
-              onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
-            >
-              Switch to Reports
-            </InputLabel>
-          )}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginTop: "35px",
-            gap: "20px",
-          }}
-        >
-          {!historytable && (
+            {" "}
             <InputLabel style={{ paddingTop: "3px" }} id="label">
-              Total number : <span style={{ color: "black" }}>{total}</span>
+              Filter By Date
             </InputLabel>
-          )}
+            <Select
+              labelId="label"
+              id="selectdate"
+              open={opendate}
+              onClose={handleClosedate}
+              onOpen={handleOpendate}
+              onChange={(e) => setDateparam({ day: e.target.value })}
+            >
+              <MenuItem value="day">Today</MenuItem>
+              <MenuItem value="week">This week</MenuItem>
+              <MenuItem value="month">This month</MenuItem>
+            </Select>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "fit-content",
+              margin: "auto",
+              gap: "30px",
+            }}
+          >
+            {" "}
+            <InputLabel style={{ paddingTop: "3px" }} id="label">
+              Filter By Cylinder Status
+            </InputLabel>
+            <Select
+              labelId="label"
+              id="selectstatus"
+              open={openstatus}
+              onClose={handleClosestatus}
+              onOpen={handleOpenstatus}
+              onChange={(e) => setExpire({ status: e.target.value })}
+            >
+              <MenuItem value="expired">Expired</MenuItem>
+              <MenuItem value="notexpired">Not expired</MenuItem>
+            </Select>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "fit-content",
+              margin: "auto",
+              gap: "20px",
+            }}
+          >
+            {!historytable ? (
+              <InputLabel
+                className="switchlabel"
+                style={{ paddingTop: "3px" }}
+                id="switchlabel"
+                onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
+              >
+                Switch to History
+              </InputLabel>
+            ) : (
+              <InputLabel
+                className="switchlabel"
+                style={{ paddingTop: "3px" }}
+                id="switchlabel"
+                onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
+              >
+                Switch to Reports
+              </InputLabel>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              margin: "auto",
+              width: "fit-content",
+              gap: "20px",
+            }}
+          >
+            {!historytable && (
+              <InputLabel style={{ paddingTop: "3px" }} id="label">
+                Total number : <span style={{ color: "black" }}>{total}</span>
+              </InputLabel>
+            )}
+          </div>
         </div>
-      </div>
+      </Breakpoint>
+      <Breakpoint medium up>
+        <div
+          style={{
+            height: "50px",
+            width: "100%",
+            marginBottom: "30px",
+            display: "flex",
+            flexDirection: "row",
+            gap: "30px",
+          }}
+        >
+          <TextField
+            id="search"
+            style={{ height: "10px !important", marginLeft: "20px" }}
+            label="Search Cylinder Serial No "
+            margin="normal"
+            onChange={(e) => {
+              setLoadingdel(true);
+              setSearch({ q: e.target.value });
+            }}
+            variant="outlined"
+            autoComplete="off"
+            width="sm"
+          />{" "}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "35px",
+              gap: "20px",
+            }}
+          >
+            {" "}
+            <InputLabel style={{ paddingTop: "3px" }} id="label">
+              Filter By Date
+            </InputLabel>
+            <Select
+              labelId="label"
+              id="selectdate"
+              open={opendate}
+              onClose={handleClosedate}
+              onOpen={handleOpendate}
+              onChange={(e) => setDateparam({ day: e.target.value })}
+            >
+              <MenuItem value="day">Today</MenuItem>
+              <MenuItem value="week">This week</MenuItem>
+              <MenuItem value="month">This month</MenuItem>
+            </Select>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "35px",
+              gap: "20px",
+            }}
+          >
+            {" "}
+            <InputLabel style={{ paddingTop: "3px" }} id="label">
+              Filter By Cylinder Status
+            </InputLabel>
+            <Select
+              labelId="label"
+              id="selectstatus"
+              open={openstatus}
+              onClose={handleClosestatus}
+              onOpen={handleOpenstatus}
+              onChange={(e) => setExpire({ status: e.target.value })}
+            >
+              <MenuItem value="expired">Expired</MenuItem>
+              <MenuItem value="notexpired">Not expired</MenuItem>
+            </Select>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "35px",
+              gap: "20px",
+            }}
+          >
+            {!historytable ? (
+              <InputLabel
+                className="switchlabel"
+                style={{ paddingTop: "3px" }}
+                id="switchlabel"
+                onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
+              >
+                Switch to History
+              </InputLabel>
+            ) : (
+              <InputLabel
+                className="switchlabel"
+                style={{ paddingTop: "3px" }}
+                id="switchlabel"
+                onClick={() => dispatch({ type: SHOW_HISTORY_TABLE })}
+              >
+                Switch to Reports
+              </InputLabel>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: "35px",
+              gap: "20px",
+            }}
+          >
+            {!historytable && (
+              <InputLabel style={{ paddingTop: "3px" }} id="label">
+                Total number : <span style={{ color: "black" }}>{total}</span>
+              </InputLabel>
+            )}
+          </div>
+        </div>
+      </Breakpoint>
       <TableContainer
         component={Paper}
         style={{

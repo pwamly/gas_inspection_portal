@@ -18,6 +18,7 @@ import {
     SAVE_PROFILE_DATA,
     CLEAR_REPORT_DATA,
     SHOW_HISTORY_TABLE,
+    SHOW_PDF,
 } from "./actions";
 // import { removeUser, registerUser } from "./client/";
 let removeUser, registerUser;
@@ -128,6 +129,9 @@ function reducer(state, action) {
     }
     if (action.type === CLEAR_PROFILE_DATA) {
         return {...state, teamdata: {} };
+    }
+    if (action.type === SHOW_PDF) {
+        return {...state, pdf: !state.pdf };
     }
     if (action.type === SHOW_HISTORY_TABLE) {
         return {...state, historytable: !state.historytable };
