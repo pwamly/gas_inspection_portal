@@ -9,8 +9,8 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT;
 
-const orig = "http://localhost:5500";
-//const orig = "http://18.191.95.162:5500";
+//onst orig = "http://localhost:5500";
+const orig = "http://13.59.207.232:5500";
 
 app.use(cors({ origin: orig, credentials: true }));
 app.use(bodyParser.json());
