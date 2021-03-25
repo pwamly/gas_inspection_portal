@@ -130,7 +130,7 @@ module.exports = async(req, res) => {
                         return el;
                     });
 
-                    const data = paginate({
+                    let data = paginate({
                         totalCount: count,
                         currentPage: page,
                         pageSize: limit,
