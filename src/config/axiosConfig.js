@@ -86,4 +86,5 @@ if (!instance) {
         }
     );
 }
+
 export default instance;

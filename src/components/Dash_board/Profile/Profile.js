@@ -75,7 +75,6 @@ function Profile({ profile, edituser, dispatch }) {
 
   return (
     <>
-      {" "}
       {!edituser ? (
         <Card
           variant="outlined "
@@ -104,7 +103,6 @@ function Profile({ profile, edituser, dispatch }) {
               flexDirection: "row",
             }}
           >
-            {" "}
             <div
               style={{
                 display: "flex",
@@ -145,7 +143,7 @@ function Profile({ profile, edituser, dispatch }) {
               }}
             >
               <Edit />
-            </IconButton>{" "}
+            </IconButton>
           </div>
           <div style={{ display: "flex ", justifyContent: "center" }}>
             {" "}
